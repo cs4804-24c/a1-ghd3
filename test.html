@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>D3 Animated Scene</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+    <script>
+      // Set the dimensions of the SVG
+      const width = 500;
+      const height = 300;
+
+      // Append the SVG to the body
+      const svg = d3.select('body').append('svg')
+                    .attr('width', width)
+                    .attr('height', height);
+
+      // Add a rectangle to represent the ground
+      const ground = svg.append('rect')
+                        .attr('x', 0)
+                        .attr('y', height - 50)
+                        .attr('width', width)
+                        .attr('height', 50)
+                        .attr('fill', 'green');
+
+      // Add a line to represent the horizon
+      const horizon = svg.append('line')
+                         .attr('x1', 0)
+                         .attr('y1', height - 50)
+                         .attr('x2', width)
+                         .attr('y2', height - 50)
+                         .attr('stroke', 'black')
+                         .attr('stroke-width', 2);
+
+      // Add a circle to represent the sun
+      const sun = svg.append('circle')
+                     .attr('cx', width / 2)
+                     .attr('cy', height)
+                     .attr('r', 30)
+                     .attr('fill', 'yellow');
+
+      // Function to animate the sun (sunrise and sunset)
+      function animateSun() {
+        sun.transition()
+           .duration(3000)
+           .attr('cy', 50)
+           .on('end', () => {
+             sun.transition()
+                .duration(3000)
+                .attr('cy', height)
+                .on('end', animateSun);
+           });
+
+        // Change ground color to indicate different times of the day
+        ground.transition()
+              .duration(3000)
+              .attr('fill', '#b5651d') // Evening
+              .transition()
+              .duration(3000)
+              .attr('fill', 'green'); // Day
+      }
+
+      // Start the animation
+      animateSun();
+
+    </script>
+</body>
+</html>
