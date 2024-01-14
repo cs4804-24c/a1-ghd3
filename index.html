@@ -4,10 +4,11 @@
     <title>CS4804 Assignment 1</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
   </head>
   <body>
     <header>
-      <h1>Visualization</h1>
+      <h1>Assignment 1 Visualization</h1>
     </header>
     <main>
       <section>
@@ -19,26 +20,78 @@
     </footer>
   </body>
   <script>
-    //Note: I am following through this D3 documentation to influence the way that I write my code below: https://d3js.org/getting-started#d3-in-vanilla-html
+    //Note: I am following through the D3 documentation below to influence the way that I write my code: 
+    //https://d3js.org/getting-started#d3-in-vanilla-html
+    //https://d3-graph-gallery.com/graph/shape.html
+    //https://observablehq.com/@jwolondon/hello-polygons
+
     const container = document.getElementById("container")
 
-    console.log(d3); // test if d3 is loaded
+    console.log(d3) // test if d3 is loaded
 
-    // Declare the chart dimensions and margins.
-    const width = 640;
-    const height = 400;
-    const marginTop = 20;
-    const marginRight = 20;
-    const marginBottom = 30;
-    const marginLeft = 40;
+    // Declare the dimensions for the svg container.
+    const width = 1000
+    const height = 600
+
     // Add an SVG
-  
+    const svg = d3.select("#container")
+    .append("svg")
+      .attr("width", width)
+      .attr("height", height)
+
+    function drawRectangle(xCoord, yCoord, width, height, stroke, fill) {
+      svg.append('rect')
+      .attr('x', xCoord)
+      .attr('y', yCoord)
+      .attr('width', width)
+      .attr('height', height)
+      .attr('stroke', stroke)
+      .attr('fill', fill)
+    }
+
+    function drawCircle(xCoord, yCoord, radius, stroke, fill) {
+      svg.append('circle')
+      .attr('cx', xCoord)
+      .attr('cy', yCoord)
+      .attr('r', radius)
+      .attr('stroke', stroke)
+      .attr('fill', fill)
+    }
+
+    function drawLine(xCoord1, yCoord1, xCoord2, yCoord2, stroke) {
+      svg.append('line')
+      .attr('x1', xCoord1)
+      .attr('y1', yCoord1)
+      .attr('x2', xCoord2)
+      .attr('y2', yCoord2)
+      .attr('stroke', stroke)
+    }
+
+    function drawPolygon(coordinates, fill, stroke, strokeWidth) {
+      svg.append("path")
+      .attr("d", `M${coordinates.join(" ")}Z`)
+      .attr("fill", fill)
+      .attr("stroke", stroke)
+      .attr("stroke-width", strokeWidth)
+    }
+
     // Add Rectangles
+    drawRectangle(20, 50, 400, 50, 'red', 'blue')
+    drawRectangle(20, 150, 600, 50, 'blue', 'red')
 
     // Add Circles
+    drawCircle(820, 150, 25, 'green', 'pink')
+    drawCircle(820, 250, 25, 'pink', 'green')
 
     // Add Lines
+    drawLine(50, 250, 60, 350, "rgb(220,20,200)")
+    drawLine(50, 450, 60, 550, "rgb(30,200,250)")
 
     // Add Polygons
+    path1Coordinates = [[850, 300], [800, 325], [730, 400], [700, 450], [890, 475]]
+    path2Coordinates= [[550, 275], [500, 390], [430, 400], [400, 450], [590, 475]]
+
+    drawPolygon(path1Coordinates, "rgb(100,75,80)", "yellow", 0.75)
+    drawPolygon(path2Coordinates, "rgb(275,130,15)", "orange", 0.75)
   </script>
 </html>
