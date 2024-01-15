@@ -1,10 +1,161 @@
+<html>
+<head>
 <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+<body>
+  <script>
+    console.log(d3); // test if d3 is loaded
+    const height = 500;
+    const width = 500;
+    
+    // adding svg
+    const svg = d3.select("body")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+    // adding lines
+    svg.append("line")
+              .attr("x1", 0)
+              .attr("x2", 500)
+              .attr("y1", 250)
+              .attr("y2", 250)
+              .attr("stroke", "black");
+
+    // adding lines
+    svg.append("line")
+              .attr("x1", 250)
+              .attr("x2", 250)
+              .attr("y1", 0)
+              .attr("y2", 500)
+              .attr("stroke", "black");
+
+    // adding rectangle
+    var rect1 = svg.append("rect")
+            .attr("x", 140)
+            .attr("y", 210)
+            .attr("width", 100)
+            .attr("height", 30)
+            .attr("fill", "yellow");
+    
+    // animate rectangle
+    function expandRect1() {
+      rect1.transition().attr("x", 70).attr("width", 170).delay(1000).on('end', contractRect1);
+    }
+
+    function contractRect1() {
+      rect1.transition().attr("x", 140).attr("width", 100).delay(1000).on('end', expandRect1);
+    }
+
+    expandRect1();
+
+    // adding rectangle
+    var rect2 = svg.append("rect")
+            .attr("x", 425)
+            .attr("y", 380)
+            .attr("width", 65)
+            .attr("height", 50)
+            .attr("fill", "orange");
+
+    // animating rectangle
+    function moveRect2() {
+      rect2.transition().attr("y", 510).delay(500).on('end', returnRect2);
+    }
+
+    function returnRect2() {
+      rect2.transition().attr("y", 380).delay(500).on('end', moveRect2);
+    }
+
+    moveRect2();
+
+    // adding circle
+    var circle = svg.append("circle")
+            .attr("cx", 375)
+            .attr("cy", 50)
+            .attr("r", 30)
+            .attr("fill", "magenta");
+
+    //animating circle
+    function changeCirc1() {
+      circle.transition().attr("r", 50).attr("fill", "purple").delay(750).on('end', changeCirc2);
+    }
+
+    function changeCirc2() {
+      circle.transition().attr("r", 30).attr("fill", "magenta").delay(750).on('end', changeCirc1);
+    }
+
+    changeCirc1();
+
+    // adding polygon
+    var points1 = [
+      [50, 50],
+      [50, 130],
+      [100, 140],
+      [70, 40],
+      [80, 90],
+      [125, 125]
+    ];
+
+    var hull1 = d3.polygonHull(points1);
+    var line = d3.line().curve(d3.curveLinearClosed);
+
+    var poly1 = svg.append("path").attr("d", line(hull1)).attr("fill", "tan");
+
+    //animating polygon
+    function changePolyColor1() {
+      poly1.transition().attr("fill", "brown").delay(1250).on('end', changePolyColor2);
+    }
+
+    function changePolyColor2() {
+      poly1.transition().attr("fill", "gray").delay(1250).on('end', changePolyColor3);
+    }
+
+    function changePolyColor3() {
+      poly1.transition().attr("fill", "tan").delay(1250).on('end', changePolyColor1);
+    }
+
+    changePolyColor1();
+
+    // adding polygons
+    var points2 = [
+      [140, 340],
+      [60, 380],
+      [70, 450],
+      [120, 400],
+      [180, 350],
+      [125, 490],
+      [210, 340],
+      [230, 450]
+    ];
+
+    var points3 = [
+      [135, 330],
+      [65, 395],
+      [60, 460],
+      [115, 410],
+      [190, 360],
+      [150, 475],
+      [190, 325],
+      [240, 470]
+    ];
+
+    var hull2 = d3.polygonHull(points2);
+    var hull3= d3.polygonHull(points3);
+
+    var poly2 = svg.append("path").attr("d", line(hull2)).attr("fill", "pink");
+
+    // animating polygons
+    function changePoly1() {
+      poly2.transition().attr("d", line(hull3)).delay(1100).on('end', changePoly2);
+    }
+
+    function changePoly2() {
+      poly2.transition().attr("d", line(hull2)).delay(1100).on('end', changePoly1);
+    }
+
+    changePoly1();
+
+  </script>
+</body>
+</html>
