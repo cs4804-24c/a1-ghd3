@@ -2,9 +2,92 @@
 
 <script>
   console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+  window.onload = function() {
+        // Add an SVG
+        const svg = d3.select('body').append('svg')
+                      .attr('width', 500)
+                      .attr('height', 500);
+
+        // Add a Line
+        svg.append('line')
+          .attr('x1', 50)
+          .attr('y1', 400)
+          .attr('x2', 450)
+          .attr('y2', 400)
+          .attr('stroke', 'grey')
+          .attr('stroke-width', 4);
+
+        // Add a Circles
+        const circle = svg.append('circle')
+                          .attr('cx', 50)
+                          .attr('cy', 400)
+                          .attr('r', 15)
+                          .attr('fill', 'grey');
+        
+        // Add a Rectangles
+        const rect = svg.append('rect')
+                        .attr('x', 50)
+                        .attr('y', 350)
+                        .attr('width', 0)
+                        .attr('height', 10)
+                        .attr('fill', 'yellow');
+        
+        // Add a Polygon
+        const poly = svg.append('polygon')
+                        .attr('points', '50,300 50,300 50,300')
+                        .attr('fill', 'grey');
+        
+        // Add animation to circle
+        function animateCircle() {
+          circle.transition()
+                .duration(3000)
+                .attr('cx', 50)
+                .attr('fill', 'grey')
+                .on('end', () => {
+                  circle.transition()
+                      .duration(3000)
+                      .attr('cx', 450)
+                      .attr('fill', 'black')
+                      .on('end', animateCircle);
+                });
+              }
+
+        // Add animation to Rectangle
+        function animateRect() {
+        rect.transition()
+              .duration(3000)
+              .attr('width', 0)
+              .attr('fill', 'yellow')
+              .on('end', () => {
+                rect.transition()
+                    .duration(3000)
+                    .attr('width', 400)
+                    .attr('fill', 'red')
+                    .on('end', animateRect);
+              });
+            }
+
+        // Add animation to Polygon
+        function animatePoly() {
+        poly.transition()
+              .duration(3000)
+              .attr('points', '50,300 50,300 50,300')
+              .attr('fill', 'aqua')
+              .on('end', () => {
+                poly.transition()
+                    .duration(3000)
+                    .attr('points', '50,300 450,250 450,300')
+                    .attr('fill', 'blue')
+                    .on('end', animatePoly);
+              });
+            }
+
+
+        // run the animation
+        animateRect();
+        animateCircle();
+        animatePoly();
+  };
+
+  
 </script>
