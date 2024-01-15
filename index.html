@@ -32,27 +32,57 @@
               .attr("stroke", "black");
 
     // adding rectangles
-    svg.append("rect")
+    var rect1 = svg.append("rect")
             .attr("x", 140)
             .attr("y", 210)
             .attr("width", 100)
             .attr("height", 30)
             .attr("fill", "yellow");
+    
+    function expandRect1() {
+      rect1.transition().attr("x", 70).attr("width", 170).delay(1000).on('end', contractRect1);
+    }
 
-    svg.append("rect")
+    function contractRect1() {
+      rect1.transition().attr("x", 140).attr("width", 100).delay(1000).on('end', expandRect1);
+    }
+
+    expandRect1();
+
+    var rect2 = svg.append("rect")
             .attr("x", 425)
             .attr("y", 380)
             .attr("width", 65)
             .attr("height", 50)
             .attr("fill", "orange");
 
+    function moveRect2() {
+      rect2.transition().attr("y", 510).delay(500).on('end', returnRect2);
+    }
+
+    function returnRect2() {
+      rect2.transition().attr("y", 380).delay(500).on('end', moveRect2);
+    }
+
+    moveRect2();
+
     // adding circles
 
-    svg.append("circle")
+    var circle = svg.append("circle")
             .attr("cx", 375)
             .attr("cy", 50)
             .attr("r", 30)
             .attr("fill", "magenta");
+
+    function changeCirc1() {
+      circle.transition().attr("r", 50).attr("fill", "purple").delay(750).on('end', changeCirc2);
+    }
+
+    function changeCirc2() {
+      circle.transition().attr("r", 30).attr("fill", "magenta").delay(750).on('end', changeCirc1);
+    }
+
+    changeCirc1();
 
     // Add Polygons
     var points1 = [
@@ -67,7 +97,21 @@
     var hull1 = d3.polygonHull(points1);
     var line = d3.line().curve(d3.curveLinearClosed);
 
-    svg.append("path").attr("d", line(hull1)).attr("fill", "tan");
+    var poly1 = svg.append("path").attr("d", line(hull1)).attr("fill", "tan");
+
+    function changePolyColor1() {
+      poly1.transition().attr("fill", "brown").delay(1250).on('end', changePolyColor2);
+    }
+
+    function changePolyColor2() {
+      poly1.transition().attr("fill", "gray").delay(1250).on('end', changePolyColor3);
+    }
+
+    function changePolyColor3() {
+      poly1.transition().attr("fill", "tan").delay(1250).on('end', changePolyColor1);
+    }
+
+    changePolyColor1();
 
     var points2 = [
       [140, 340],
