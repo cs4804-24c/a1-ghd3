@@ -1,10 +1,89 @@
+<html>
+<head>
 <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+<body>
+  <script>
+    console.log(d3); // test if d3 is loaded
+    const height = 500;
+    const width = 500;
+    
+    // adding svg
+    const svg = d3.select("body")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height);
+
+    // adding lines
+    svg.append("line")
+              .attr("x1", 0)
+              .attr("x2", 500)
+              .attr("y1", 250)
+              .attr("y2", 250)
+              .attr("stroke", "black");
+
+    // adding lines
+    svg.append("line")
+              .attr("x1", 250)
+              .attr("x2", 250)
+              .attr("y1", 0)
+              .attr("y2", 500)
+              .attr("stroke", "black");
+
+    // adding rectangles
+    svg.append("rect")
+            .attr("x", 140)
+            .attr("y", 210)
+            .attr("width", 100)
+            .attr("height", 30)
+            .attr("fill", "yellow");
+
+    svg.append("rect")
+            .attr("x", 425)
+            .attr("y", 380)
+            .attr("width", 65)
+            .attr("height", 50)
+            .attr("fill", "orange");
+
+    // adding circles
+
+    svg.append("circle")
+            .attr("cx", 375)
+            .attr("cy", 50)
+            .attr("r", 30)
+            .attr("fill", "magenta");
+
+    // Add Polygons
+    var points1 = [
+      [50, 50],
+      [50, 130],
+      [100, 140],
+      [70, 40],
+      [80, 90],
+      [125, 125]
+    ];
+
+    var hull1 = d3.polygonHull(points1);
+    var line = d3.line().curve(d3.curveLinearClosed);
+
+    svg.append("path").attr("d", line(hull1)).attr("fill", "tan");
+
+    var points2 = [
+      [140, 340],
+      [60, 380],
+      [70, 450],
+      [120, 400],
+      [180, 350],
+      [125, 490],
+      [210, 340],
+      [230, 450]
+    ];
+
+    var hull2 = d3.polygonHull(points2);
+
+    svg.append("path").attr("d", line(hull2)).attr("fill", "pink");
+
+  </script>
+</body>
+</html>
