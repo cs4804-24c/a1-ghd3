@@ -31,7 +31,7 @@
               .attr("y2", 500)
               .attr("stroke", "black");
 
-    // adding rectangles
+    // adding rectangle
     var rect1 = svg.append("rect")
             .attr("x", 140)
             .attr("y", 210)
@@ -39,6 +39,7 @@
             .attr("height", 30)
             .attr("fill", "yellow");
     
+    // animate rectangle
     function expandRect1() {
       rect1.transition().attr("x", 70).attr("width", 170).delay(1000).on('end', contractRect1);
     }
@@ -49,6 +50,7 @@
 
     expandRect1();
 
+    // adding rectangle
     var rect2 = svg.append("rect")
             .attr("x", 425)
             .attr("y", 380)
@@ -56,6 +58,7 @@
             .attr("height", 50)
             .attr("fill", "orange");
 
+    // animating rectangle
     function moveRect2() {
       rect2.transition().attr("y", 510).delay(500).on('end', returnRect2);
     }
@@ -66,14 +69,14 @@
 
     moveRect2();
 
-    // adding circles
-
+    // adding circle
     var circle = svg.append("circle")
             .attr("cx", 375)
             .attr("cy", 50)
             .attr("r", 30)
             .attr("fill", "magenta");
 
+    //animating circle
     function changeCirc1() {
       circle.transition().attr("r", 50).attr("fill", "purple").delay(750).on('end', changeCirc2);
     }
@@ -84,7 +87,7 @@
 
     changeCirc1();
 
-    // Add Polygons
+    // adding polygon
     var points1 = [
       [50, 50],
       [50, 130],
@@ -99,6 +102,7 @@
 
     var poly1 = svg.append("path").attr("d", line(hull1)).attr("fill", "tan");
 
+    //animating polygon
     function changePolyColor1() {
       poly1.transition().attr("fill", "brown").delay(1250).on('end', changePolyColor2);
     }
@@ -113,6 +117,7 @@
 
     changePolyColor1();
 
+    // adding polygons
     var points2 = [
       [140, 340],
       [60, 380],
@@ -140,6 +145,7 @@
 
     var poly2 = svg.append("path").attr("d", line(hull2)).attr("fill", "pink");
 
+    // animating polygons
     function changePoly1() {
       poly2.transition().attr("d", line(hull3)).delay(1100).on('end', changePoly2);
     }
