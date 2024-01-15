@@ -124,9 +124,31 @@
       [230, 450]
     ];
 
-    var hull2 = d3.polygonHull(points2);
+    var points3 = [
+      [135, 330],
+      [65, 395],
+      [60, 460],
+      [115, 410],
+      [190, 360],
+      [150, 475],
+      [190, 325],
+      [240, 470]
+    ];
 
-    svg.append("path").attr("d", line(hull2)).attr("fill", "pink");
+    var hull2 = d3.polygonHull(points2);
+    var hull3= d3.polygonHull(points3);
+
+    var poly2 = svg.append("path").attr("d", line(hull2)).attr("fill", "pink");
+
+    function changePoly1() {
+      poly2.transition().attr("d", line(hull3)).delay(1100).on('end', changePoly2);
+    }
+
+    function changePoly2() {
+      poly2.transition().attr("d", line(hull2)).delay(1100).on('end', changePoly1);
+    }
+
+    changePoly1();
 
   </script>
 </body>
