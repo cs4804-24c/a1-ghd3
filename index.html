@@ -1,10 +1,129 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
 
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+
+    // setting some vars for window size
+    var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+    // create svg container
+    var svg = d3.select("body").append("svg")
+      .attr("width", x)
+      .attr("height", y)
+      .style("background", "#E8E0D3");
+
+    //adding circle
+    var circle = svg.append("circle")
+      .attr("cx", 1000)
+      .attr("cy", 500)
+      .attr("r", 150)
+      .style("fill", "#0C7346")
+      .style("transition", "opacity 0.3s");
+
+  // hover animation for circle
+    circle.on("mouseover", function() {
+      d3.select(this).style("opacity", 0.7); 
+    })
+    .on("mouseout", function() {
+      d3.select(this).style("opacity", 1); 
+    });
+
+  // adding text to circle
+    var circleText = svg.append("text")
+      .attr("x", 1000)
+      .attr("y", 500)
+      .attr("dy", ".3em") 
+      .style("text-anchor", "middle") 
+      .style("fill", "white")
+      .text("Hover over me");
+
+    //adding a rectangle
+    var rect = svg.append("rect")
+      .attr("x", 400)
+      .attr("y", 100)
+      .attr("width", 400)
+      .attr("height", 200)
+      .style("fill", "#E64D13");
+
+    //adding text to rectangle
+    var rectText = svg.append("text")
+      .attr("x", 600) 
+      .attr("y", 200) 
+      .style("text-anchor", "middle") 
+      .style("fill", "white")
+      .text("Click on me");
+
+    // adding animation on click of rect
+    rect.on("click", function() {
+      d3.select(this).attr("width", 300)
+      d3.select(this).attr("height", 100);
+      rectText.attr("x", 550);
+      rectText.attr("y", 160);
+    })
+
+    //adding line
+    var line = svg.append('line')
+      .style("stroke", "black")
+      .style("stroke-linecap", "round")
+      .style("stroke-width", 40)
+      .attr("x1", 100)
+      .attr("y1", 800)
+      .attr("x2", 400)
+      .attr("y2", 800);
+
+    //add text to line
+    var lineText = svg.append("text")
+      .attr("x", 250)
+      .attr("y", 800)
+      .attr("dy", ".3em") 
+      .style("text-anchor", "middle")
+      .style("fill", "white")
+      .text("Click on me");
+
+      // adding animation on click of line
+    line.on("click", function() {
+      d3.select(this).attr("x2", 900)
+      lineText.attr("x", 500)
+    })
+
+    // some point data for triangle
+    var triangleData = [
+      { x: 300, y: 400 },
+      { x: 500, y: 600 },
+      { x: 100, y: 600 }
+    ];
+
+    //creating triangle polygon from points
+    var triangle = svg.append("polygon")
+      .attr("points", triangleData.map(d => [d.x, d.y].join(",")).join(" "))
+      .style("fill", "#E19AC4");
+
+    // adding text to triangle
+    var polyText = svg.append("text")
+      .attr("x", 300)
+      .attr("y", 530)
+      .attr("dy", ".3em") 
+      .style("text-anchor", "middle") 
+      .style("fill", "white")
+      .text("Hover on me");
+    
+    //adding animation on click of triangle
+    triangle.on("mouseover", function() {
+      d3.select(this).style("fill", "#5F0476"); 
+    })
+    .on("mouseout", function() {
+      d3.select(this).style("fill", "#E19AC4"); 
+    });
 </script>
+
+</body>
+</html>
