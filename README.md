@@ -14,7 +14,7 @@ Achievement 2 (6 points):
 Design Achievements:
 
 Achievement 1 (4 Points): 
-Used Bulma CSS framework to style the webpage; to make the webpage appear aesthetically pleasing, I used the Bulma CSS framework to style the h1 title, footer, and section that contains the D3 graphics primitives.
+Used Bulma CSS framework to style the webpage; to make the webpage appear aesthetically pleasing, I used the Bulma CSS framework to style the h1 title, footer, and section that contains the D3 graphics primitives. I applied Bulma CSS styling using color, text fonts, text sizes, text weight, text positioning, and sectioning.
 
 Achievement 2 (4 Points):
 
