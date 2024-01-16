@@ -1,10 +1,193 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CS4804 A1</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvg/3.0.6/canvg.min.js"></script>
+</head>
+<body style="margin: 0; overflow: hidden;">
 
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+  const svg = d3.select('body').append('svg') //Set dimentsions of container to size of window
+    .attr('width', window.innerWidth)
+    .attr('height', window.innerHeight)
+
+  //Display a welcome message
+  const welcomeMessage = svg.append('text')
+    .attr('x', window.innerWidth / 2)
+    .attr('y', window.innerHeight / 2)
+    .attr('text-anchor', 'middle')
+    .attr('alignment-baseline', 'middle')
+    .attr('font-size', '20')
+    .style('font-family', 'Roboto, sans-serif')
+    .text('Left click to randomly draw a shape! Right click to remove one!');
+
+  //Handle left clicks
+  const handleLeftClick = function(event) {
+    welcomeMessage.remove(); //Remove welcome message
+
+    //Get cursor coordinates
+    const [x, y] = d3.pointer(event);
+
+    //Generate random values for various attributes
+    const randomColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+    const randomSize = Math.random() * 80 + 20;
+    const randomOpacity = Math.random() * 0.5 + 0.5;
+    const randomRotation = Math.random() * 360;
+
+    const shapes = ['circle', 'rect', 'line', 'polygon'];
+
+    //Randomly choose a shape
+    const randomShape = shapes[Math.floor(Math.random() * shapes.length)];
+
+    //Create the appropriate SVG element
+    switch (randomShape) {
+      case 'circle':
+        svg.append('circle')
+          .attr('cx', x)
+          .attr('cy', y)
+          .attr('r', randomSize)
+          .attr('fill', randomColor)
+          .attr('opacity', randomOpacity)
+          .attr('transform', `rotate(${randomRotation} ${x} ${y})`)
+          .classed('shape', true);
+        break;
+      case 'rect':
+        const isSquare = Math.round(Math.random());
+        console.log(isSquare);
+
+        if(isSquare === 1) {
+          svg.append('rect')
+          .attr('x', x - randomSize / 2)
+          .attr('y', y - randomSize / 2)
+          .attr('width', randomSize)
+          .attr('height', randomSize)
+          .attr('fill', randomColor)
+          .attr('opacity', randomOpacity)
+          .attr('transform', `rotate(${randomRotation} ${x} ${y})`)
+          .classed('shape', true);
+        } else if(isSquare === 0) {
+          svg.append('rect')
+          .attr('x', x - randomSize / 2)
+          .attr('y', y - randomSize / 2)
+          .attr('width', randomSize * 2)
+          .attr('height', randomSize)
+          .attr('fill', randomColor)
+          .attr('opacity', randomOpacity)
+          .attr('transform', `rotate(${randomRotation} ${x} ${y})`)
+          .classed('shape', true);
+        }
+        break;
+      case 'line':
+        svg.append('line')
+          .attr('x1', x - randomSize)
+          .attr('y1', y)
+          .attr('x2', x + randomSize)
+          .attr('y2', y)
+          .attr('stroke', randomColor)
+          .attr('opacity', randomOpacity)
+          .attr('transform', `rotate(${randomRotation} ${x} ${y})`)
+          .classed('shape', true);
+        break;
+      case 'polygon':
+        //Generate a random number of sides
+        const numSides = Math.floor(Math.random() * 10) + 3;
+        //Calculate polygon angle
+        const angle = (2 * Math.PI) / numSides;
+
+        //List of points
+        const polygonPoints = [];
+
+        // Generate the points for the polygon
+        for (let i = 0; i < numSides; i++) {
+          const px = x + randomSize * Math.cos(i * angle);
+          const py = y + randomSize * Math.sin(i * angle);
+          polygonPoints.push(`${px},${py}`);
+        }
+
+        //Join the points to create the 'points' attribute string
+        const points = polygonPoints.join(' ');
+
+        svg.append('polygon')
+          .attr('points', points)
+          .attr('fill', randomColor)
+          .attr('opacity', randomOpacity)
+          .attr('transform', `rotate(${randomRotation} ${x} ${y})`)
+          .classed('shape', true);
+        break;
+    }
+  };
+
+  //Handle right clicks
+  const handleRightClick = function(event) {
+    //Prevent default right-click popup window
+    event.preventDefault();
+
+    const target = d3.select(event.target);
+
+    //Remove target only if it is a shape
+    if (target.classed('shape')) {
+      target.remove();
+    }
+  };
+
+  //Handle saving
+  const handleKeyDown = function(event) {
+    if (event.ctrlKey && event.key === 's') { //CTRL + S
+      // Prevent default save popup window
+      event.preventDefault();
+
+      exportAsPNG();
+    }
+  };
+
+  // Function to export the SVG as PNG
+  function exportAsPNG() {
+    // Get the SVG element
+    const svgElement = document.querySelector('svg');
+
+    // Create a white rectangle covering the entire SVG
+    const whiteBackground = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    whiteBackground.setAttribute('width', '100%');
+    whiteBackground.setAttribute('height', '100%');
+    whiteBackground.setAttribute('fill', 'white');
+    svgElement.insertBefore(whiteBackground, svgElement.firstChild);
+
+    // Convert the SVG to a data URL
+    const svgString = new XMLSerializer().serializeToString(svgElement);
+    const blob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    // Create an image element
+    const img = new Image();
+
+    // When the image is loaded, render it to a canvas and trigger the download
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      // Trigger the download
+      const link = document.createElement('a');
+      link.href = canvas.toDataURL('image/png');
+      link.download = 'visualization.png';
+      link.click();
+    };
+
+    // Set the image source to the SVG data URL
+    img.src = url;
+  }
+
+  //Attaching event listeners
+  svg.on('click', handleLeftClick);
+  svg.on('contextmenu', handleRightClick);
+  document.addEventListener('keydown', handleKeyDown);
+
 </script>
+
+</body>
+</html>
