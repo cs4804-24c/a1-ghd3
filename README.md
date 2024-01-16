@@ -34,7 +34,7 @@ GitHub Details
 - Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
 - Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
 
-Submission Details
+Submission Detail
 ---
 - To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
 - Note: name your pull request using the following scheme: 
