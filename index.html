@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>CS4804 Assignment 1 - Basic Animation</title>
+    <title>CS4804 Assignment 1 - Animated Shapes with Interactivity</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
   </head>
   <body class = "has-background-danger-light">
     <header>
-      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Basic Animation</h1>
+      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Animated Shapes with Interactivity</h1>
     </header>
     <main>
       <div id = "container"></div>
@@ -20,12 +20,19 @@
     </footer>
   </body>
   <script>
+    //I used the following resource to get started with an svg container:
+    //https://d3js.org/getting-started
+    //I used the following resources to learn about interactivity in D3:
+    //https://observablehq.com/@nikomccarty/histogram-hover-d3
+    //https://www.geeksforgeeks.org/d3-js-color-brighter-function/
+
     const container = document.getElementById("container")
     console.log(d3) // test if d3 is loaded
 
     // Declare the dimensions for the svg container.
-    const width = 1400
-    const height = 600
+    const margin = {top: 20, right: 20, bottom: 20, left: 20}
+    const width = 1440 - margin.left - margin.right
+    const height = 640 - margin.top - margin.bottom
 
     // Add an SVG
     const svg = d3.select("#container")
