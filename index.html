@@ -11,7 +11,9 @@
       <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Animated Shapes with Interactivity</h1>
     </header>
     <main>
-      <div id = "container"></div>
+      <section class = "section">
+        <div id = "container"></div>
+      </section>
     </main>
     <footer class = "footer">
       <div class = "content has-text-centered">
@@ -37,8 +39,15 @@
     // Add an SVG
     const svg = d3.select("#container")
     .append("svg")
-      .attr("width", width)
-      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+
+    const shapeInfoText = svg
+      .append('text')
+      .attr("id", 'shapeInfo')
+      .attr("x", width - 300)
+      .attr("y", 80)
+      .attr("font-family", "monospace")
+      .text("Selected Shape: None")
 
     function drawRectangle(id, xCoord, yCoord, width, height, fill) {
       svg.append('rect')
@@ -50,9 +59,11 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
+        d3.select("#shapeInfo").text(`Selected Shape: Rectangle`)
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
+        d3.select("#shapeInfo").text(`Selected Shape: None`)
       })
     }
 
@@ -65,9 +76,11 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
+        d3.select("#shapeInfo").text(`Selected Shape: Circle`)
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
+        d3.select("#shapeInfo").text(`Selected Shape: None`)
       })
     }
 
@@ -82,9 +95,11 @@
       .attr("stroke-width", strokeWidth)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'stroke: black')
+        d3.select("#shapeInfo").text(`Selected Shape: Line`)
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `stroke: ${stroke}`)
+        d3.select("#shapeInfo").text(`Selected Shape: None`)
       })
     }
 
@@ -95,9 +110,11 @@
       .attr("fill", fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
+        d3.select("#shapeInfo").text(`Selected Shape: Polygon`)
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
+        d3.select("#shapeInfo").text(`Selected Shape: None`)
       })
     }
 
