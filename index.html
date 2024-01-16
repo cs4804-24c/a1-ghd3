@@ -1,19 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>CS4804 Assignment 1 - Moving Shapes</title>
+    <title>CS4804 Assignment 1 - Basic Animation</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
   </head>
   <body class = "has-background-danger-light">
     <header>
-      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Moving Shapes</h1>
+      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Basic Animation</h1>
     </header>
     <main>
-      <section class = "section">
-        <div id = "container"></div>
-      </section>
+      <div id = "container"></div>
     </main>
     <footer class = "footer">
       <div class = "content has-text-centered">
@@ -22,17 +20,11 @@
     </footer>
   </body>
   <script>
-    //Note: I am following through the D3 documentation below to influence the way that I write my code: 
-    //https://d3js.org/getting-started#d3-in-vanilla-html
-    //https://d3-graph-gallery.com/graph/shape.html
-    //https://observablehq.com/@jwolondon/hello-polygons
-
     const container = document.getElementById("container")
-
     console.log(d3) // test if d3 is loaded
 
     // Declare the dimensions for the svg container.
-    const width = 1000
+    const width = 1400
     const height = 600
 
     // Add an SVG
@@ -41,59 +33,84 @@
       .attr("width", width)
       .attr("height", height)
 
-    function drawRectangle(xCoord, yCoord, width, height, stroke, fill) {
+    function drawRectangle(id, xCoord, yCoord, width, height, fill) {
       svg.append('rect')
+      .attr("id", id)
       .attr('x', xCoord)
       .attr('y', yCoord)
       .attr('width', width)
       .attr('height', height)
-      .attr('stroke', stroke)
       .attr('fill', fill)
+      .on('mouseover', function() {
+        d3.select(this).attr('style', 'fill: black')
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('style', `fill: ${fill}`)
+      })
     }
 
-    function drawCircle(xCoord, yCoord, radius, stroke, fill) {
+    function drawCircle(id, xCoord, yCoord, radius, fill) {
       svg.append('circle')
+      .attr("id", id)
       .attr('cx', xCoord)
       .attr('cy', yCoord)
       .attr('r', radius)
-      .attr('stroke', stroke)
       .attr('fill', fill)
+      .on('mouseover', function() {
+        d3.select(this).attr('style', 'fill: black')
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('style', `fill: ${fill}`)
+      })
     }
 
-    function drawLine(xCoord1, yCoord1, xCoord2, yCoord2, stroke) {
+    function drawLine(id, xCoord1, yCoord1, xCoord2, yCoord2, stroke, strokeWidth) {
       svg.append('line')
+      .attr("id", id)
       .attr('x1', xCoord1)
       .attr('y1', yCoord1)
       .attr('x2', xCoord2)
       .attr('y2', yCoord2)
-      .attr('stroke', stroke)
-    }
-
-    function drawPolygon(coordinates, fill, stroke, strokeWidth) {
-      svg.append("path")
-      .attr("d", `M${coordinates.join(" ")}Z`)
-      .attr("fill", fill)
       .attr("stroke", stroke)
       .attr("stroke-width", strokeWidth)
+      .on('mouseover', function() {
+        d3.select(this).attr('style', 'stroke: black')
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('style', `stroke: ${stroke}`)
+      })
+    }
+
+    function drawPolygon(id, coordinates, fill) {
+      svg.append("path")
+      .attr("id", id)
+      .attr("d", `M${coordinates.join(" ")}Z`)
+      .attr("fill", fill)
+      .on('mouseover', function() {
+        d3.select(this).attr('style', 'fill: black')
+      })
+      .on('mouseout', function() {
+        d3.select(this).attr('style', `fill: ${fill}`)
+      })
     }
 
     // Add Rectangles
-    drawRectangle(20, 50, 400, 50, 'red', 'blue')
-    drawRectangle(20, 150, 600, 50, 'blue', 'red')
+    drawRectangle("rect1", 20, 50, 400, 50, 'red')
+    drawRectangle("rect2", 400, 150, 600, 50, 'blue')
 
     // Add Circles
-    drawCircle(820, 150, 25, 'green', 'pink')
-    drawCircle(820, 250, 25, 'pink', 'green')
+    drawCircle("circle1", 1200, 150, 25, 'green')
+    drawCircle("circle2", 1300, 500, 25, 'pink')
 
     // Add Lines
-    drawLine(50, 250, 60, 350, "rgb(220,20,200)")
-    drawLine(50, 450, 60, 550, "rgb(30,200,250)")
+    drawLine("line1", 50, 250, 60, 350, "rgb(220,20,200)", 10)
+    drawLine("line2", 150, 450, 550, 550, "rgb(30,200,250)", 10)
 
     // Add Polygons
     path1Coordinates = [[850, 300], [800, 325], [730, 400], [700, 450], [890, 475]]
     path2Coordinates= [[550, 275], [500, 390], [430, 400], [400, 450], [590, 475]]
 
-    drawPolygon(path1Coordinates, "rgb(100,75,80)", "yellow", 0.75)
-    drawPolygon(path2Coordinates, "rgb(275,130,15)", "orange", 0.75)
+    drawPolygon("polygon1", path1Coordinates, "rgb(100,75,80)")
+    drawPolygon("polygon2", path2Coordinates, "rgb(275,130,15)")
   </script>
 </html>
