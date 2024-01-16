@@ -8,9 +8,9 @@
   </head>
   <body>
     <script>
-      width = 800; // Double the width
-      height = 1600; // Double the height
-      // stick figure created with the help of chatGPT
+      width = 800;
+      height = 1600;
+      // created with the help of chatGPT
       // Add an SVG
       const svg = d3
         .select("body")
@@ -21,30 +21,30 @@
       // Add a Circle for the Head
       svg
         .append("circle")
-        .attr("cx", 200) // Double the x-coordinate
-        .attr("cy", 100) // Double the y-coordinate
-        .attr("r", 60) // Double the radius
+        .attr("cx", 200)
+        .attr("cy", 100)
+        .attr("r", 60)
         .style("fill", "#e0a58d");
 
       // Add Eyes
       svg
         .append("circle")
-        .attr("cx", 180) // Double the x-coordinate
-        .attr("cy", 90) // Double the y-coordinate
-        .attr("r", 10) // Double the radius
+        .attr("cx", 180)
+        .attr("cy", 90)
+        .attr("r", 10)
         .style("fill", "black");
 
       svg
         .append("circle")
-        .attr("cx", 220) // Double the x-coordinate
-        .attr("cy", 90) // Double the y-coordinate
-        .attr("r", 10) // Double the radius
+        .attr("cx", 220)
+        .attr("cy", 90)
+        .attr("r", 10)
         .style("fill", "black");
 
       // Add a Mouth
       svg
         .append("path")
-        .attr("d", "M 180 120 Q 200 140 220 120") // Adjust the path coordinates
+        .attr("d", "M 180 120 Q 200 140 220 120")
         .style("fill", "none")
         .style("stroke", "black");
 
@@ -52,48 +52,73 @@
       const rightArm = svg
         .append("line")
         .attr("x1", 200)
-        .attr("y1", 180) // Double the y-coordinate
-        .attr("x2", 300) // Double the x-coordinate
-        .attr("y2", 180) // Double the y-coordinate
+        .attr("y1", 180)
+        .attr("x2", 300)
+        .attr("y2", 180)
         .style("stroke", "#e0a58d")
-        .style("stroke-width", 10); // Double the stroke width
+        .style("stroke-width", 10);
 
       svg
         .append("line")
-        .attr("x1", 120) // Double the x-coordinate
-        .attr("y1", 240) // Double the y-coordinate
+        .attr("x1", 120)
+        .attr("y1", 240)
         .attr("x2", 200)
-        .attr("y2", 160) // Double the y-coordinate
+        .attr("y2", 160)
         .style("stroke", "#e0a58d")
-        .style("stroke-width", 10); // Double the stroke width
+        .style("stroke-width", 10);
 
       // Add a Rectangle for the shirt
       svg
         .append("rect")
-        .attr("x", 170) // Adjust the x-coordinate
-        .attr("y", 160) // Double the y-coordinate
-        .attr("width", 60) // Double the width
-        .attr("height", 160) // Double the height
+        .attr("x", 170)
+        .attr("y", 160)
+        .attr("width", 60)
+        .attr("height", 160)
         .style("fill", "#AFE1AF");
 
       // Add Lines for the Legs
       svg
         .append("line")
         .attr("x1", 200)
-        .attr("y1", 320) // Double the y-coordinate
-        .attr("x2", 160) // Double the x-coordinate
-        .attr("y2", 400) // Double the y-coordinate
+        .attr("y1", 320)
+        .attr("x2", 160)
+        .attr("y2", 400)
         .style("stroke", "#5e88b6")
-        .style("stroke-width", 10); // Double the stroke width
+        .style("stroke-width", 10);
 
       svg
         .append("line")
         .attr("x1", 200)
-        .attr("y1", 320) // Double the y-coordinate
-        .attr("x2", 240) // Double the x-coordinate
-        .attr("y2", 400) // Double the y-coordinate
+        .attr("y1", 320)
+        .attr("x2", 240)
+        .attr("y2", 400)
         .style("stroke", "#5e88b6")
-        .style("stroke-width", 10); // Double the stroke width
+        .style("stroke-width", 10);
+
+      // Sun
+      const sun = svg
+        .append("circle")
+        .attr("cx", width - 300)
+        .attr("cy", 60)
+        .attr("r", 40)
+        .style("fill", "#ffd700");
+
+      // Animation function for the sun
+      function growSun() {
+        sun
+          .transition()
+          .duration(5000)
+          .attr("r", 52)
+          .style("fill", "#FA5F55")
+          .transition()
+          .duration(5000)
+          .attr("r", 50)
+          .style("fill", "#ffd700")
+          .on("end", growSun);
+      }
+
+      // Start the sun growth animation
+      growSun();
 
       // Base Polygon
       const basePolygon = svg
@@ -113,8 +138,8 @@
       // Define the waving motion
       function wavingTween() {
         return function (t) {
-          const angle = Math.sin(t * Math.PI * 2) * 20; // Adjust the waving range
-          return "rotate(" + angle + ", 200, 180)"; // Double the rotation point coordinates
+          const angle = Math.sin(t * Math.PI * 2) * 20;
+          return "rotate(" + angle + ", 200, 180)";
         };
       }
 
