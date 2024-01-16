@@ -4,7 +4,7 @@ Eric Zhou
 
 ## **Description**
 
-**Link:** https://fullstackgoogler.github.io/01-ghd3/index.html
+**Link:** https://fullstackgoogler.github.io/a1-ghd3/
 
 My site starts off as a blank canvas, where once the user begins left clicking around, random required shapes begin generating. These include:
 - Circle
