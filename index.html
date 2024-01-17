@@ -1,10 +1,196 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<html>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  
+  
+  <body>
+    <p>
+      Click on  blue rectangle, yellow circle, and white 
+    curved line</p>
+    <div id = "svgcontainer">
+      </div>
+    
+    <script>
+      console.log(d3); // test if d3 is loaded
+      
+      
+      // Add an SVG
+      var width = 700;
+      var height = 700;
+      var svg = d3.select("#svgcontainer")
+         .append("svg").attr("width", width).attr("height", height);
+      
+      
+      // Add Rectangles
+      svg.append('rect')
+        .attr('x', 10)
+        .attr('y', 300)
+        .attr('width', 600)
+        .attr('height', 40)
+        .attr('stroke', 'black')
+        .attr('fill', 'green');
+      
+      var sky = svg.append('rect')
+        .attr('x', 10)
+        .attr('y', 0)
+        .attr('width', 600)
+        .attr('height', 300)
+        .attr('stroke', 'black')
+        .attr('fill', '#7FB2F0')
+      
+      
+      // Add Circles
+      var sun = svg.append('circle')
+        .attr('cx', 100)
+        .attr('cy', 100)
+        .attr('r', 45)
+        .attr('stroke', 'black')
+        .attr('fill', '#FAE04E');
+      
+    
+    
+      
+      // Add Lines
+      svg.append('line')
+        .attr('x1', 410)
+        .attr('y1', 200)
+        .attr('x2', 410)
+        .attr('y2', 300)
+        .attr('stroke', 'green')
+        .attr('stroke-width', '7')
+      
+      var data = [{x: 20, y: 200}, 
+                  {x: 80, y: 250}, 
+                  {x: 140, y: 180}, 
+                  {x: 200, y: 250}, 
+                  {x: 260, y: 200},
+                  {x: 320, y: 230}]
+      
+      var move = [{x: 20, y: 250}, 
+                  {x: 80, y: 200}, 
+                  {x: 140, y: 250}, 
+                  {x: 200, y: 180}, 
+                  {x: 260, y: 230},
+                  {x: 320, y: 200}]
+     
+      var curveFunc = d3.line()
+        .curve(d3.curveBasis)       
+        .x(function(d) { return d.x })
+        .y(function(d) { return d.y })
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+      
+      var wind = svg.append('path')
+        .attr('d', curveFunc(data))
+        .attr('stroke', 'white')
+        .attr('stroke-width', '7')
+        .attr('fill', 'none')
+
+      
+      // Add Polygons
+      var bud = [{x: 410, y: 200},
+                 {x: 430, y: 190},
+                 {x: 430, y: 170},
+                 {x: 410, y: 160},
+                 {x: 390, y: 170},
+                 {x: 390, y: 190},
+                 {x: 410, y: 200}]
+      
+      //create flower pedal triangles
+      var Ppedals =[{x: 410, y: 200},
+                   {x: 440, y: 230},
+                   {x: 430, y: 190},
+                   {x: 410, y: 200},
+                   {x: 410, y: 160},
+                   {x: 440, y: 130},
+                   {x: 430, y: 170},
+                   {x: 390, y: 190},
+                   {x: 350, y: 180},
+                   {x: 390, y: 170}]
+      
+      var Bpedals =[{x: 410, y: 200},
+                   {x: 380, y: 230},
+                   {x: 390, y: 190},
+                   {x: 430, y: 190},
+                   {x: 470, y: 180},
+                   {x: 430, y: 170},
+                   {x: 390, y: 170},
+                   {x: 380, y: 130},
+                   {x: 410, y: 160}]
+      
+      var lineFunc = d3.line()
+        .x(function(d) { return d.x })
+        .y(function(d) { return d.y })
+      
+      
+      
+      svg.append('path')
+        .attr('d', lineFunc(Ppedals))
+        .attr('stroke', 'black')
+        .attr('fill', '#682992');
+      
+      svg.append('path')
+        .attr('d', lineFunc(Bpedals))
+        .attr('stroke', 'black')
+        .attr('fill', 'Beige');
+      
+      svg.append('path')
+        .attr('d', lineFunc(bud))
+        .attr('stroke', 'black')
+        .attr('fill', '#FFBF00');
+      
+        var t = d3.transition()
+        .duration(500)
+            
+        
+        
+        //animation for line (wind)
+      wind.on("click", function(){
+      d3.select(this)
+      .transition()
+      .duration(2000)
+      .attr('d', curveFunc(move))
+    })
+
+      //animation for circle(sun)
+      sun.on("click", function(){
+      d3.select(this)
+      .transition()
+      .duration(2000)
+      .attr('r', 35)
+      svg.append("path")
+        .attr("transform", "translate(100,100)")
+        .attr("d", d3.arc()
+          .innerRadius( 50 )
+          .outerRadius( 80 )
+          .startAngle( 4.5 )     
+          .endAngle( 6.2 )       
+          )
+        .attr('stroke', 'black')
+        .attr('fill', 'orange');
+      svg.append("path")
+      .attr("transform", "translate(100,100)")
+      .attr("d", d3.arc()
+        .innerRadius( 50 )
+        .outerRadius( 80 )
+        .startAngle( 1.5 )     
+        .endAngle( 3 )       
+        )
+      .attr('stroke', 'black')
+      .attr('fill', 'orange');
+    })
+
+      //animation for curved line(sky)
+      sky.on("click", function(){
+      d3.select(this)
+      .transition()
+      .duration(2000)
+      .style("fill", "#F24A1E")
+    })
+      
+      
+      
+    </script>
+    
+  </body>
+</html>
+
+
