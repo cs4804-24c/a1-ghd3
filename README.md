@@ -4,9 +4,9 @@ a1-audreymongillo-Audrey-Mongillo
 
 ## Description:
 I used different kinds of graphic primitives to create my drawing of a car moving down a road. I used lines to create
-the different components of the road, a rectangle for the bottom half of the car, polygons for the top half of the car
-including the windows, and circles for the wheels of the car. I then animated the car to look as though it is moving
-down the road. 
+the different components of the road, a rectangle for the bottom half of the car and the middle window, polygons for the 
+top half of the car and the outer windows, and circles for the wheels of the car. I then animated the car to look as 
+though it is moving down the road. 
 
 Screenshot of the car (will need to open site to view animation):
 ![Screenshot 2024-01-16 at 9.41.36 PM.png](Screenshot%202024-01-16%20at%209.41.36%20PM.png)
