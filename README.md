@@ -14,6 +14,7 @@ shapes will also give the user a surprise.
 
 gh-pages site
 ---
+http://asosa117.github.io/a1-ghd3/index.html
 
 Technical and Design Achievement
 ---
