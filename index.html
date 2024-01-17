@@ -1,10 +1,47 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>d3 Graphics Demo</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+    // Test if d3 is loaded
+    console.log(d3);
+
+    // Add an SVG element
+    var svg = d3.select("body").append("svg")
+        .attr("width", 500)
+        .attr("height", 500);
+
+    // Add Rectangles
+    svg.append("rect")
+        .attr("x", 50)
+        .attr("y", 50)
+        .attr("width", 100)
+        .attr("height", 100)
+        .attr("fill", "red");
+
+    // Add Circles
+    svg.append("circle")
+        .attr("cx", 250)
+        .attr("cy", 100)
+        .attr("r", 50)
+        .attr("fill", "blue");
+
+    // Add Lines
+    svg.append("line")
+        .attr("x1", 300)
+        .attr("y1", 300)
+        .attr("x2", 400)
+        .attr("y2", 400)
+        .attr("stroke", "green")
+        .attr("stroke-width", 2);
+
+    // Add Polygons
+    svg.append("polygon")
+        .attr("points", "200,10 250,190 160,210")
+        .attr("fill", "yellow");
 </script>
+</body>
+</html>
