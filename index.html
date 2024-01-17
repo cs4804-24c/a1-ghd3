@@ -13,6 +13,7 @@
     <main>
       <section class = "section">
         <div id = "container"></div>
+        <button onClick="updateShapePositions()" class = "button is-family-monospace is-link is-medium">Play Animation</button>
       </section>
     </main>
     <footer class = "footer">
@@ -27,6 +28,7 @@
     //I used the following resources to learn about interactivity in D3:
     //https://observablehq.com/@nikomccarty/histogram-hover-d3
     //https://www.geeksforgeeks.org/d3-js-color-brighter-function/
+    //I used coding techniques with transitions from the following article to create an animation: https://www.d3indepth.com/transitions/
 
     const container = document.getElementById("container")
     console.log(d3) // test if d3 is loaded
@@ -41,11 +43,14 @@
     .append("svg")
       .attr("viewBox", [0, 0, width, height])
 
+    //Declare shape data for animations
+    let shapePositionData = []
+
     const shapeInfoText = svg
       .append('text')
       .attr("id", 'shapeInfo')
-      .attr("x", width - 300)
-      .attr("y", 80)
+      .attr("x", 1100)
+      .attr("y", 50)
       .attr("font-family", "monospace")
       .text("Selected Shape: None")
 
@@ -116,6 +121,32 @@
         d3.select(this).attr('style', `fill: ${fill}`)
         d3.select("#shapeInfo").text(`Selected Shape: None`)
       })
+    }
+
+    function updateShapeData() {
+      shapePositionDataX = []
+      shapePositionDataY = []
+      for(let i = 0; i < 2; i++) {
+        shapePositionDataX.push(Math.random() * 900)
+        shaoePositionDataY.push(Math.random() * 500)
+      }
+    }
+
+    function updateShapePositions() {
+      d3.select('svg')
+      .selectAll('circle')
+      .data(shapePositionData)
+      .join('circle')
+      .attr('cy', 50)
+      .attr('r', 40)
+      .attr('cx', function(d) {
+        return d //returns new x positions for each shape one at a time.
+      })
+    }
+
+    function updateShapePositions() {
+      updateShapeData()
+      updateShapePositions()
     }
 
     // Add Rectangles

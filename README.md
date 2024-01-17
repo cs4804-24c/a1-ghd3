@@ -7,13 +7,13 @@ Screenshots:
 
 Technical Achievements:
 
-Achievement 1 (Estimated 6 points):
+Achievement 1 (Estimated 12 points):
 
-Achievement 2 (Estimated 6 points):
+
 
 Design Achievements:
 
-Achievement 1 (Estimated 6 Points): 
+Achievement 1 (Estimated 4 Points): 
 Used Bulma CSS framework to style the webpage and essentially set the backdrop for the animation; to make the webpage appear aesthetically pleasing, I used the Bulma CSS framework to style the h1 title, footer, and section that contains the D3 graphics primitives. I applied Bulma CSS styling using color, text fonts, text sizes, text weight, and text positioning.
 
 Achievement 2 (Estimated 4 Points):
