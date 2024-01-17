@@ -1,10 +1,217 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<div id="container"></div>
+<script type="module">
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+    import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+    //Dimensions of image
+    const width = 1400;
+    const height = 500;
+
+    //create SVG
+    const svg = d3.create("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+    container.append(svg.node());
+
+    //Lines to represent the road
+    svg.append("line")
+        .attr("x1", 0)
+        .attr("x2", 140000)
+        .attr("y1", 500)
+        .attr("y2", 500)
+        .style("stroke", "gray")
+        .style("stroke-width", 20);
+
+    svg.append("line")
+        .attr("x1", 0)
+        .attr("x2", 140000)
+        .attr("y1", 375)
+        .attr("y2", 375)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 0)
+        .attr("x2", 90)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 180)
+        .attr("x2", 270)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 360)
+        .attr("x2", 450)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 540)
+        .attr("x2", 630)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 720)
+        .attr("x2", 810)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 900)
+        .attr("x2", 990)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 1080)
+        .attr("x2", 1170)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 1260)
+        .attr("x2", 1350)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 1440)
+        .attr("x2", 1530)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    svg.append("line")
+        .attr("x1", 1620)
+        .attr("x2", 1710)
+        .attr("y1", 438)
+        .attr("y2", 438)
+        .style("stroke", "gray")
+        .style("stroke-width", 10);
+
+    //Circles for car wheels
+    const wheel1 = svg.append("circle")
+                        .attr("cx", 450)
+                        .attr("cy", 430)
+                        .attr("r", 60)
+                        .style("fill", "#363232");
+
+    const wheel2 = svg.append("circle")
+                        .attr("cx", 690)
+                        .attr("cy", 430)
+                        .attr("r", 60)
+                        .style("fill", "#363232");
+
+    //Rectangle for car body
+    const car1 = svg.append("rect")
+                        .attr("x", 350)
+                        .attr("y", 310)
+                        .attr("width", 450)
+                        .attr("height", 75)
+                        .style("fill", "#5F9EA0");
+
+    //Polygon for top of car
+    const car2 = svg.append("polygon")
+                        .attr("points", "350 310,450 200, 600 200, 800 310")
+                        .style("fill", "#86B6D6");
+
+    //Polygon for front window
+    const car3 = svg.append("polygon")
+                        .attr("points", "600 300,600 210, 770 300")
+                        .style("fill", "#4c718c")
+                        .style("opacity", 50)
+
+    //Polygon for back window
+    const car4 = svg.append("polygon")
+                        .attr("points", "370 300,450 210, 450 300")
+                        .style("fill", "#4c718c")
+                        .style("opacity", 50)
+
+    //Rectangle for middle window
+    const car5 = svg.append("rect")
+                        .attr("x", 460)
+                        .attr("y", 210)
+                        .attr("width", 130)
+                        .attr("height", 90)
+                        .style("fill", "#4c718c");
+
+
+    // Function to make the car move
+    function moveCar()
+    {
+        car1.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        car2.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        car3.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        car4.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        car5.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        wheel1.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+        wheel2.transition()
+            .duration(4000)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(1200, 0)")
+            .on("end", resetCar);
+    }
+
+    // Function to reset the car position
+    function resetCar()
+    {
+        car1.attr("transform", null);
+        car2.attr("transform", null);
+        car3.attr("transform", null);
+        car4.attr("transform", null);
+        car5.attr("transform", null);
+        wheel1.attr("transform", null);
+        wheel2.attr("transform", null);
+        moveCar();
+    }
+
+    moveCar();
+
 </script>
