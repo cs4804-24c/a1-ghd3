@@ -1,10 +1,78 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Engjell Ramadani Assignment 1</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+  <body>
+    <script>
+      console.log(d3); // test if d3 is loaded
+      // Add an SVG
+      var svg = d3
+        .select("body")
+        .append("svg")
+        .attr("width", 500)
+        .attr("height", 500);
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+      // Add Circles
+      svg
+        .append("circle")
+        .attr("cx", 250)
+        .attr("cy", 250)
+        .attr("r", 200)
+        .attr("fill", "yellow")
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
+
+      // Add Polygons
+      //Left eye
+      svg
+        .append("polygon")
+        .attr("points", "170,200 190,180 210,200 190,220")
+        .attr("fill", "green");
+
+      //Right eye
+      svg
+        .append("polygon")
+        .attr("points", "290,200 310,180 330,200 310,220")
+        .attr("fill", "green");
+
+      //Eyebrow
+      svg
+        .append("line")
+        .attr("x1", 160)
+        .attr("y1", 180)
+        .attr("x2", 210)
+        .attr("y2", 160)
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
+
+      svg
+        .append("line")
+        .attr("x1", 290)
+        .attr("y1", 160)
+        .attr("x2", 340)
+        .attr("y2", 180)
+        .attr("stroke", "black")
+        .attr("stroke-width", 3);
+      //Hat
+      svg
+        .append("rect")
+        .attr("x", 150)
+        .attr("y", 80)
+        .attr("width", 200)
+        .attr("height", 60)
+        .attr("fill", "blue")
+        .attr("stroke", "black")
+        .attr("stroke-width", 2);
+
+      //Mouth
+      svg
+        .append("path")
+        .attr("d", "M 150,300 Q 250,400 350,300")
+        .attr("stroke", "red")
+        .attr("stroke-width", 3)
+        .attr("fill", "none");
+    </script>
+  </body>
+</html>
