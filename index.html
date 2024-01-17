@@ -1,10 +1,21 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
-
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+<head>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>CS 4804 Assignment 1</h1>
+  <h4>Instructions</h4>
+  <ul>
+    <li>Use left click to draw a line. Select the first point by clicking on the SVG, and then a second time to choose the second point. The line will be drawn after the second point is chosen.</li>
+    <li>Select a color for the line using the color picker below the SVG.</li>
+    <li>Move the slider to change the width of the stroke from 1 to 32 pixels</li>
+    <li>Draw a polygon by selecting points by right clicking on the SVG. When all points are selected, press the space bar to draw the polygon.</li>
+    <li>Clear the SVG at any time by clicking the Clear SVG button.</li>
+  </ul>
+  <div id="svg-holder"></div>
+  <button id="clear-svg">Clear SVG</button>
+  <label>Stroke color: </label><input id="color-picker" type="color"/>
+  <label>Stroke width: </label><input id="select-stroke-width" type="range" min="1" max="32" value="1" />
+  <label>Fill color: </label><input id="fill-color-picker" type="color"/>
+</body>
