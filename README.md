@@ -1,7 +1,8 @@
-Resources Used
+Resources Used <br />
  -https://www.youtube.com/playlist?list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p<br />
  -https://d3js.org/d3-transition/selecting<br />
  -pregiven code<br />
+Link to Index.html <br />
 Description<br />
     I made a diorama of a wall with a clock and two differently colored hanging lights that look like hourglasses. The clock is made up of two different elements, circles are used to differentiate it from the wall as well as the center point of the clock. Additionally 2 lines are used to represent the hour and minute hands of the clock. The wall is made up of a single black rectangle, while the lights are made of polygons. This also contains a animation of the clock falling down and bouncing once,
 Technical Achievement Description<br />
