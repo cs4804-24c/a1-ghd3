@@ -54,13 +54,13 @@
   // Adding Sun/Moon (Circle)
   // Center Circle
   const centerX = svg.attr("width") / 2;
-  const centerY = svg.attr("height") / 4;
+  const centerY = svg.attr("height") / 2;
 
   svg
     .append("circle")
     .attr("cx", centerX)
     .attr("cy", centerY)
-    .attr("r", 100)
+    .attr("r", 400)
     .attr("fill", "url(#sunGradient)");
 
   // Adding Birds (Lines)
@@ -264,6 +264,21 @@
     .attr("width", 225)
     .attr("height", 400)
     .attr("fill", "grey");
+
+
+  // Adding a long pentagon
+  const pentagonPoints = [
+    { x: 250, y: 400 },
+    { x: 475, y: 400 },
+    { x: 475, y: 300 },
+    { x: 362.5, y: 200 },
+    { x: 250, y: 300 }
+  ];
+
+  svg
+    .append("polygon")
+    .attr("points", pentagonPoints.map(point => `${point.x},${point.y}`).join(" "))
+    .attr("fill", "grey")
   
 
   // Add the linear gradient definition
@@ -288,25 +303,37 @@
 
   // Function to update gradient stops over time
   function updateGradient() {
-  const gradientStops = svg.select("#sunGradient").selectAll("stop");
+    const gradientStops = svg.select("#sunGradient").selectAll("stop");
 
   // Update saturation based on time
-  const currentTime = new Date().getTime();
-  const saturation = 50 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time
+    const currentTime = new Date().getTime();
+    const saturation = 50 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time
 
   // Apply the same color with varying saturation to all stops
-  const color = `hsl(65, ${saturation}%, 50%)`;
-  gradientStops.each(function() {
-    d3.select(this).attr("stop-color", color);
-  });
+    const color = `hsl(50, ${saturation}%, 50%)`;
+    gradientStops.each(function() {
+      d3.select(this).attr("stop-color", color);
+    });
 
   // Update background color based on time for the container
-  const containerSaturation = 40 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time for the background
-  const containerColor = `hsl(30, ${containerSaturation}%, 40%)`;
-  container.style("background-color", containerColor);
+    const containerSaturation = 40 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time for the background
+    const containerColor = `hsl(30, ${containerSaturation}%, 40%)`;
+    container.style("background-color", containerColor);
+
+  // Update building colors based on time
+    const buildingSaturation = 15 + Math.sin((currentTime / 100) * 2 * Math.PI) * 30; // Vary saturation over time for the buildings
+    const buildingColor = `hsl(0, 0%, ${buildingSaturation}%)`;
+
+  // Select and update each building
+    svg.selectAll("rect")
+    .attr("fill", buildingColor);
+
+  // Select and update top building
+    svg.selectAll("polygon")
+    .attr("fill", buildingColor);
 
   // Repeat the update at a certain interval
-  setTimeout(updateGradient, 100);
+    setTimeout(updateGradient, 200);
 }
   // Call the function to start the dynamic color change
   updateGradient();
