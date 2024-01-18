@@ -1,19 +1,34 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>CS4804 Assignment 1 - Animated Shapes with Interactivity</title>
+    <title>CS4804 Assignment 1 - Animated Circles & Rectangles</title>
     <meta charset="utf-8">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"></link>
   </head>
   <body class = "has-background-danger-light">
     <header>
-      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Animated Shapes with Interactivity</h1>
+      <h1 class = "title is-1 is-family-primary has-text-success-dark has-text-weight-bold has-text-centered">Assignment 1 Visualization - Animated Circles & Rectangles</h1>
     </header>
     <main>
       <section class = "section">
+        <div class = "content">
+          <h2 class = "subtitle is-3 is-family-sans-serif has-text-warning-dark">User Interaction Instructions:</h2>
+          <ol type = "A">
+            <li class = "is-family-code">
+              Hover the mouse over any shape to identify the shape type. Information will appear in the "Selected Shape" label below.
+            </li>
+            <li class = "is-family-code">
+              Click the rectangles and circles to trigger an animation; the rectangle or circle that is clicked will move to a new position on the screen.
+            </li>
+          </ol>
+        </div>
+        <div class = "box">
+            <p id = "shapeInformationParagraph">
+              <strong>Selected Shape: </strong>None
+            </p> 
+        </div>
         <div id = "container"></div>
-        <button onClick="updateShapePositions()" class = "button is-family-monospace is-link is-medium">Play Animation</button>
       </section>
     </main>
     <footer class = "footer">
@@ -33,26 +48,36 @@
     const container = document.getElementById("container")
     console.log(d3) // test if d3 is loaded
 
-    // Declare the dimensions for the svg container.
+    // Declare the dimensions for the svg container:
     const margin = {top: 20, right: 20, bottom: 20, left: 20}
     const width = 1440 - margin.left - margin.right
     const height = 640 - margin.top - margin.bottom
+    //Declare shape and position constants:
+    const maximumXPosition = 875
+    const maximumYPosition = 475
+    const numberOfShapesUpdated = 1
+    let shapePositionData = null
+    //Shape Information paragraph element:
+    shapeInfoParagraph = document.getElementById("shapeInformationParagraph")
+    const shapeInfoParagraphDefaultMessage = `<strong>Selected Shape </strong>: None`
 
     // Add an SVG
     const svg = d3.select("#container")
     .append("svg")
-      .attr("viewBox", [0, 0, width, height])
+      .attr("width", width)
+      .attr("height", height)
 
-    //Declare shape data for animations
-    let shapePositionData = []
-
-    const shapeInfoText = svg
-      .append('text')
-      .attr("id", 'shapeInfo')
-      .attr("x", 1100)
-      .attr("y", 50)
-      .attr("font-family", "monospace")
-      .text("Selected Shape: None")
+    function updateShapeData() {
+      shapePositionDataX = []
+      shapePositionDataY = []
+      shapePositionDataCombined = []
+      for(let i = 0; i < numberOfShapesUpdated; i++) {
+        shapePositionDataX.push(Math.random() * maximumXPosition)
+        shapePositionDataY.push(Math.random() * maximumYPosition)
+        shapePositionDataCombined.push([shapePositionDataX[i], shapePositionDataY[i]])
+      }
+      return shapePositionDataCombined
+    }
 
     function drawRectangle(id, xCoord, yCoord, width, height, fill) {
       svg.append('rect')
@@ -64,11 +89,15 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
-        d3.select("#shapeInfo").text(`Selected Shape: Rectangle`)
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Rectangle with width ${width} and height ${height}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
-        d3.select("#shapeInfo").text(`Selected Shape: None`)
+        shapeInfoParagraph.innerHTML = shapeInfoParagraphDefaultMessage
+      })
+      .on('click', function() {
+        shapePositionData = updateShapeData()
+        d3.select(this).transition().duration(1000).attr('x', shapePositionData[0][0]).attr('y', shapePositionData[0][1])
       })
     }
 
@@ -81,15 +110,20 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
-        d3.select("#shapeInfo").text(`Selected Shape: Circle`)
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Circle with radius ${radius}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
-        d3.select("#shapeInfo").text(`Selected Shape: None`)
+        shapeInfoParagraph.innerHTML = shapeInfoParagraphDefaultMessage
+      })
+      .on('click', function() {
+        shapePositionData = updateShapeData()
+        d3.select(this).transition().duration(1000).attr('cx', shapePositionData[0][0]).attr('cy', shapePositionData[0][1])
       })
     }
 
     function drawLine(id, xCoord1, yCoord1, xCoord2, yCoord2, stroke, strokeWidth) {
+      let formattedCoordinates = `${xCoord1},${yCoord1} , ${xCoord2},${yCoord2}`
       svg.append('line')
       .attr("id", id)
       .attr('x1', xCoord1)
@@ -100,53 +134,28 @@
       .attr("stroke-width", strokeWidth)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'stroke: black')
-        d3.select("#shapeInfo").text(`Selected Shape: Line`)
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape </strong>: Line with coordinates ${formattedCoordinates}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `stroke: ${stroke}`)
-        d3.select("#shapeInfo").text(`Selected Shape: None`)
+        shapeInfoParagraph.innerHTML = shapeInfoParagraphDefaultMessage
       })
     }
 
     function drawPolygon(id, coordinates, fill) {
+      let formattedCoordinates = coordinates.join(" , ")
       svg.append("path")
       .attr("id", id)
       .attr("d", `M${coordinates.join(" ")}Z`)
       .attr("fill", fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
-        d3.select("#shapeInfo").text(`Selected Shape: Polygon`)
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Polygon with coordinates ${formattedCoordinates}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
-        d3.select("#shapeInfo").text(`Selected Shape: None`)
+        shapeInfoParagraph.innerHTML = shapeInfoParagraphDefaultMessage
       })
-    }
-
-    function updateShapeData() {
-      shapePositionDataX = []
-      shapePositionDataY = []
-      for(let i = 0; i < 2; i++) {
-        shapePositionDataX.push(Math.random() * 900)
-        shaoePositionDataY.push(Math.random() * 500)
-      }
-    }
-
-    function updateShapePositions() {
-      d3.select('svg')
-      .selectAll('circle')
-      .data(shapePositionData)
-      .join('circle')
-      .attr('cy', 50)
-      .attr('r', 40)
-      .attr('cx', function(d) {
-        return d //returns new x positions for each shape one at a time.
-      })
-    }
-
-    function updateShapePositions() {
-      updateShapeData()
-      updateShapePositions()
     }
 
     // Add Rectangles
@@ -155,7 +164,7 @@
 
     // Add Circles
     drawCircle("circle1", 1200, 150, 25, 'green')
-    drawCircle("circle2", 1300, 500, 25, 'pink')
+    drawCircle("circle2", 1300, 500, 45, 'pink')
 
     // Add Lines
     drawLine("line1", 50, 250, 60, 350, "rgb(220,20,200)", 10)
