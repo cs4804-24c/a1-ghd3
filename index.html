@@ -99,6 +99,8 @@
       .on('click', function() {
         shapePositionData = updateShapeData()
         d3.select(this).raise().transition().duration(1000).attr('x', shapePositionData[0][0]).attr('y', shapePositionData[0][1])
+        xCoord = shapePositionData[0][0]
+        yCoord = shapePositionData[0][1]
       })
     }
 
@@ -120,6 +122,8 @@
       .on('click', function() {
         shapePositionData = updateShapeData()
         d3.select(this).raise().transition().duration(1000).attr('cx', shapePositionData[0][0]).attr('cy', shapePositionData[0][1])
+        xCoord = shapePositionData[0][0]
+        yCoord = shapePositionData[0][1]
       })
     }
 
