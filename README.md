@@ -1,4 +1,4 @@
-https://github.com/OmriGreen/Omri_Green_a1_ghd3/blob/OmriGreen-patch-1/Fallen%20Clock.pngResources Used:<br />
+Resources Used
  -https://www.youtube.com/playlist?list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p<br />
  -https://d3js.org/d3-transition/selecting<br />
  -pregiven code<br />
