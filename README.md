@@ -1,86 +1,37 @@
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
-This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
+Working link to gh-pages site: https://maccode7110.github.io/a1-ghd3-MacCode7110-Matthew-McAlarney/
 
-The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
+I referenced the following resources to help me learn about certain aspects of D3 and write D3-specific code:
 
-The secondary goal is to introduce you to coding on GitHub, including creating a gh-pages branch to host your visualizations.
+    I used the following resource to get started with an svg container: https://d3js.org/getting-started
+    I used the following Histogram example to learn about user interaction in D3: https://observablehq.com/@nikomccarty/histogram-hover-d3
+    I used coding techniques with D3 transitions from the following article to create animations: https://www.d3indepth.com/transitions/
+    I used the D3 raise method to bring certain shapes to the front when moving across the svg container, which I learned about from this article: https://dev.to/cselig/controlling-svg-draw-order-in-d3-4n9l
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, you **must identify** the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
+Description of what I created:
 
-For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
+    I have created a web application titled "Animated Circles and Rectangles", which provides informational user interaction features and interactive animations. The purpose of the application is to provide the user a fun way to interact with different shapes and observe some of them move across the screen. 
+    This web application provides the following features for the user to engage in (as shown in the application instructions UI component as well):
+        1. When the mouse is hovered over any shape, the shape type will appear next to the "Selected Shape" label. Additional information about the selected shape such as its width, height, radius, and/or coordinates will also appear next to the shape type identification.
+        2. When any of the rectangles and circles are clicked with the mouse, there will be a resulting animation of the clicked rectangle or circle; the rectangle or circle that is clicked will move (using a smooth transition) to a new randomly-assigned position within the svg container. 
 
-Resources
----
+Note: Screenshots of the web application are attached to the GitHub assignment folder.
 
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
+Technical Achievements:
 
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
+Achievement 1 (Estimated 6 Points):
+In conjunction with accessing part of the DOM through obtaining an element ID defined in my HTML structure, I applied the D3 mouseover and mouseout events on all shapes to make each one interactive on an informational level. When the user hovers over any of the shapes with their mouse, the type of shape that has been selected will appear in the white box where the "Selected Shape" text is located. In addition, key information about that particular shape is provided such as the width, height, radius, and/or coordinates of that shape. When the user moves their mouse outside of the area of a given shape, the "Selected Shape" text will show "None". To accomplish this functionality, I had to interact with the DOM (via obtaining element ID and setting inner HTML techniques) in my script to access and modify the paragraph where the selected shape information is displayed. 
 
-Requirements
----
+Achievement 2 (Estimated 6 points):
+I implemented user-driven interactive animations using the D3 mouse click event for all circles and rectangles. When a given circle or rectangle is clicked with the mouse, it will move to a new position within the svg container using a smooth transition of 1000 milliseconds. The x and y coordinates of a new position are determined in an updateShapeData helper function at random within reasonable bounds (inside of the svg container). This way, the new position of a rectangle or circle is a surprise to the user.
 
-1. Your project should contain at least four kinds of graphics primitives (circles, rectangles, lines, polygons) in different colors. 
-2. Your document should identify the source of the code if you start with code that you found. 
-3. Your code should be forked from the GitHub repo and linked using GitHub pages. See the "GitHub Details" section below for detailed instructions on how to do this.
+Design Achievements:
 
-GitHub Details
----
+Achievement 1 (Estimated 6 Points): 
+I added numerous HTML elements to create a proper webpage structure to hold the visualization. Following up on this HTML page design, I used Bulma CSS framework to style the webpage and essentially set the backdrop for the animation; to make the webpage appear aesthetically pleasing, I used the Bulma CSS framework to style, for example, the h1 title, the h2 subtitle, the Selected Shape box, ordered list, footer, and section that contains the D3 graphics primitives. I applied Bulma CSS styling using sectioning, content setting, color, text fonts, text sizes, text weight, and text positioning. 
 
-- Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
-- Make changes to index.html to fulfill the project requirements. 
-- Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
-
-Submission Details
----
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-- Note: name your pull request using the following scheme: 
-```
-a1-your Gh username-your first name-your lastname
-
-```
-
-Vis Details
----
-
-For this project you should use d3.js. 
-You can learn from examples on the [d3.js](http://d3js.org) site or start from scratch.
-
-See the [Using d3js](https://github.com/mbostock/d3/wiki#using) documentation for how to run your own local server.
-
-Creative solutions are welcome! In the past I've seen recreations of paintings, interactives, and more.
-
-Go beyond the minimum requirements of this project.
-Experiment with other aspects of the [d3 API](https://github.com/mbostock/d3/wiki/API-Reference) and [d3 Tutorials](https://github.com/mbostock/d3/wiki/Tutorials). 
-Try making the elements interactive, for example, or animate them.
-
-Grading
----
-
-Grades are on a 120 point scale. 
-96 points will be graded for functionality: the program does what the assignment requests with an informative README. 
-
-We will use Google Chrome to view submissions. 
-Be sure to test your code there.
-
-Below are some, but not necessarily all, of the key points we will consider during grading:
-
-- Circles and Rectangles  
-- Lines  
-- Polygons  
-- Different colors  
-- README Quality
-    - A description of what you have created. 1-2 screenshots are recommended for the README.  
-    - A working link to the hosted files (usually the gh-pages 'live' url)  
-    - Section for Technical and Design Achievements
-
-Technical Achievement Desription -- 12  
-Design Achievement Description -- 12
-
-Remember, it is up to *you* to define what constitutes a technical and design achievements.
-Be ambitious as these are designed to allow you to shape your learning.
-These are the only way to move from B to A territory.
+Achievement 2 (Estimated 6 Points):
+Applied the D3 mouseover and mouseout events on all shapes to make each one interactive on an aesthetic level. When the user hovers over any of the shapes with their mouse, the color of the shape becomes black to signify that it has been selected. When the user moves their mouse outside of the area of a given shape, the color of that shape returns to its default fill or stroke color.
 
