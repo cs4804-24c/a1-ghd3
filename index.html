@@ -6,43 +6,72 @@
 </head>
 <body>
 <script>
-    var width = 1200, height = 700;
+    var width = 1300, height = 700;
 
-    // Add an SVG element
     var svg = d3.select("body").append("svg")
         .attr("width", width)
         .attr("height", height);
 
-    // Define shapes with initial positions and velocities
+    var defs = svg.append("defs");
+
+    var redGradient = defs.append("linearGradient").attr("id", "red-gradient");
+    redGradient.append("stop").attr("offset", "0%").attr("stop-color", "red");
+    redGradient.append("stop").attr("offset", "100%").attr("stop-color", "darkred");
+
+    var blueGradient = defs.append("linearGradient").attr("id", "blue-gradient");
+    blueGradient.append("stop").attr("offset", "0%").attr("stop-color", "lightblue");
+    blueGradient.append("stop").attr("offset", "100%").attr("stop-color", "blue");
+
+    var greenGradient = defs.append("linearGradient").attr("id", "green-gradient");
+    greenGradient.append("stop").attr("offset", "0%").attr("stop-color", "lightgreen");
+    greenGradient.append("stop").attr("offset", "100%").attr("stop-color", "green");
+
+    var yellowGradient = defs.append("linearGradient").attr("id", "yellow-gradient");
+    yellowGradient.append("stop").attr("offset", "0%").attr("stop-color", "lightyellow");
+    yellowGradient.append("stop").attr("offset", "100%").attr("stop-color", "yellow");
+
     var shapes = [
         {
             el: svg.append("rect")
                 .attr("width", 100)
                 .attr("height", 100)
-                .attr("fill", "red"),
-            x: 50, y: 50, vx: 1, vy: 1, update: updateRect
+                .attr("fill", "url(#red-gradient)"),
+            x: 100, y: 100, vx: 1, vy: 1, update: updateRect
         },
         {
             el: svg.append("circle")
                 .attr("r", 50)
-                .attr("fill", "blue"),
-            x: 250, y: 100, vx: 1, vy: 1, update: updateCircle
+                .attr("fill", "url(#blue-gradient)"),
+            x: 400, y: 200, vx: 1, vy: 1, update: updateCircle
         },
         {
             el: svg.append("line")
-                .attr("stroke", "green")
+                .attr("stroke", "url(#green-gradient)")
                 .attr("stroke-width", 2),
-            x1: 300, y1: 300, x2: 400, y2: 400, vx: 1, vy: 1, update: updateLine
+            x1: 500, y1: 500, x2: 600, y2: 600, vx: 1, vy: 1, update: updateLine
         },
         {
             el: svg.append("polygon")
-                .attr("fill", "yellow"),
-            points: [[200, 10], [250, 190], [160, 210]], vx: 1, vy: 1, update: updatePolygon
+                .attr("fill", "url(#yellow-gradient)"), // Apply yellow gradient
+            points: [[300, 300], [350, 480], [260, 500]], vx: 1, vy: 1, update: updatePolygon
         }
-        // Add more shapes if necessary
     ];
 
-    // Animation loop
+    var clock = svg.append("text")
+        .attr("x", 800) // Position of the clock
+        .attr("y", 60)
+        .attr("font-family", "sans-serif")
+        .attr("font-size", "60px")
+        .attr("fill", "black");
+
+    function updateClock() {
+        var now = new Date();
+        var currentTime = now.getHours() + ":" + now.getMinutes() + ":" + now.getSeconds();
+        clock.text(currentTime);
+    }
+
+    setInterval(updateClock, 1000);
+
     d3.timer(function() {
         shapes.forEach(function(shape) {
             shape.update(shape);
@@ -50,53 +79,38 @@
     });
 
     function updateRect(shape) {
-        // Update position
         shape.x += shape.vx;
         shape.y += shape.vy;
-
-        // Boundary detection
         if (shape.x > width - 100 || shape.x < 0) shape.vx *= -1;
         if (shape.y > height - 100 || shape.y < 0) shape.vy *= -1;
-
-        // Apply new position
         shape.el.attr("x", shape.x).attr("y", shape.y);
     }
 
     function updateCircle(shape) {
         shape.x += shape.vx;
         shape.y += shape.vy;
-
         if (shape.x > width - 50 || shape.x < 50) shape.vx *= -1;
         if (shape.y > height - 50 || shape.y < 50) shape.vy *= -1;
-
         shape.el.attr("cx", shape.x).attr("cy", shape.y);
     }
 
     function updateLine(shape) {
-        // For simplicity, the line moves as a whole
         shape.x1 += shape.vx; shape.x2 += shape.vx;
         shape.y1 += shape.vy; shape.y2 += shape.vy;
-
         if (shape.x1 < 0 || shape.x2 > width) shape.vx *= -1;
         if (shape.y1 < 0 || shape.y2 > height) shape.vy *= -1;
-
         shape.el.attr("x1", shape.x1).attr("y1", shape.y1)
             .attr("x2", shape.x2).attr("y2", shape.y2);
     }
 
     function updatePolygon(shape) {
-        // Move all points of the polygon
         shape.points = shape.points.map(function(point) {
             return [point[0] + shape.vx, point[1] + shape.vy];
         });
-
-        // Boundary detection for polygon is more complex
-        // Here, we just reverse direction if any point hits a boundary
         shape.points.forEach(function(point) {
             if (point[0] < 0 || point[0] > width) shape.vx *= -1;
             if (point[1] < 0 || point[1] > height) shape.vy *= -1;
         });
-
         shape.el.attr("points", shape.points.join(" "));
     }
 </script>
