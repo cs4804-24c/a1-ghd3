@@ -48,6 +48,9 @@ d3.select('body').on('keypress', e => {
         case ' ':
             svg.append('polygon')
                 .attr('points', polygonPts.slice(0,polygonPts.length-1))
+                .attr('stroke-width', 1)
+                .transition()
+                .duration(2000)
                 .attr('stroke-width', d3.select("#select-stroke-width").node().value)
                 .attr('stroke', d3.select("#color-picker").node().value)
                 .attr('fill', d3.select("#fill-color-picker").node().value)
@@ -56,6 +59,9 @@ d3.select('body').on('keypress', e => {
     }
 })
 svg.on('contextmenu', e => e.preventDefault())
+let interval=undefined;
+let translate = 0;
+let elementToMove = undefined;
 svg.on("mousedown", e => {
     e.preventDefault();
     switch (e.button) {
@@ -68,6 +74,9 @@ svg.on("mousedown", e => {
                     .attr("y1", linePts[1])
                     .attr('x2', linePts[2])
                     .attr('y2', linePts[3])
+                    .attr('stroke-width', 1)
+                    .transition()
+                    .duration(2000)
                     .attr('stroke-width', d3.select("#select-stroke-width").node().value)
                     .attr('stroke', d3.select("#color-picker").node().value)
                 linePts=[]
@@ -76,5 +85,28 @@ svg.on("mousedown", e => {
         case 2:
             polygonPts += `${e.offsetX},${e.offsetY},`
             break;
+        case 1: //scroll wheel click
+            if (e.target.parentElement.nodeName != "svg") break;
+            elementToMove = d3.select(e.target);
+            let diff = 10;
+            interval = d3.interval( () => {
+              if (translate === 100 || translate===-100) diff*=-1;
+              translate+=diff;
+              elementToMove.transition()
+                .duration(50)
+                .attr("transform", `translate(${translate})`)
+            }, 50)
+            break;
     }
+})
+svg.on("mouseup", e => {
+  switch (e.button) {
+    case 1:
+      if (interval === undefined) break;
+      translate=0;
+      interval.stop();
+      interval=undefined;
+      elementToMove.transition().duration(500).attr("transform","translate(0,0)")
+      break;
+  }
 })

@@ -1,92 +1,27 @@
 Assignment 1 - Hello World: GitHub and d3  
 ===
+## Description
+For this project, I created an environment where the user can draw lines and polygons to the SVG on the website. When the page initially loads, a line, rectangle, circle and polygon is added by default. The user can press the "Clear SVG" button to delete all shapes placed within the SVG. The user can left click on the SVG at two points to draw a line. The thickness of the line can be controlled by the stroke width slider below the SVG. This line will start at a size of one and grow to the selected size with a transition. This stroke size will also appear on the border of any polygons drawn on the SVG. Polygons can be drawn on the SVG by selecting at least two points using the right click button on the mouse. When the user has selected all the points, pressing the space bar will draw the polygon to the SVG. The fill color can be selected before pressing space to choose the fill color of the polygon. The user can hold down the middle mouse button on any shape in the SVG and the shape will animate back and forth over its original position on the x axis. Releasing the middle mouse button will move the shape back to its original position. 
 
-This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
+## Technical Achievments
+- The user is able to draw polygons and lines using their mouse on the SVG. Instructions to use this feature are located above the SVG on the webpage.
+- The user can clear the SVG at any time using the Clear SVG button. 
+- The user can select the stroke width of polygons and lines in the SVG
 
-The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
+## Design Achievments
+- A user controlled animation on all SVG contained elements was added, allowing the shapes to move back and forth as long as the middle mouse button is held on the shape. 
+- Basic CSS was added to the webpage, including centering the elements and adding a border to the SVG. 
+- The user can select the color of the line or polygon before drawing. 
 
-The secondary goal is to introduce you to coding on GitHub, including creating a gh-pages branch to host your visualizations.
+## Screenshots
+### Initial page
+![Initial Page](images/initPage.png)
+## Clear SVG
+![Clear SVG](images/clearSVG.png)
+## Drawing with different colors
+![Drawing with different colors](images/drawingColor.png)
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, you **must identify** the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
-
-Resources
----
-
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
-
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
-
-Requirements
----
-
-1. Your project should contain at least four kinds of graphics primitives (circles, rectangles, lines, polygons) in different colors. 
-2. Your document should identify the source of the code if you start with code that you found. 
-3. Your code should be forked from the GitHub repo and linked using GitHub pages. See the "GitHub Details" section below for detailed instructions on how to do this.
-
-GitHub Details
----
-
-- Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
-- Make changes to index.html to fulfill the project requirements. 
-- Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
-
-Submission Details
----
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-- Note: name your pull request using the following scheme: 
-```
-a1-your Gh username-your first name-your lastname
-
-```
-
-Vis Details
----
-
-For this project you should use d3.js. 
-You can learn from examples on the [d3.js](http://d3js.org) site or start from scratch.
-
-See the [Using d3js](https://github.com/mbostock/d3/wiki#using) documentation for how to run your own local server.
-
-Creative solutions are welcome! In the past I've seen recreations of paintings, interactives, and more.
-
-Go beyond the minimum requirements of this project.
-Experiment with other aspects of the [d3 API](https://github.com/mbostock/d3/wiki/API-Reference) and [d3 Tutorials](https://github.com/mbostock/d3/wiki/Tutorials). 
-Try making the elements interactive, for example, or animate them.
-
-Grading
----
-
-Grades are on a 120 point scale. 
-96 points will be graded for functionality: the program does what the assignment requests with an informative README. 
-
-We will use Google Chrome to view submissions. 
-Be sure to test your code there.
-
-Below are some, but not necessarily all, of the key points we will consider during grading:
-
-- Circles and Rectangles  
-- Lines  
-- Polygons  
-- Different colors  
-- README Quality
-    - A description of what you have created. 1-2 screenshots are recommended for the README.  
-    - A working link to the hosted files (usually the gh-pages 'live' url)  
-    - Section for Technical and Design Achievements
-
-Technical Achievement Desription -- 12  
-Design Achievement Description -- 12
-
-Remember, it is up to *you* to define what constitutes a technical and design achievements.
-Be ambitious as these are designed to allow you to shape your learning.
-These are the only way to move from B to A territory.
-
-
-
-
-
-Resources used
-- https://developer.mozilla.org/en-US/docs/Web/SVG
+## Resources used
+- [SVG Documentation](https://developer.mozilla.org/en-US/docs/Web/SVG)
+- Professor Harrison's Loom Video (Uploaded to Slack)
+- [D3.js Documentation](https://devdocs.io/d3~6/)
