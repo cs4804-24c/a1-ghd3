@@ -1,10 +1,128 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<h1>CS4801 a1 Patrick Salisbury</h1>
+<div id="container"></div>
+<button id="reset" type="button">Reset Board/Update Color</button>
+<input id="xcolor" type="color" value="#FF0000">X Color</input>
+<input id="ocolor" type="color" value="#0000FF">O Color</input>
+<br><br>
+<text>Tic-Tac-Toe With D3. Click/Drag pieces to play.</text>
+<script type="module">
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Functions for dragging pieces
+function draggingCircle(event,d){
+  var xCoor = event.x;
+  var yCoor = event.y;
+
+  d3.select(this)
+    .attr("cx", xCoor)
+    .attr("cy", yCoor);
+}
+
+function draggingPolygon(event,d){
+  var xCoor = event.x;
+  var yCoor = event.y;
+
+  d3.select(this)
+    .attr("points", `${xCoor-25},${yCoor+25} ${xCoor+25},${yCoor-25} ${xCoor},${yCoor} ${xCoor-25},${yCoor-25} ${xCoor+25},${yCoor+25} ${xCoor},${yCoor}`);
+}
+
+function gameInit() {
+  // Declare the container size.
+  const width = 500;
+  const height = 500;
+  
+  // Create the SVG container.
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  // Add squares for background / style
+  svg.append("rect")
+      .attr("x", 10)
+      .attr("y", 10)
+      .attr("width", 310)
+      .attr("height", 120)
+      .attr("fill", "silver");
+
+  svg.append("rect")
+      .attr("x", 160)
+      .attr("y", 160)
+      .attr("width", 320)
+      .attr("height", 320)
+      .attr("fill", "none")
+      .attr("stroke", "black");
+  
+  // Add Lines (for tic tac toe board)
+  svg.append("line")
+    .attr("x1", 270)
+    .attr("y1", 170)
+    .attr("x2", 270)
+    .attr("y2", 470)
+    .attr("stroke", "black");
+
+  svg.append("line")
+    .attr("x1", 370)
+    .attr("y1", 170)
+    .attr("x2", 370)
+    .attr("y2", 470)
+    .attr("stroke", "black");
+
+  svg.append("line")
+    .attr("x1", 170)
+    .attr("y1", 270)
+    .attr("x2", 470)
+    .attr("y2", 270)
+    .attr("stroke", "black");
+
+  svg.append("line")
+    .attr("x1", 170)
+    .attr("y1", 370)
+    .attr("x2", 470)
+    .attr("y2", 370)
+    .attr("stroke", "black");
+
+  // Add 5 "x" polygons for game pieces
+  let x_center = 45;
+  for (let i = 0; i < 5; i++) {
+    svg.append("polygon")
+      .attr("points", `${x_center-25},70 ${x_center+25},20 ${x_center},45 ${x_center-25},20 ${x_center+25},70 ${x_center},45`)
+      .attr("stroke", document.getElementById("xcolor").value)
+      .attr("stroke-width", "10.0")
+      .attr("fill", "none")
+      .call(d3.drag()
+        .on('drag', draggingPolygon));
+
+      x_center += 60;
+  }
+
+  // Add 5 circles for game pieces
+  x_center = 45;
+  for (let i = 0; i < 5; i++) {
+    svg.append("circle")
+      .attr("cx", x_center)
+      .attr("cy", 100)
+      .attr("r", 25)
+      .attr("fill", document.getElementById("ocolor").value)
+      .call(d3.drag()
+          .on('drag', draggingCircle));
+    
+    x_center += 60;
+  }
+
+  // Append the SVG element.
+  container.append(svg.node());
+}
+
+window.addEventListener("load", (event) => {
+  gameInit();
+});
+
+// reset button event
+reset.addEventListener("click", (event) => {
+  document.getElementById("container").innerHTML = "";
+  gameInit();
+});
+
 </script>
