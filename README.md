@@ -84,3 +84,13 @@ Remember, it is up to *you* to define what constitutes a technical and design ac
 Be ambitious as these are designed to allow you to shape your learning.
 These are the only way to move from B to A territory.
 
+Description
+---
+Visualization shows 3 differnt colored circles, a small black rectangle, an orange line, and most notably 6 polygon hexagons of different colors as well as a small circle that travels in a loop though each hexagon, constantly changing colors as it moves. The code can be accessed at (https://github.com/Termite1/a1-ghd3.git). 
+
+Desging and Technical Achievements
+
+After figuring out how to make, add, and manipulate the basic shapes, I focused on figuring out how to animate objects within the svg, which I succeded in doing so. After struggling on my own I turned to ChatGBT to get generic forms of animation code, which I then modified and implimented to suit my purposes of having a periodically color changing circle follow a polygon-based path through each of the hexagons. Through this I had to learn about how functions opperate in html files and learned more about how other files can be linked to html files. I think this is a technical achievment in managing to accomplish this while going through the usual struggle of trying to learn a new programming language as well as a minor design acheivement for managing to exicute upon a design (is a simple one).
+
+A snapshot of the design:
+<img width="406" alt="image" src="https://github.com/cs4804-24c/a1-ghd3/assets/67423556/22aef329-705b-4999-adc1-21fb9f15e07e">
