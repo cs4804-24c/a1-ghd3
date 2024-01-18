@@ -5,6 +5,10 @@
   <title>D3.js</title>
 </head>
 <body>
+
+  <h3 style="margin: 0">Use spacebar to switch the sprinkle colors</h3>
+  <h3>Use arrow keys to move the entire ice cream cone</h3>
+
   <script src="https://d3js.org/d3.v6.min.js"></script>
 
   <script>
@@ -13,78 +17,85 @@
     console.log(d3); // test if d3 is loaded
     let otherPolygons = [];
     let otherRectangles = [];
+
+    let svgWidth = 500;
+    let svgHeight = 500;
+
+    let groupTransformX = 150;
+    let groupTransformY = 120;
+
+    d3.select("body")
+      .style("display", "flex")
+      .style("justify-content", "center")
+      .style("align-items", "center")
+      .style("flex-direction", "column");
+      
+    
     // Make the main SVG container
     let svg = d3.select("body")
-      .append("svg")
-      .attr("width", 500)
-      .attr("height", 500);
+    .append("svg")
+    .attr("class", "draggable")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
+    .attr("transform", "scale(1)")
+    .style("border", "5px solid black")
+    .style("border-radius", "10px");
+
+
+
+    let group = svg
+    .append("g")
+    .attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
 
 
     // Add a circle
-    let circle = svg
+    let circle = group
       .append("circle")
+      .attr("class", "draggable")
       .attr("cx", 100)
-      .attr("cy", 100)
+      .attr("cy", 120)
       .attr("r", 50)
-      .attr("transform", "translate(0, 20) scale(1)")
+      .attr("transform", "scale(1)")
       .attr("fill", "green")
       .attr("stroke", "black")
-      .attr("stroke-width", 2)
-      .call(d3.drag()
-        .on("drag", dragged));
+      .attr("stroke-width", 2);
 
     // Add a polygon
-    let polygon = svg
+    let polygon = group
       .append("polygon")
-      //points for a hexagon not a star
       .attr("points", "100,10 190,60 160,180 40,180 10,60")
       .attr("transform", "translate(64, 92) scale(0.1)")
       .attr("fill", "red")
       .attr("stroke", "black")
       .attr("stroke-width", 5)
       .call(d3.drag()
-        .on("drag", dragged));
-
-    for(i = 0; i < 6; i++) {
-      let randomX = Math.floor(Math.random() * 50);
-      let randomY = Math.floor(Math.random() * 50);
-
-      let newPolygon = polygon.clone(true)
-        .attr("transform", "translate("+ (64 + randomX) + "," + (92 + randomY) + ") scale(0.1)")
-        .call(d3.drag()
           .on("drag", dragged));
 
-      otherPolygons.push(newPolygon);
-
-    }
-
-    let line = svg
+    let line = group
       .append("line")
+      .attr("class", "draggable")
       .attr("x1", 0)
       .attr("y1", 0)
       .attr("x2", 100)
       .attr("y2", 200)
       .attr("stroke", "black")
       .attr("stroke-width", 5)
-      .attr("transform", "translate(55, 140) scale(0.5)")
-      .call(d3.drag()
-        .on("drag", dragged));
+      .attr("transform", "translate(55, 140) scale(0.5)");
 
     let line2CurrentTranslate = [0, 0];
 
-    let line2 = svg
+    let line2 = group
       .append("line")
+      .attr("class", "draggable")
       .attr("x1", 57)
       .attr("y1", 205)
       .attr("x2", 100)
       .attr("y2", 100)
       .attr("stroke", "black")
       .attr("stroke-width", 2)
-      .attr("transform", "translate(48,36) scale(1)")
-      .call(d3.drag()
-        .on("drag", dragged));
+      .attr("transform", "translate(48,36) scale(1)");
 
-    let rectangle = svg
+    let rectangle = group
       .append("rect")
       .attr("x", 100)
       .attr("y", 120)
@@ -92,30 +103,16 @@
       .attr("height", 20)
       .attr("fill", "blue")
       .attr("stroke", "black")
+      .attr("transform", "scale(1)")
       .call(d3.drag()
-        .on("drag", dragged));
-
-    for(i = 0; i < 6; i++) {
-      //spread rectangles randomly out from the center of the circle
-      let randomAngle = Math.random() * 2 * Math.PI;
-      let randomDistance = Math.random() * 50;
-
-      let randomX = Math.cos(randomAngle) * randomDistance;
-      let randomY = Math.sin(randomAngle) * randomDistance;
-
-      let newRectangle = rectangle.clone(true)
-        .attr("x", 100 + randomX-rectangle.attr("width"))
-        .attr("y", 120 + randomY-rectangle.attr("height"))
-        .call(d3.drag()
           .on("drag", dragged));
-
-      otherRectangles.push(newRectangle);
-
-    }
 
     // when space bar is pressed, change color of polygon
     d3.select("body").on("keydown", function(e) {
       if (e.keyCode == 32) {
+
+        console.log(groupTransformX, groupTransformY);
+
         originalColors = !originalColors;
         if(!originalColors) {
           //turn the polygon and all of its clones blue
@@ -149,59 +146,126 @@
 
       }
 
-      //arrow keys
+      // update the group transform if the arrow keys are pressed
       if (e.keyCode == 37) {
-        // line2.attr("transform", "translate(" + (line2CurrentTranslate[0] - 1) + "," + line2CurrentTranslate[1] + ")");
-        line2.attr("x1", line2.attr("x1") - 1);
-        line2CurrentTranslate[0] -= 1;
+
+        groupTransformX -= 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 38) {
+
+        groupTransformY -= 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 39) {
+
+        groupTransformX += 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 40) {
+
+        groupTransformY += 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+        
       }
 
-      if (e.keyCode == 38) {
-        //line2.attr("transform", "translate(" + line2CurrentTranslate[0] + "," + (line2CurrentTranslate[1] - 1) + ")");
-        line2.attr("y1", line2.attr("y1") - 1);
-        line2CurrentTranslate[1] -= 1;
-      }
-
-      if (e.keyCode == 39) {
-        // line2.attr("transform", "translate(" + (line2CurrentTranslate[0] + 1) + "," + line2CurrentTranslate[1] + ")");
-        line2.attr("x1", line2.attr("x1") + 1);
-        line2CurrentTranslate[0] += 1;
-      }
-
-      if (e.keyCode == 40) {
-        line2.attr("transform", "translate(" + line2CurrentTranslate[0] + "," + (line2CurrentTranslate[1] + 1) + ")");
-        line2.attr("y1", line2.attr("y1") + 1);
-        line2CurrentTranslate[1] += 1;
-      }
     });
 
-    // move line2 when arrow keys are pressed
-    // d3.select("body").on("keydown", function(e) {
-    //   if (e.keyCode == 37) {
-    //     line2.transform.baseVal.getItem(0).matrix.e -= 10;
-    //   }
-    //   if (e.keyCode == 38) {
-    //     line2.attr("transform", "translate(0, -10)");
-    //   }
-    //   if (e.keyCode == 39) {
-    //     line2.attr("transform", "translate(10, 0)");
-    //   }
-    //   if (e.keyCode == 40) {
-    //     line2.attr("transform", "translate(0, 10)");
-    //   }
-    // });
 
-
+    // d3.selectAll(svg.childNodes).on("drag", dragged);
     function dragged(e) {
       // move the element
-      this.setAttribute("transform", "translate(" + e.x + "," + e.y + ") scale(0.1)");
-      
+      //this.setAttribute("transform", "translate(" + e.x + "," + e.y + ") scale(0.1)");
+      // console.log(this.transform, e);
+
+
+      // set e and f values 
+      this.transform.baseVal[0].matrix.e += e.dx;
+      this.transform.baseVal[0].matrix.f += e.dy;
+    }
+    
+    // d3.selectAll(".draggable").call(d3.drag().on("drag", dragged));
+    svg.call(d3.drag().on("drag", dragged));
+
+    let button1 = d3.select("body")
+      .append("button")
+      .text("Reset/Reload")
+      .style("margin", "10px")
+      .style("padding", "10px")
+      .style("border-radius", "10px")
+      .style("border", "2px solid black")
+      .style("background-color", "white")
+      .style("font-size", "20px")
+      .style("cursor", "pointer")
+      .on("click", function() {
+        document.location.reload();
+      });
+
+    let button2 = d3.select("body")
+      .append("button")
+      .text("Random Sprinkles")
+      .style("margin", "10px")
+      .style("padding", "10px")
+      .style("border-radius", "10px")
+      .style("border", "2px solid black")
+      .style("background-color", "white")
+      .style("font-size", "20px")
+      .style("cursor", "pointer")
+      .on("click", function() {
+        makeRandomPolygons(polygon);
+        makeRandomRectangles(rectangle);
+      });
+
+    function makeRandomRectangles(originRectangle){
+
+      //remove all of the old rectangles
+      for(i = 0; i < otherRectangles.length; i++) {
+        otherRectangles[i].remove();
+      }
+      otherRectangles = [];
+      for(i = 0; i < 6; i++) {
+        //spread rectangles randomly out from the center of the circle
+        let randomAngle = Math.random() * 2 * Math.PI;
+        let randomDistance = Math.random() * 50;
+
+        let randomX = Math.cos(randomAngle) * randomDistance;
+        let randomY = Math.sin(randomAngle) * randomDistance;
+
+        let newRectangle = originRectangle.clone(true)
+          .attr("x", 100 + randomX-rectangle.attr("width"))
+          .attr("y", 120 + randomY-rectangle.attr("height"))
+          .attr("transform", "scale(1)")
+          .call(d3.drag()
+            .on("drag", dragged));
+
+        otherRectangles.push(newRectangle);
+
+      }
     }
 
+    function makeRandomPolygons(originPolygon){
+      
+      //remove all of the old polygons
+      for(i = 0; i < otherPolygons.length; i++) {
+        otherPolygons[i].remove();
+      }
+      otherPolygons = [];
 
 
+      for(i = 0; i < 6; i++) {
+        let randomX = Math.floor(Math.random() * 50);
+        let randomY = Math.floor(Math.random() * 50);
+
+        let newPolygon = polygon.clone(true)
+          .attr("transform", "translate("+ (64 + randomX) + "," + (92 + randomY) + ") scale(0.1)")
+          .call(d3.drag()
+            .on("drag", dragged));
+
+        otherPolygons.push(newPolygon);
+
+      }
+    }
 
   </script>
-
 </body>
 </html>
