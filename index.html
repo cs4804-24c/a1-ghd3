@@ -1,10 +1,91 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<head>
+  <title>Assignment 1</title>
+</head>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<body>
+  <script>
+    console.log(d3); // test if d3 is loaded
+    //Minimum Requirements Achieved Below
+    // Add an SVG
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width",2000)
+      .attr("height",1000);
+    // Add Rectangles (Added in the Additional Section)
+    var stand = svg.append("rect")
+      .attr("width",1000)
+      .attr("height",1000)
+      .attr("x",0)
+      .attr("y",0)
+      .attr("fill","black");
+    // Add Circles
+    var foreground = svg.append("circle")
+      .attr("cx", 500)
+      .attr("cy",250)
+      .attr("r",200)
+      .attr("fill","white")
+      .transition()
+      .duration(2000)
+      .attr("cx",500)
+      .attr("cy",750)
+      .transition()
+      .duration(1000)
+      .attr("cx",500)
+      .attr("cy",550)
+      // .transition()
+      // .duration(1000)
+      // .attr("cx",500)
+      // .attr("cy",750);
+    var center = svg.append("circle")
+    .attr("cx", 500)
+    .attr("cy",250)
+    .attr("r",10)
+    .attr("fill","black")
+    .transition()
+    .duration(2000)
+    .attr("cx",500)
+    .attr("cy",750)
+    .transition()
+    .duration(1000)
+    .attr("cx",500)
+    .attr("cy",550)
+    // .transition()
+    // .duration(1000)
+    // .attr("cx",500)
+    // .attr("cy",750);
+    // Add Lines
+    let rM = Math.PI;
+    let rH = 0.1;
+    var hour = svg.append("line")
+      .attr("x1",500)
+      .attr("x2",400)
+      .attr("y1",250)
+      .attr("y2",200)
+      .attr("stroke","red")
+      .attr("stroke-width",10)
+      .transition()
+      .duration(2000)
+      .attr("y1",750)
+      .attr("y2",700)
+      .transition()
+      .duration(1000)
+      .attr("y1",550)
+      .attr("y2",500)
+      // .transition()
+      // .duration(1000)
+      // .attr("y1",750)
+      // .attr("y2",700);
+    
+    // Add Polygons
+    var poly1 = svg.append("polygon")
+      .attr("points", "0,0 200,0 0,200 200,200")
+      .attr("fill","red")
+    var poly2 = svg.append("polygon")
+    .attr("points", "800,0 1000,0 800,200 1000,200")
+    .attr("fill","yellow");
+
+    // //Animates the clock
+   
+  </script>
+</body>
