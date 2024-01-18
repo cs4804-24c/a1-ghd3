@@ -1,7 +1,7 @@
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
-Working link to gh-pages site: 
+Working link to gh-pages site: https://maccode7110.github.io/a1-ghd3-MacCode7110-Matthew-McAlarney/
 
 I referenced the following resources to help me learn about certain aspects of D3 and write D3-specific code:
 
