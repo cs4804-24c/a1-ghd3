@@ -1,47 +1,104 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>d3 Graphics Demo</title>
+    <title>d3 Graphics Demo with Moving Shapes</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
 <body>
 <script>
-    // Test if d3 is loaded
-    console.log(d3);
+    var width = 1200, height = 700;
 
     // Add an SVG element
     var svg = d3.select("body").append("svg")
-        .attr("width", 500)
-        .attr("height", 500);
+        .attr("width", width)
+        .attr("height", height);
 
-    // Add Rectangles
-    svg.append("rect")
-        .attr("x", 50)
-        .attr("y", 50)
-        .attr("width", 100)
-        .attr("height", 100)
-        .attr("fill", "red");
+    // Define shapes with initial positions and velocities
+    var shapes = [
+        {
+            el: svg.append("rect")
+                .attr("width", 100)
+                .attr("height", 100)
+                .attr("fill", "red"),
+            x: 50, y: 50, vx: 1, vy: 1, update: updateRect
+        },
+        {
+            el: svg.append("circle")
+                .attr("r", 50)
+                .attr("fill", "blue"),
+            x: 250, y: 100, vx: 1, vy: 1, update: updateCircle
+        },
+        {
+            el: svg.append("line")
+                .attr("stroke", "green")
+                .attr("stroke-width", 2),
+            x1: 300, y1: 300, x2: 400, y2: 400, vx: 1, vy: 1, update: updateLine
+        },
+        {
+            el: svg.append("polygon")
+                .attr("fill", "yellow"),
+            points: [[200, 10], [250, 190], [160, 210]], vx: 1, vy: 1, update: updatePolygon
+        }
+        // Add more shapes if necessary
+    ];
 
-    // Add Circles
-    svg.append("circle")
-        .attr("cx", 250)
-        .attr("cy", 100)
-        .attr("r", 50)
-        .attr("fill", "blue");
+    // Animation loop
+    d3.timer(function() {
+        shapes.forEach(function(shape) {
+            shape.update(shape);
+        });
+    });
 
-    // Add Lines
-    svg.append("line")
-        .attr("x1", 300)
-        .attr("y1", 300)
-        .attr("x2", 400)
-        .attr("y2", 400)
-        .attr("stroke", "green")
-        .attr("stroke-width", 2);
+    function updateRect(shape) {
+        // Update position
+        shape.x += shape.vx;
+        shape.y += shape.vy;
 
-    // Add Polygons
-    svg.append("polygon")
-        .attr("points", "200,10 250,190 160,210")
-        .attr("fill", "yellow");
+        // Boundary detection
+        if (shape.x > width - 100 || shape.x < 0) shape.vx *= -1;
+        if (shape.y > height - 100 || shape.y < 0) shape.vy *= -1;
+
+        // Apply new position
+        shape.el.attr("x", shape.x).attr("y", shape.y);
+    }
+
+    function updateCircle(shape) {
+        shape.x += shape.vx;
+        shape.y += shape.vy;
+
+        if (shape.x > width - 50 || shape.x < 50) shape.vx *= -1;
+        if (shape.y > height - 50 || shape.y < 50) shape.vy *= -1;
+
+        shape.el.attr("cx", shape.x).attr("cy", shape.y);
+    }
+
+    function updateLine(shape) {
+        // For simplicity, the line moves as a whole
+        shape.x1 += shape.vx; shape.x2 += shape.vx;
+        shape.y1 += shape.vy; shape.y2 += shape.vy;
+
+        if (shape.x1 < 0 || shape.x2 > width) shape.vx *= -1;
+        if (shape.y1 < 0 || shape.y2 > height) shape.vy *= -1;
+
+        shape.el.attr("x1", shape.x1).attr("y1", shape.y1)
+            .attr("x2", shape.x2).attr("y2", shape.y2);
+    }
+
+    function updatePolygon(shape) {
+        // Move all points of the polygon
+        shape.points = shape.points.map(function(point) {
+            return [point[0] + shape.vx, point[1] + shape.vy];
+        });
+
+        // Boundary detection for polygon is more complex
+        // Here, we just reverse direction if any point hits a boundary
+        shape.points.forEach(function(point) {
+            if (point[0] < 0 || point[0] > width) shape.vx *= -1;
+            if (point[1] < 0 || point[1] > height) shape.vy *= -1;
+        });
+
+        shape.el.attr("points", shape.points.join(" "));
+    }
 </script>
 </body>
 </html>
