@@ -1,10 +1,83 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<html>
+  <head>
+    <script src = "https://d3js.org/d3.v6.min.js"></script>
+  </head>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+  <body>
+    <script>
+      console.log(d3);
+      const width = 600;
+      const height = 600;
+
+// Add an SVG container
+ const svg = d3.select("body")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height);
+
+   // Add Lines
+svg.append("line")
+  .attr("x1", 300)
+  .attr("x2", 300)
+  .attr("y1", 0)
+  .attr("y2", 600)
+  .style("stroke", "black")
+  .style("stroke-width", 3);
+
+svg.append("line")
+  .attr("x1", 0)
+  .attr("x2", 600)
+  .attr("y1", 300)
+  .attr("y2", 300)
+  .style("stroke", "black")
+  .style("stroke-width", 3);
+
+ // Add Rectangles
+svg.append("rect")
+  .attr("x", 100)
+  .attr("y", 150)
+  .attr("width", 150)
+  .attr("height", 90)
+  .style("fill", "pink");
+
+  d3.select("rect").transition().duration(1000).attr("x", 400);
+
+  // Add Polygon
+ var polygon = [[575, 515], [450, 320], [535, 410], [350, 430], 
+ [540, 570], [400, 550], [425, 450], [500, 400], [430, 510]];
+ var hull = d3.polygonHull(polygon)
+ var line = d3.line().curve(d3.curveLinearClosed);
+
+ svg.append("path")
+  .attr("d", line(hull))
+  .style("fill", "thistle");
+
+
+ // Add Circles
+svg.append("circle")
+  .attr("cx", 500)
+  .attr("cy", 200)
+  .attr("r", 50)
+  .style("fill", "orange");
+
+  d3.select("circle").transition().duration(1000).attr("cx", 100);
+
+  for (var i = 1; i<= 5; i++) {
+   svg.append("circle")
+    .attr("cx", 100)
+    .attr("cy", 400)
+    .attr("r", 10)
+    .style("fill", "lightgreen")
+    .on("mouseover", function() {
+     d3.select(this)
+     .transition()
+     .attr("r", 50);
+    })
+    .transition()
+    .delay(200 * i)
+    .attr("r", 50);
+  }
+
 </script>
+</body>
+</html>
