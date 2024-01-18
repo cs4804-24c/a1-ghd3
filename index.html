@@ -1,10 +1,236 @@
 <script src="https://d3js.org/d3.v6.min.js"></script>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+<body>
+  <script>
+    console.log(d3); // test if d3 is loaded
+  
+    var w = 1000
+    var h = 1000
+  
+    // Add an SVG
+  
+    var svg = d3.select("body")
+      .append("svg")
+      .attr("width", w)
+      .attr("height", h)
+
+    // cat
+
+    svg.append("circle") // head
+      .attr("cx", 250)
+      .attr("cy", 300)
+      .attr("r", 250)
+      .attr("stroke", "black")
+      .attr("fill", "black")
+
+    svg.append("circle") // Leye
+      .attr("cx", 166)
+      .attr("cy", 216)
+      .attr("r", 41)
+      .attr("stroke", "white")
+      .attr("fill", "green")
+      .attr("stroke-width", 30)
+
+    svg.append("circle") // Reye
+      .attr("cx", 333)
+      .attr("cy", 216)
+      .attr("r", 41)
+      .attr("stroke", "white")
+      .attr("fill", "green")
+      .attr("stroke-width", 30)
+
+    svg.append("polygon") // nose
+      .attr("points", "207,300 292,300 251,383")
+      .attr("fill", "pink")
+
+    svg.append("path") // mouth thing idk (L)
+      .attr("transform", "translate(205,383)")
+      .attr("fill", "pink")
+      .attr("d", d3.arc()({
+        innerRadius: 36,
+        outerRadius: 50,
+        startAngle: Math.PI/2,
+        endAngle: 3*Math.PI/2
+      }));
+
+    svg.append("path") // mouth thing idk (R)
+      .attr("transform", "translate(297,383)")
+      .attr("fill", "pink")
+      .attr("d", d3.arc()({
+        innerRadius: 36,
+        outerRadius: 50,
+        startAngle: Math.PI/2,
+        endAngle: 3*Math.PI/2
+      }));
+
+    svg.append("line") // whiskers
+      .attr("x1", 175)
+      .attr("x2", 50)
+      .attr("y1", 350)
+      .attr("y2", 300)
+      .attr("stroke", "white")
+      .attr("stroke-width", 5)
+
+    svg.append("line")
+      .attr("x1", 175)
+      .attr("x2", 50)
+      .attr("y1", 375)
+      .attr("y2", 375)
+      .attr("stroke", "white")
+      .attr("stroke-width", 5)
+
+    svg.append("line")
+      .attr("x1", 325)
+      .attr("x2", 450)
+      .attr("y1", 350)
+      .attr("y2", 300)
+      .attr("stroke", "white")
+      .attr("stroke-width", 5)
+
+    svg.append("line")
+      .attr("x1", 325)
+      .attr("x2", 450)
+      .attr("y1", 375)
+      .attr("y2", 375)
+      .attr("stroke", "white")
+      .attr("stroke-width", 5)
+
+    svg.append("polygon") // Lear
+      .attr("points", "40,216 63,50 166,113")
+      .attr("stroke", "black")
+      .attr("fill", "pink")
+      .attr("stroke-width", 40)
+
+    svg.append("polygon") // Rear
+      .attr("points", "340,113 437,50 466,216")
+      .attr("stroke", "black")
+      .attr("fill", "pink")
+      .attr("stroke-width", 40)
+
+    // clock
+
+    svg.append("circle")
+      .attr("cx", 750)
+      .attr("cy", 250)
+      .attr("r", 125)
+      .attr("stroke", "black")
+      .attr("fill", "white")
+      .attr("stroke-width", 30)
+
+    svg.append("text") // numbers
+      .attr("x", 740)
+      .attr("y", 160)
+      .attr("font-size", "24px")
+      .text("12");
+
+    svg.append("text")
+      .attr("x", 745)
+      .attr("y", 356)
+      .attr("font-size", "24px")
+      .text("6");
+
+    svg.append("text")
+      .attr("x", 845)
+      .attr("y", 250)
+      .attr("font-size", "24px")
+      .text("3");
+
+    svg.append("text")
+      .attr("x", 645)
+      .attr("y", 250)
+      .attr("font-size", "24px")
+      .text("9");
+
+    svg.append("text")
+      .attr("x", 792)
+      .attr("y", 175)
+      .attr("font-size", "24px")
+      .text("1");
+
+    svg.append("text")
+      .attr("x", 827)
+      .attr("y", 205)
+      .attr("font-size", "24px")
+      .text("2");
+
+    svg.append("text")
+      .attr("x", 827)
+      .attr("y", 305)
+      .attr("font-size", "24px")
+      .text("4");
+
+    svg.append("text")
+      .attr("x", 792)
+      .attr("y", 345)
+      .attr("font-size", "24px")
+      .text("5");
+
+    svg.append("text")
+      .attr("x", 687)
+      .attr("y", 175)
+      .attr("font-size", "24px")
+      .text("11");
+
+    svg.append("text")
+      .attr("x", 657)
+      .attr("y", 205)
+      .attr("font-size", "24px")
+      .text("10");
+
+    svg.append("text")
+      .attr("x", 657)
+      .attr("y", 305)
+      .attr("font-size", "24px")
+      .text("8");
+
+    svg.append("text")
+      .attr("x", 692)
+      .attr("y", 345)
+      .attr("font-size", "24px")
+      .text("7");
+
+    svg.append("line") // hour
+      .attr("x1", 750)
+      .attr("x2", 805)
+      .attr("y1", 250)
+      .attr("y2", 224)
+      .attr("stroke", "black")
+      .attr("stroke-width", 5)
+
+    svg.append("line") // minute
+      .attr("x1", 750)
+      .attr("x2", 850)
+      .attr("y1", 250)
+      .attr("y2", 254)
+      .attr("stroke", "black")
+      .attr("stroke-width", 5)
+
+    // tv
+
+    svg.append("rect") // screen
+      .attr("x", 375)
+      .attr("y", 700)
+      .attr("width", 250)
+      .attr("height", 175)
+      .attr("stroke", "black")
+      .attr("fill", "#202020")
+      .attr("stroke-width", 30)
+
+    svg.append("line") // stand
+      .attr("x1", 475)
+      .attr("x2", 425)
+      .attr("y1", 875)
+      .attr("y2", 925)
+      .attr("stroke", "black")
+      .attr("stroke-width", 10)
+
+    svg.append("line")
+      .attr("x1", 525)
+      .attr("x2", 575)
+      .attr("y1", 875)
+      .attr("y2", 925)
+      .attr("stroke", "black")
+      .attr("stroke-width", 10)
+    
+  </script>  
+</body>
