@@ -1,5 +1,6 @@
-Assignment 1 - Hello World: GitHub and d3  
+Assignment 1 - Hello World: GitHub and d3
 ===
+Link to project demo: https://markou.dev/a1-ghd3/
 ## Description
 For this project, I created an environment where the user can draw lines and polygons to the SVG on the website. When the page initially loads, a line, rectangle, circle and polygon is added by default. The user can press the "Clear SVG" button to delete all shapes placed within the SVG. The user can left click on the SVG at two points to draw a line. The thickness of the line can be controlled by the stroke width slider below the SVG. This line will start at a size of one and grow to the selected size with a transition. This stroke size will also appear on the border of any polygons drawn on the SVG. Polygons can be drawn on the SVG by selecting at least two points using the right click button on the mouse. When the user has selected all the points, pressing the space bar will draw the polygon to the SVG. The fill color can be selected before pressing space to choose the fill color of the polygon. The user can hold down the middle mouse button on any shape in the SVG and the shape will animate back and forth over its original position on the x axis. Releasing the middle mouse button will move the shape back to its original position. 
 
