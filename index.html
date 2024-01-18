@@ -1,10 +1,207 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3.js</title>
+</head>
+<body>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+  <script>
+    let originalColors = true;
+
+    console.log(d3); // test if d3 is loaded
+    let otherPolygons = [];
+    let otherRectangles = [];
+    // Make the main SVG container
+    let svg = d3.select("body")
+      .append("svg")
+      .attr("width", 500)
+      .attr("height", 500);
+
+
+    // Add a circle
+    let circle = svg
+      .append("circle")
+      .attr("cx", 100)
+      .attr("cy", 100)
+      .attr("r", 50)
+      .attr("transform", "translate(0, 20) scale(1)")
+      .attr("fill", "green")
+      .attr("stroke", "black")
+      .attr("stroke-width", 2)
+      .call(d3.drag()
+        .on("drag", dragged));
+
+    // Add a polygon
+    let polygon = svg
+      .append("polygon")
+      //points for a hexagon not a star
+      .attr("points", "100,10 190,60 160,180 40,180 10,60")
+      .attr("transform", "translate(64, 92) scale(0.1)")
+      .attr("fill", "red")
+      .attr("stroke", "black")
+      .attr("stroke-width", 5)
+      .call(d3.drag()
+        .on("drag", dragged));
+
+    for(i = 0; i < 6; i++) {
+      let randomX = Math.floor(Math.random() * 50);
+      let randomY = Math.floor(Math.random() * 50);
+
+      let newPolygon = polygon.clone(true)
+        .attr("transform", "translate("+ (64 + randomX) + "," + (92 + randomY) + ") scale(0.1)")
+        .call(d3.drag()
+          .on("drag", dragged));
+
+      otherPolygons.push(newPolygon);
+
+    }
+
+    let line = svg
+      .append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 100)
+      .attr("y2", 200)
+      .attr("stroke", "black")
+      .attr("stroke-width", 5)
+      .attr("transform", "translate(55, 140) scale(0.5)")
+      .call(d3.drag()
+        .on("drag", dragged));
+
+    let line2CurrentTranslate = [0, 0];
+
+    let line2 = svg
+      .append("line")
+      .attr("x1", 57)
+      .attr("y1", 205)
+      .attr("x2", 100)
+      .attr("y2", 100)
+      .attr("stroke", "black")
+      .attr("stroke-width", 2)
+      .attr("transform", "translate(48,36) scale(1)")
+      .call(d3.drag()
+        .on("drag", dragged));
+
+    let rectangle = svg
+      .append("rect")
+      .attr("x", 100)
+      .attr("y", 120)
+      .attr("width", 10)
+      .attr("height", 20)
+      .attr("fill", "blue")
+      .attr("stroke", "black")
+      .call(d3.drag()
+        .on("drag", dragged));
+
+    for(i = 0; i < 6; i++) {
+      //spread rectangles randomly out from the center of the circle
+      let randomAngle = Math.random() * 2 * Math.PI;
+      let randomDistance = Math.random() * 50;
+
+      let randomX = Math.cos(randomAngle) * randomDistance;
+      let randomY = Math.sin(randomAngle) * randomDistance;
+
+      let newRectangle = rectangle.clone(true)
+        .attr("x", 100 + randomX-rectangle.attr("width"))
+        .attr("y", 120 + randomY-rectangle.attr("height"))
+        .call(d3.drag()
+          .on("drag", dragged));
+
+      otherRectangles.push(newRectangle);
+
+    }
+
+    // when space bar is pressed, change color of polygon
+    d3.select("body").on("keydown", function(e) {
+      if (e.keyCode == 32) {
+        originalColors = !originalColors;
+        if(!originalColors) {
+          //turn the polygon and all of its clones blue
+          polygon.attr("fill", "blue");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherPolygons[i].attr("fill", "blue");
+          }
+
+          //turn the rectangle and all of its clones blue
+          rectangle.attr("fill", "red");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherRectangles[i].attr("fill", "red");
+          }
+        } else {
+          //turn the polygon and all of its clones red
+          polygon.attr("fill", "red");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherPolygons[i].attr("fill", "red");
+          }
+
+          //turn the rectangle and all of its clones blue
+          rectangle.attr("fill", "blue");
+
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherRectangles[i].attr("fill", "blue");
+          }
+        }
+
+      }
+
+      //arrow keys
+      if (e.keyCode == 37) {
+        // line2.attr("transform", "translate(" + (line2CurrentTranslate[0] - 1) + "," + line2CurrentTranslate[1] + ")");
+        line2.attr("x1", line2.attr("x1") - 1);
+        line2CurrentTranslate[0] -= 1;
+      }
+
+      if (e.keyCode == 38) {
+        //line2.attr("transform", "translate(" + line2CurrentTranslate[0] + "," + (line2CurrentTranslate[1] - 1) + ")");
+        line2.attr("y1", line2.attr("y1") - 1);
+        line2CurrentTranslate[1] -= 1;
+      }
+
+      if (e.keyCode == 39) {
+        // line2.attr("transform", "translate(" + (line2CurrentTranslate[0] + 1) + "," + line2CurrentTranslate[1] + ")");
+        line2.attr("x1", line2.attr("x1") + 1);
+        line2CurrentTranslate[0] += 1;
+      }
+
+      if (e.keyCode == 40) {
+        line2.attr("transform", "translate(" + line2CurrentTranslate[0] + "," + (line2CurrentTranslate[1] + 1) + ")");
+        line2.attr("y1", line2.attr("y1") + 1);
+        line2CurrentTranslate[1] += 1;
+      }
+    });
+
+    // move line2 when arrow keys are pressed
+    // d3.select("body").on("keydown", function(e) {
+    //   if (e.keyCode == 37) {
+    //     line2.transform.baseVal.getItem(0).matrix.e -= 10;
+    //   }
+    //   if (e.keyCode == 38) {
+    //     line2.attr("transform", "translate(0, -10)");
+    //   }
+    //   if (e.keyCode == 39) {
+    //     line2.attr("transform", "translate(10, 0)");
+    //   }
+    //   if (e.keyCode == 40) {
+    //     line2.attr("transform", "translate(0, 10)");
+    //   }
+    // });
+
+
+    function dragged(e) {
+      // move the element
+      this.setAttribute("transform", "translate(" + e.x + "," + e.y + ") scale(0.1)");
+      
+    }
+
+
+
+
+  </script>
+
+</body>
+</html>
