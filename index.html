@@ -44,6 +44,7 @@
     //https://observablehq.com/@nikomccarty/histogram-hover-d3
     //https://www.geeksforgeeks.org/d3-js-color-brighter-function/
     //I used coding techniques with transitions from the following article to create an animation: https://www.d3indepth.com/transitions/
+    //I used the raise method to bring certain shapes to the front, which I learned about from this article: https://dev.to/cselig/controlling-svg-draw-order-in-d3-4n9l
 
     const container = document.getElementById("container")
     console.log(d3) // test if d3 is loaded
@@ -89,7 +90,7 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
-        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Rectangle with width ${width} and height ${height}`
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Rectangle with width ${width} and height ${height} and coordinate ${xCoord},${yCoord}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
@@ -97,7 +98,7 @@
       })
       .on('click', function() {
         shapePositionData = updateShapeData()
-        d3.select(this).transition().duration(1000).attr('x', shapePositionData[0][0]).attr('y', shapePositionData[0][1])
+        d3.select(this).raise().transition().duration(1000).attr('x', shapePositionData[0][0]).attr('y', shapePositionData[0][1])
       })
     }
 
@@ -110,7 +111,7 @@
       .attr('fill', fill)
       .on('mouseover', function() {
         d3.select(this).attr('style', 'fill: black')
-        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Circle with radius ${radius}`
+        shapeInfoParagraph.innerHTML = `<strong>Selected Shape</strong>: Circle with radius ${radius} and coordinate ${xCoord},${yCoord}`
       })
       .on('mouseout', function() {
         d3.select(this).attr('style', `fill: ${fill}`)
@@ -118,7 +119,7 @@
       })
       .on('click', function() {
         shapePositionData = updateShapeData()
-        d3.select(this).transition().duration(1000).attr('cx', shapePositionData[0][0]).attr('cy', shapePositionData[0][1])
+        d3.select(this).raise().transition().duration(1000).attr('cx', shapePositionData[0][0]).attr('cy', shapePositionData[0][1])
       })
     }
 
