@@ -1,4 +1,4 @@
-Resources Used:<br />
+https://github.com/OmriGreen/Omri_Green_a1_ghd3/blob/OmriGreen-patch-1/Fallen%20Clock.pngResources Used:<br />
  -https://www.youtube.com/playlist?list=PL6il2r9i3BqH9PmbOf5wA5E1wOG3FT22p<br />
  -https://d3js.org/d3-transition/selecting<br />
  -pregiven code<br />
@@ -9,7 +9,7 @@ Technical Achievement Description<br />
 Design Achievement Description<br />
     I have made a diorama of a wall with a clock and two differently colored hanging lights, where the clock falls off the wall. This was actually inspired by the posters in my apartment, they ALWAYS fell down eventually with the exception of one on the right of my bed. The clock represents the time I spent learning the basics of d3 and reaquanting myself with javascript.
 Screenshots<br />
-![Fallen Clock](Fallen Clock.png)
+![Fallen Clock](https://github.com/OmriGreen/Omri_Green_a1_ghd3/blob/OmriGreen-patch-1/Fallen%20Clock.png))
 ![Mid Fall](MidFall.png)
 ![On Wall](OnWall.png)
 
