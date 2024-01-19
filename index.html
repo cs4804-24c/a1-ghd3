@@ -1,10 +1,289 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3.js</title>
+</head>
+<body>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+  <h3 style="margin: 0">Use spacebar to switch the sprinkle colors</h3>
+  <h3>Use arrow keys to move the entire ice cream cone</h3>
+
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+
+  <script>
+    let originalColors = true;
+
+    console.log(d3); // test if d3 is loaded
+    let otherPolygons = [];
+    let otherRectangles = [];
+
+    let svgWidth = 500;
+    let svgHeight = 500;
+
+    let groupTransformX = 150;
+    let groupTransformY = 120;
+
+    d3.select("body")
+      .style("display", "flex")
+      .style("justify-content", "center")
+      .style("align-items", "center")
+      .style("flex-direction", "column");
+      
+    
+    let svg = d3.select("body")
+    .append("svg")
+    .attr("class", "draggable")
+    .attr("width", svgWidth)
+    .attr("height", svgHeight)
+    .attr("transform", "scale(1)")
+    .style("border", "5px solid black")
+    .style("border-radius", "10px")
+    .style("box-shadow", "1px 1px 1px 1px #888888");
+
+    let group = svg
+    .append("g")
+    .attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+    let line = group
+      .append("line")
+      .attr("class", "draggable")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 100)
+      .attr("y2", 200)
+      .attr("stroke", "#6b3e26")
+      .attr("stroke-width", 5)
+      .attr("transform", "translate(55, 140) scale(0.5)");
+
+    let line2CurrentTranslate = [0, 0];
+
+    let line2 = group
+      .append("line")
+      .attr("class", "draggable")
+      .attr("x1", 57)
+      .attr("y1", 205)
+      .attr("x2", 100)
+      .attr("y2", 100)
+      .attr("stroke", "#6b3e26")
+      .attr("stroke-width", 2)
+      .attr("transform", "translate(48,36) scale(1)");
+
+      
+      // Add a circle
+     let circle = group
+      .append("circle")
+      .attr("class", "draggable")
+      .attr("cx", 101)
+      .attr("cy", 120)
+      .attr("r", 50)
+      .attr("transform", "scale(1)")
+      .attr("fill", "#c2f2d0")
+      .attr("stroke", "#c2f2d0")
+      .attr("stroke-width", 2);
+      
+    let rectangle = group
+      .append("rect")
+      .attr("x", 100)
+      .attr("y", 120)
+      .attr("width", 10)
+      .attr("height", 20)
+      .attr("fill", "#fdf5c9")
+      .attr("stroke", "#f0e7be")
+      .attr("stroke-width", 1)
+      .attr("transform", "scale(1)")
+      .call(d3.drag()
+          .on("drag", dragged));
+
+    let polygon = group
+      .append("polygon")
+      .attr("points", "100,10 190,60 160,180 40,180 10,60")
+      .attr("transform", "translate(64, 92) scale(0.1)")
+      .attr("fill", "#ffc5d9")
+      .attr("stroke", "#cc9dad")
+      .attr("stroke-width", 5)
+      .call(d3.drag()
+          .on("drag", dragged));
+    // when space bar is pressed, change color of polygon
+    d3.select("body").on("keydown", function(e) {
+      if (e.keyCode == 32) {
+
+        console.log(groupTransformX, groupTransformY);
+
+        originalColors = !originalColors;
+        if(!originalColors) {
+          //turn the polygon and all of its clones blue
+          polygon
+          .attr("fill", "#fdf5c9")
+          .attr("stroke", "#f0e7be");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherPolygons[i]
+            .attr("fill", "#fdf5c9")
+            .attr("stroke", "#f0e7be");
+          }
+
+          //turn the rectangle and all of its clones blue
+          rectangle
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherRectangles[i]
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
+          }
+        } else {
+          //turn the polygon and all of its clones red
+          polygon
+          .attr("fill", "#ffc5d9")
+          .attr("stroke", "#cc9dad");
+          
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherPolygons[i]
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
+          }
+
+          //turn the rectangle and all of its clones blue
+          rectangle
+          .attr("fill", "#fdf5c9")
+          .attr("stroke", "#f0e7be");
+
+          for(i = 0; i < otherPolygons.length; i++) {
+            otherRectangles[i]
+            .attr("fill", "#fdf5c9")
+            .attr("stroke", "#f0e7be");
+          }
+        }
+
+      }
+
+      // update the group transform if the arrow keys are pressed
+      if (e.keyCode == 37) {
+
+        groupTransformX -= 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 38) {
+
+        groupTransformY -= 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 39) {
+
+        groupTransformX += 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+
+      } else if (e.keyCode == 40) {
+
+        groupTransformY += 10;
+        group.attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
+        
+      }
+
+    });
+
+
+    // d3.selectAll(svg.childNodes).on("drag", dragged);
+    function dragged(e) {
+      // With some help from GitHub Copilot and this page of 
+      // documentation: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+      // I was able to figure out how to move elements without reseting their transform/scaling values
+
+      this.transform.baseVal[0].matrix.e += e.dx;
+      this.transform.baseVal[0].matrix.f += e.dy;
+    }
+
+
+    svg.call(d3.drag().on("drag", dragged));
+
+    let button1 = d3.select("body")
+      .append("button")
+      .text("Reset/Reload")
+      .style("margin", "10px")
+      .style("padding", "10px")
+      .style("border-radius", "10px")
+      .style("border", "2px solid black")
+      .style("box-shadow", "1px 1px 1px 1px #888888")
+      .style("background-color", "white")
+      .style("font-size", "20px")
+      .style("cursor", "pointer")
+      .on("click", function() {
+        document.location.reload();
+      });
+
+    let button2 = d3.select("body")
+      .append("button")
+      .text("Random Sprinkles")
+      .style("margin", "10px")
+      .style("padding", "10px")
+      .style("border-radius", "10px")
+      .style("border", "2px solid black")
+      .style("box-shadow", "1px 1px 1px 1px #888888")
+      .style("background-color", "white")
+      .style("font-size", "20px")
+      .style("cursor", "pointer")
+      .on("click", function() {
+        makeRandomPolygons(polygon);
+        makeRandomRectangles(rectangle);
+      });
+
+
+    d3.selectAll("button, h3")
+      .style("font-family", "Arial, sans-serif");
+
+    
+    function makeRandomRectangles(originRectangle){
+
+      // Remove all of the old rectangles
+      for(i = 0; i < otherRectangles.length; i++) {
+        otherRectangles[i].remove();
+      }
+      otherRectangles = [];
+      for(i = 0; i < 6; i++) {
+        // Spread rectangles randomly out from the center of the circle
+        let randomAngle = Math.random() * 2 * Math.PI;
+        let randomDistance = Math.random() * 50;
+
+        let randomX = Math.cos(randomAngle) * randomDistance;
+        let randomY = Math.sin(randomAngle) * randomDistance;
+
+        let newRectangle = originRectangle.clone(true)
+          .attr("x", 100 + randomX-rectangle.attr("width"))
+          .attr("y", 120 + randomY-rectangle.attr("height"))
+          .attr("transform", "scale(1)")
+          .call(d3.drag()
+            .on("drag", dragged));
+
+        otherRectangles.push(newRectangle);
+
+      }
+    }
+
+    function makeRandomPolygons(originPolygon){
+      
+      // Remove all of the old polygons
+      for(i = 0; i < otherPolygons.length; i++) {
+        otherPolygons[i].remove();
+      }
+      otherPolygons = [];
+
+
+      for(i = 0; i < 6; i++) {
+        let randomX = Math.floor(Math.random() * 50);
+        let randomY = Math.floor(Math.random() * 50);
+
+        let newPolygon = polygon.clone(true)
+          .attr("transform", "translate("+ (64 + randomX) + "," + (92 + randomY) + ") scale(0.1)")
+          .call(d3.drag()
+            .on("drag", dragged));
+
+        otherPolygons.push(newPolygon);
+
+      }
+    }
+
+  </script>
+</body>
+</html>
