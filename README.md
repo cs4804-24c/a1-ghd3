@@ -6,4 +6,4 @@ Here's the version I created in D3:
 
 I believe that this is a technically impressive first D3 project! I learned to use linear gradients in D3, how to round the corners of rectangles, use connected paths to make smooth-edged polygons, and then whipped up a little web server to host the project.
 
-You can see the live version of this webpage at https://joed.dev/d3-demo.
+You can see the live version of this webpage at https://d3-demo.joed.dev.
