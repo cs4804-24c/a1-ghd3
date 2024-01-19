@@ -9,6 +9,7 @@ const ps = 8;
 const svg = d3.create("svg").attr("width", width).attr("height", height);
 
 drawCenterCross();
+drawBackgroundPolygons();
 drawLetteringBackground();
 drawLettering();
 
@@ -204,9 +205,10 @@ function drawLettering() {
 
       // Draw the black circle
       svg.append("ellipse")
-        .attr("cx", width / 2 - ps * 8)
-        .attr("cy", height / 2 + 2 * ps)
-        .attr("rx", ps * 10) 
+        .attr("cx", width / 2 - ps * 6)
+        .attr("cy", height / 2 + 2.5 * ps)
+        .attr("rx", ps * 8) 
+        .attr("ry", ps * 9) 
         .style("fill", "black");
 
       // Create an array of points for the curved line
@@ -241,3 +243,216 @@ function drawLettering() {
         .style("fill", "black");
 }
 
+function drawBackgroundPolygons() {
+  const yellowGradient = svg.append("defs")
+    .append("linearGradient")
+    .attr("id", "yellowGradient")
+    .attr("gradientTransform", "rotate(90)");
+
+  yellowGradient.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#fbdf00");
+    
+    yellowGradient.append("stop")
+    .attr("offset", "50%")
+    .attr("stop-color", "#feaf02");
+    
+    yellowGradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#fbdf00");
+
+  const orangeGradient = svg.append("defs")
+    .append("linearGradient")
+    .attr("id", "orangeGradient")
+    .attr("gradientTransform", "rotate(-90)");
+
+    orangeGradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#fd7c0c");
+      
+    orangeGradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#f82a35");
+
+  const orangeGradient2 = svg.append("defs")
+  .append("linearGradient")
+  .attr("id", "orangeGradient2")
+
+  orangeGradient2.append("stop")
+    .attr("offset", "0%")
+    .attr("stop-color", "#f03536");
+    
+  orangeGradient2.append("stop")
+    .attr("offset", "100%")
+    .attr("stop-color", "#fd7e10");
+
+  const redGradient = svg.append("defs")
+    .append("linearGradient")
+    .attr("id", "redGradient")
+    .attr("gradientTransform", "rotate(-90)");
+
+    redGradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#f41946");
+      
+    redGradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#f60f46");
+
+  function buildPoints(array) {
+    let points = "";
+    array.forEach((point, i) => {
+      points += `${point}, `;
+    });
+    return points;
+  }
+
+  const yp2 = [
+    `${width / 2 + 22 * ps},${24 * ps}`,
+    `${width / 2 + 36 * ps},${24 * ps}`,
+    `${width / 2 + 36 * ps},${28 * ps}`,
+    `${width / 2 + 34 * ps},${28 * ps}`,
+    `${width / 2 + 34 * ps},${29 * ps}`,
+    `${width / 2 + 22 * ps},${29 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(yp2))
+    .style("fill", "#ffc401");
+
+  const op2 = [
+    `${width / 2 + 16 * ps},${20 * ps}`,
+    `${width / 2 + 17 * ps},${20 * ps}`,
+    `${width / 2 + 17 * ps},${18 * ps}`,
+    `${width / 2 + 18 * ps},${18 * ps}`,
+    `${width / 2 + 18 * ps},${10 * ps}`,
+    `${width / 2 + 22 * ps},${10 * ps}`,
+    `${width / 2 + 22 * ps},${24 * ps}`,
+    `${width / 2 + 25 * ps},${24 * ps}`,
+    `${width / 2 + 25 * ps},${27 * ps}`,
+    `${width / 2 + 29 * ps},${27 * ps}`,
+    `${width / 2 + 29 * ps},${29 * ps}`,
+    `${width / 2 + 24 * ps},${29 * ps}`,
+    `${width / 2 + 24 * ps},${30 * ps}`,
+    `${width / 2 + 0 * ps},${30 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(op2))
+    .style("fill", 'url(#orangeGradient)');
+
+  const rp = [
+    `${width / 2 + 11 * ps},${14 * ps}`,
+    `${width / 2 + 2.5 * ps},${14 * ps}`,
+    `${width / 2 + 2.5 * ps},${23 * ps}`,
+    `${width / 2 + 15 * ps},${23 * ps}`,
+    `${width / 2 + 15 * ps},${22 * ps}`,
+    `${width / 2 + 16 * ps},${22 * ps}`,
+    `${width / 2 + 16 * ps},${20 * ps}`,
+    `${width / 2 + 15 * ps},${20 * ps}`,
+    `${width / 2 + 15 * ps},${18 * ps}`,
+    `${width / 2 + 14 * ps},${18 * ps}`,
+    `${width / 2 + 14 * ps},${16 * ps}`,
+    `${width / 2 + 11 * ps},${16 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(rp))
+    .style("fill", 'url(#redGradient)');
+
+
+  const op = [
+    `${width / 2 - 2.5 * ps},${0}`,
+    `${width / 2 + 2.5 * ps},${0}`,
+    `${width / 2 + 2.5 * ps},${9 * ps}`,
+    `${width / 2 + 6 * ps},${9 * ps}`,
+    `${width / 2 + 6 * ps},${8.5 * ps}`,
+    `${width / 2 + 9 * ps},${8.5 * ps}`,
+    `${width / 2 + 9 * ps},${12 * ps}`,
+    `${width / 2 + 11 * ps},${12 * ps}`,
+    `${width / 2 + 11 * ps},${14 * ps}`,
+    `${width / 2 + 6.5 * ps},${14 * ps}`,
+    `${width / 2 + 6.5 * ps},${18 * ps}`,
+    `${width / 2 + 3 * ps},${18 * ps}`,
+    `${width / 2 + 3 * ps},${21 * ps}`,
+    `${width / 2 + 2.5 * ps},${21 * ps}`,
+    `${width / 2 + 2.5 * ps},${25 * ps}`,
+    `${width / 2 - 12 * ps},${25 * ps}`,
+    `${width / 2 - 12 * ps},${18 * ps}`,
+    `${width / 2 - 3 * ps},${12 * ps}`,
+    `${width / 2 - 2.5 * ps},${12 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(op))
+    .style("fill", 'url(#orangeGradient)');
+    
+    const op3 = [
+      `${25 * ps},${height / 2 - 22 * ps}`,
+      `${10 * ps},${height / 2 - 22 * ps}`,
+      `${10 * ps},${height / 2 - 18 * ps}`,
+      `${12 * ps},${height / 2 - 18 * ps}`,
+      `${12 * ps},${height / 2 - 16 * ps}`,
+      `${5 * ps},${height / 2 - 16 * ps}`,
+      `${5 * ps},${height / 2 - 12 * ps}`,
+      `${2 * ps},${height / 2 - 12 * ps}`,
+      `${2 * ps},${height / 2 - 10 * ps}`,
+      `${10 * ps},${height / 2 - 10 * ps}`,
+      `${10 * ps},${height / 2 - 6 * ps}`,
+      `${2 * ps},${height / 2 - 6 * ps}`,
+      `${2 * ps},${height / 2 - 4 * ps}`,
+      `${25 * ps},${height / 2 - 4 * ps}`,
+    ]
+    
+    svg.append("polygon")
+      .attr("points", buildPoints(op3))
+      .style("fill", 'url(#orangeGradient2)');
+
+  const yp = [
+    `${width / 2 - 2.5 * ps},${height / 2}`,
+    `${12 * ps},${height / 2}`,
+    `${12 * ps},${height / 2 - 3 * ps}`,
+    `${17 * ps},${height / 2 - 3 * ps}`,
+    `${17 * ps},${height / 2 - 9 * ps}`,
+    `${19 * ps},${height / 2 - 9 * ps}`,
+    `${19 * ps},${height / 2 - 15 * ps}`,
+    `${22 * ps},${height / 2 - 15 * ps}`,
+    `${22 * ps},${height / 2 - 19 * ps}`,
+    `${25 * ps},${height / 2 - 19 * ps}`,
+    `${25 * ps},${height / 2 - 22 * ps}`,
+    `${30 * ps},${height / 2 - 22 * ps}`,
+    `${30 * ps},${height / 2 - 30 * ps}`,
+    `${34 * ps},${height / 2 - 30 * ps}`,
+    `${34 * ps},${height / 2 - 26 * ps}`,
+    `${width / 2 - 2.5 * ps},${height / 2 - 26 * ps}`,
+    `${width / 2 - 2.5 * ps},${height / 2 - 24 * ps}`,
+    `${width / 2 - 5 * ps},${height / 2 - 24 * ps}`,
+    `${width / 2 - 5 * ps},${height / 2 - 20 * ps}`,
+    `${width / 2 - 8 * ps},${height / 2 - 20 * ps}`,
+    `${width / 2 - 8 * ps},${height / 2 - 19 * ps}`,
+    `${width / 2 - 12 * ps},${height / 2 - 19 * ps}`,
+    `${width / 2 - 12 * ps},${height / 2}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(yp))
+    .style("fill", "url(#yellowGradient)");
+
+  const yp3 = [
+    `${2 * ps},${height / 2 - 12 * ps}`,
+    `${2 * ps},${height / 2 - 16 * ps}`,
+    `${6 * ps},${height / 2 - 16 * ps}`,
+    `${6 * ps},${height / 2 - 12 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(yp3))
+    .style("fill", "#ffc900");
+
+  svg.append("rect")
+    .attr("x", width / 2)
+    .attr("y", height / 2 - 2 * ps)
+    .attr("width", width / 2)
+    .attr("height", 2 * ps)
+    .style("fill", "#f55b1b");
+}
