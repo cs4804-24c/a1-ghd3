@@ -27,18 +27,25 @@ svg.append("line")
     .attr("y1", 110)
     .attr("x2", 300)
     .attr("y2", 300)
-    .attr("stroke", "pink");
+    .attr("stroke", "black");
 
 
 
-
-  // Add Rectangles
+  // Add Rectangles (square)
 svg.append("rect")
     .attr("x", 20)
     .attr("y", 20)
     .attr("width", 200)
     .attr("height", 200)
-    .attr("fill", "red");
+    .attr("fill", "green");
+  
+  // Add Rectangles (in center of the last cube we had)
+svg.append("rect")
+  .attr("x", 80)
+  .attr("y", 70)
+  .attr("width", 70)
+  .attr("height", 100)
+  .attr("fill", "yellow");
   
   
   // Add Circles
