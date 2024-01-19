@@ -241,7 +241,8 @@
     .attr("y", 500)
     .attr("width", 225)
     .attr("height", 500)
-    .attr("fill", "grey");
+    .attr("fill", "grey")
+    .attr("class", "building");
 
   svg
     .append("rect")
@@ -249,7 +250,8 @@
     .attr("y", 400)
     .attr("width", 225)
     .attr("height", 600)
-    .attr("fill", "grey");
+    .attr("fill", "grey")
+    .attr("class", "building");
 
   svg
     .append("rect")
@@ -257,7 +259,8 @@
     .attr("y", 375)
     .attr("width", 225)
     .attr("height", 625)
-    .attr("fill", "grey");
+    .attr("fill", "grey")
+    .attr("class", "building");
 
   svg
     .append("rect")
@@ -265,7 +268,8 @@
     .attr("y", 600)
     .attr("width", 225)
     .attr("height", 400)
-    .attr("fill", "grey");
+    .attr("fill", "grey")
+    .attr("class", "building");
 
   svg
     .append("rect")
@@ -273,7 +277,8 @@
     .attr("y", 475)
     .attr("width", 225)
     .attr("height", 800)
-    .attr("fill", "grey");
+    .attr("fill", "grey")
+    .attr("class", "building");
 
 
   // Adding a long pentagon (top of building)
@@ -322,6 +327,25 @@
     .attr("y2", 600)
     .attr("stroke", "black")
     .attr("stroke-width", 5);
+
+  //Adding red light
+  svg
+    .append("rect")
+    .attr("x", 97.5)
+    .attr("y", 400)
+    .attr("width", 30)
+    .attr("height", 10)
+    .attr("fill", "red")
+    .attr("class", "light");
+
+  svg
+    .append("rect")
+    .attr("x", 1097.5)
+    .attr("y", 350)
+    .attr("width", 30)
+    .attr("height", 10)
+    .attr("fill", "red")
+    .attr("class", "light");
   
   // Add the linear gradient definition
   svg.append("defs")
@@ -367,7 +391,7 @@
     const buildingColor = `hsl(0, 0%, ${buildingSaturation}%)`;
 
   // Select and update each building
-    svg.selectAll("rect")
+    svg.selectAll(".building")
     .attr("fill", buildingColor);
 
   // Select and update top building
@@ -383,6 +407,24 @@
 }
   // Call the function to start the dynamic color change
   updateGradient();
+
+  function updatelight() {
+    // Update saturation based on time
+    const currentTime = new Date().getTime();
+
+    // Update light color based on time
+    const lightSaturation = 50 + Math.sin((currentTime / 200) * 2 * Math.PI) * 50; // Vary saturation over time for the light
+    const lightColor = `hsl(0, ${lightSaturation}%, 50%)`;
+
+    // Select and update only the red light element
+    svg.selectAll(".light")
+    .attr("fill", lightColor);
+
+    // Repeat the update at a certain interval
+    setTimeout(updatelight, 10);
+  }
+  // Call the function to start the dynamic color change
+  updatelight();
 
   // Animation: Rotate the lines in opposite directions
   function rotateLines() {
@@ -629,9 +671,9 @@
   text.raise();
 
   // Add an SVG (container)
-  // Add Rectangles (buildings)
+  // Add Rectangles (buildings) and (red light on radio pole)
   // Add Circles (sun/moon)
-  // Add Lines (birds)
+  // Add Lines (birds) and (radio poles)
   // Add Polygons (top of building)
   </script>
 </body>
