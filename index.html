@@ -147,7 +147,7 @@ var star = svg.append("polygon")
 // Creating a button
 const nightbutton = svg.append("rect")
   .attr("x", 10)
-  .attr("y", 10)
+  .attr("y", 60)
   .attr("width", 85)
   .attr("height", 40)
   .attr("fill", "lightblue")
@@ -156,11 +156,19 @@ const nightbutton = svg.append("rect")
 // Append text to the button.
 svg.append("text")
   .attr("x", 15)
-  .attr("y", 30)
+  .attr("y", 80)
   .text("Night Time")
   .attr("fill", "black");
 
 nightbutton.on("click", function() {
+  nightbutton
+    .transition()
+    .duration(2000)
+    .attr('fill', 'green')
+  daybutton
+    .transition()
+    .duration(2000)
+    .attr('fill', 'skyblue')
   sun
     .transition()
     .duration(2000)
@@ -180,20 +188,28 @@ nightbutton.on("click", function() {
 // Creating a button
 const daybutton = svg.append("rect")
   .attr("x", 10)
-  .attr("y", 60)
+  .attr("y", 10)
   .attr("width", 85)
   .attr("height", 40)
-  .attr("fill", "lightblue")
+  .attr("fill", "green")
   .attr("stroke", "black");
 
 // Append text to the button.
 svg.append("text")
   .attr("x", 15)
-  .attr("y", 80)
+  .attr("y", 30)
   .text("Day Time")
   .attr("fill", "black");
 
 daybutton.on("click", function() {
+  nightbutton
+    .transition()
+    .duration(2000)
+    .attr('fill', 'skyblue')
+  daybutton
+    .transition()
+    .duration(2000)
+    .attr('fill', 'green')
   sun
     .transition()
     .duration(2000)
