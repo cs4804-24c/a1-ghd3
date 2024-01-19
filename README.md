@@ -21,4 +21,7 @@ Design Achievement Description:
     - Make the sun/moon larger and put it in the center of the city for aesthetic purposes.
     - Offset the bird (usually traveling in a triangluar formation) for aesthetic purposes and realism.
 - I made sure that everything is where I wanted, like making sure the AOV light is perfectly centered on the pole.
-- I made sure everything in the picture made sense, and had a sense of realism and would complement each other well. 
+- I made sure everything in the picture made sense, and had a sense of realism and would complement each other well.
+
+<img width="1488" alt="Screenshot 2024-01-19 at 2 22 15 AM" src="https://github.com/azzhang3/a1-ghd3/assets/128123007/5593a196-0c9f-409e-905f-3becd5c6e8e8">
+<img width="1491" alt="Screenshot 2024-01-19 at 2 21 18 AM" src="https://github.com/azzhang3/a1-ghd3/assets/128123007/c86f2b48-4b23-47fb-8abb-0862545c3197">
