@@ -41,6 +41,10 @@ Submission Details
 ```
 a1-your Gh username-your first name-your lastname
 
+DESCRIPTION
+
+This was a product for my first assignment in CS4804, it features a light pink background with animated rectangles, circles, lines, and polygons. The shapes transition in shape and color, with the intent of creating an aesthetically pleasing graphic display.
+
 ```
 
 Vis Details

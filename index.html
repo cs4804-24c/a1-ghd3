@@ -8,3 +8,84 @@
   // Add Lines
   // Add Polygons
 </script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3 Graphics</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #FFDDDD; 
+    }
+  </style>
+</head>
+<body>
+
+  <script>
+    // Check if D3 is loaded
+    console.log(d3);
+  
+    // Set up SVG container
+    const svg = d3.select("body").append("svg")
+      .attr("width", 500)
+      .attr("height", 300);
+  
+    // rectangle w transition
+    svg.append("rect")
+      .attr("x", 50)
+      .attr("y", 50)
+      .attr("width", 100)
+      .attr("height", 50)
+      .attr("fill", "#FF69B4") 
+      .transition()
+      .duration(1000)
+      .attr("x", 150)
+      .attr("width", 120)
+      .attr("fill", "#FF1493"); 
+  
+    // circle w transition
+    svg.append("circle")
+      .attr("cx", 200)
+      .attr("cy", 75)
+      .attr("r", 30)
+      .attr("fill", "#800080") 
+      .transition()
+      .duration(1000)
+      .attr("cx", 300)
+      .attr("r", 40)
+      .attr("fill", "#9932CC"); 
+  
+    // line w transition
+    svg.append("line")
+      .attr("x1", 250)
+      .attr("y1", 50)
+      .attr("x2", 350)
+      .attr("y2", 100)
+      .attr("stroke", "#C71585") 
+      .transition()
+      .duration(1000)
+      .attr("y1", 150)
+      .attr("y2", 200)
+      .attr("stroke", "#8B008B"); 
+  
+    // poly w transition
+    const points = "400,50 450,150 350,150";
+    svg.append("polygon")
+      .attr("points", points)
+      .attr("fill", "#FF00FF") 
+      .transition()
+      .duration(1000)
+      .attr("points", "400,100 450,200 350,200")
+      .attr("fill", "#9400D3"); 
+  </script>
+  
+
+</body>
+</html>
