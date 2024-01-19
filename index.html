@@ -1,10 +1,154 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<div id="container"></div>
+<script type="module">
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 420;
+const height = 400;
+
+console.log(d3); // test if d3 is loaded
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+    
+// Append a rectangle.
+//sky
+svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 0)
+  .attr("width", 420)
+  .attr("height", 300)
+  .attr("fill", "azure")
+  .on('click', function(){
+      d3.select(this)
+          .transition()
+          .duration(1000)
+          .attr("fill", "plum");
+  });
+
+//tree
+svg.append("rect")
+  .attr("x", 130)
+  .attr("y", 130)
+  .attr("width", 50)
+  .attr("height", 50)
+  .attr("fill", "darkgreen")
+  .on('click', function() {
+    d3.select(this)
+      .transition()
+      .duration(1000) 
+      .attrTween("transform", function() {
+        var cx = 90; 
+        var cy = 90; 
+        return d3.interpolateString("rotate(0," + cx + "," + cy + ")", "rotate(360," + cx + "," + cy + ")");
+      });
+  });
+
+//grass
+svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 250)
+  .attr("width", 420)
+  .attr("height", 20)
+  .attr("fill", "seagreen")
+
+//road
+svg.append("rect")
+  .attr("x", 0)
+  .attr("y", 270)
+  .attr("width", 420)
+  .attr("height", 70)
+  .attr("fill", "lightgray")
+
+
+// Add Circles
+//sun or moon
+svg.append("circle")
+  .attr("cx", 50)
+  .attr("cy", 50)
+  .attr("r", 50)
+  .attr("fill", "orange")
+  .on('click', function(){
+      d3.select(this)
+          .transition()
+          .duration(1000)
+          .attr("fill", "gray");
+  });
+
+//back wheel
+svg.append("circle")
+  .attr("cx", 70)
+  .attr("cy", 300)
+  .attr("r", 10)
+  .attr("fill", "black")
+  .transition()
+  .duration(3000)
+  .attr("cx", 320)
+  .attr("cy", 300);
+
+//front wheel
+svg.append("circle")
+  .attr("cx", 130)
+  .attr("cy", 300)
+  .attr("r", 10)
+  .attr("fill", "black")
+  .transition()
+  .duration(3000)
+  .attr("cx", 380)
+  .attr("cy", 300);
+
+
+// Add Lines
+// tree trunks
+svg.append("line")
+  .attr("x1", 155)
+  .attr("y1", 155)
+  .attr("x2", 155)
+  .attr("y2", 250)
+  .attr("stroke", "brown")
+  .attr("stroke-width", 3);
+
+svg.append("line")
+  .attr("x1", 200)
+  .attr("y1", 200)
+  .attr("x2", 200)
+  .attr("y2", 250)
+  .attr("stroke", "brown")
+  .attr("stroke-width", 3);
+
+// Add Polygons
+// tree points
+var polygonPoints = "200,155 180,200 220,200";
+
+// tree polygon 
+svg.append("polygon")
+  .attr("points", polygonPoints)
+  .attr("stroke", "forestgreen")
+  .attr("fill", "forestgreen");
+
+// points for the initial position of the car
+var initialCarPoints = "50,280 70,280 70,255 130,255 130,280 160,280 160,300 50,300";
+
+// car polygon
+var car = svg.append("polygon")
+  .attr("points", initialCarPoints)
+  .attr("stroke", "darkred")
+  .attr("fill", "darkred");
+
+// final position of the car
+var finalCarPoints = "300,280 320,280 320,255 380,255 380,280 410,280 410,300 300,300";
+
+// transition to animate car
+car.transition()
+  .duration(3000)
+  .attr("points", finalCarPoints);
+
+// Append the SVG element.
+container.append(svg.node());
+
 </script>
+
