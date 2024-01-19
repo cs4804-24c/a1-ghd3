@@ -1,10 +1,178 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>HW 1</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script>
+      //This sucks, just use F12 > Sources.
+      //Also it will be obvious if it loads because nothing will be on screen if it failed
+      console.log(d3); // test if d3 is loaded
+      // Add Rectangles
+      window.onload = function() {
+        d3.select("#rectangle")
+          .append("rect")
+          .attr("x", 0)
+          .attr("y", 0)
+          .attr("width", "100%")
+          .attr("height", "100%")
+          .attr("fill", "#800c04");
+        d3.select("#rectangle").append("text")
+          .attr("x", "50%")
+          .attr("y", "50%")
+          .attr("stroke", "white")
+          .attr("fill", "white")
+          .attr("font-familty", "Consolas")
+          .attr("font-size", "24px")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "central")
+          .text("a1-ghd3: CS 4802 Data Visualization HW 1");
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+        var svg = d3.select("#d3-body")
+                    .append("svg")
+                    .attr("width", 700)
+                    .attr("height", 700);
+        var circle = svg.append("circle")
+                        .attr("cx", 350)
+                        .attr("cy", 350)
+                        .attr("r", "300")
+                        .attr("stroke", "black")
+                        .attr("fill", "#42b0f5");
+        var polygon = svg.append("path")
+                        .attr("d", "M562 138 465 73 350 50 235 73 138 138 73 235 50 350 73 465 138 562 235 627 350 650 465 627 562 562 627 465 650 350 627 235z")
+                        .attr("fill", "#53c24f")
+                        .attr("stroke", "black")
+                        .attr("stroke-linecap", "round")
+                        .attr("visibility", "hidden");
+
+      
+
+        const lineCoords = [562, 138, 465, 73, 350, 50, 235, 73, 138, 138, 73, 235, 50, 350, 73, 465, 138, 562, 235, 627, 350, 650, 465, 627, 562, 562, 627, 465, 650, 350, 627, 235]
+        var lines = []
+        for(var i = 0; i < lineCoords.length / 2; i++) {
+          lines.push(svg.append("line")
+                        .attr("x1", lineCoords[2*i])
+                        .attr("y1", lineCoords[2*i + 1])
+                        .attr("x2", 700 - lineCoords[2*i])
+                        .attr("y2", 700 - lineCoords[2*i + 1])
+                        .attr("stroke", "gray")
+                        .attr("visibility", "hidden"));
+        }
+
+        const coordinates = [350, 70, 461, 92, 549, 151, 609, 242, 630, 350, 609, 458, 549, 549, 461, 608]
+        var circles = []
+        for(var i = 0; i < coordinates.length / 2; i++) {
+          const circleI = svg.append("circle");
+          circles.push(circleI);
+
+          circleI.attr("cx", coordinates[2*i])
+                .attr("cy", coordinates[2*i + 1])
+                .attr("r", 20)
+                .attr("fill", `hsl(${(360 / (coordinates.length / 2)) * i - (i === 2 ? 30 : 0)}, 100%, 50%)`);
+        }
+
+        //-----------------------------------------------------
+        //Setting up other page elements
+        //-----------------------------------------------------
+      
+        const bgButton = document.getElementById("toggle-bg");
+        const bgLabel = document.getElementById("bg-type");
+        
+        bgButton.onclick = () => {
+          switch(bgLabel.innerText) {
+            case "Circle":
+              bgLabel.innerText = "Polygon";
+              circle.attr("visibility", "hidden");
+              polygon.attr("visibility", "visible");
+              break;
+            case "Polygon":
+              bgLabel.innerText = "None";
+              circle.attr("visibility", "hidden");
+              polygon.attr("visibility", "hidden");
+              break;
+            default:
+              bgLabel.innerText = "Circle";
+              circle.attr("visibility", "visible");
+              polygon.attr("visibility", "hidden");
+              break;
+          }
+        }
+
+      const lineButton = document.getElementById("toggle-lines");
+      var visible = false;
+      lineButton.onclick = () => {
+        visible = !visible
+        lines.forEach(e => e.attr("visibility", visible ? "visible" : "hidden"));
+      }
+
+      //-----------------------------------------------------------------
+      //Initialize animation last to reduce async issues
+      //-----------------------------------------------------------------
+      function animate(circle) {
+        circle.transition()
+              .attr("cx", 700 - circle.attr("cx"))
+              .attr("cy", 700 - circle.attr("cy"))
+              .duration(2000)
+              .ease(d3.easeSinInOut);
+      }
+
+      function timeLoop(i) {
+        animate(circles[i]);
+        setTimeout(() => timeLoop((i + 1) % circles.length), 250);
+      }
+      timeLoop(0);
+    }
+    </script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .center {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+      }
+      .center * {
+        margin-left:"auto";
+        margin-right: "auto";
+      }
+      .center p {
+        max-width: 600px;
+        word-wrap: break-word;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #rectangle {
+        width: 100%;
+        height: 100px;
+        overflow: hidden;
+        top: 0;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <svg id="rectangle">
+    </svg>
+    <div class="center">
+      <div id="d3-body"></div>
+      <button type="button" id="toggle-lines">
+        Toggle Lines
+      </button>
+      <button type="button" id="toggle-bg">
+        Toggle Background
+      </button>
+      <h3 id="bg-type">
+        Circle
+      </h3>
+      <p>
+        Note: Slightly unstable because d3 transitions are finnicky. May have slight desyncs in the animation. Also the animation breaks if the tab loses focus because the timers continue even though the animation gets paused.
+      </p>
+    </div>
+  </body>
+</html>

@@ -1,86 +1,38 @@
-Assignment 1 - Hello World: GitHub and d3  
+Assignment 1 - Hello World: GitHub and d3
+https://andrewsalls.github.io/a1-ghd3/
 ===
 
-This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
+![The visual](image-2.png)
+The visualization I created for this assignment
 
-The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
+This project recreates an illusion that went viral a few years ago. In the illusion, a series of circles look like they are stuck to the edge of a circle that is rotating around another circle. However, the circles are actually moving back and forth along a line, in a motion that creates a circle shape.
 
-The secondary goal is to introduce you to coding on GitHub, including creating a gh-pages branch to host your visualizations.
+There are two (non-d3) buttons. The first button toggles lines, which helps viewers know for sure that the circles are just moving back and forth along a line.
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, you **must identify** the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
+The second button alters the background, rotating between a circle, a 16-gon, and nothing.
 
-For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
+![Using both buttons](image-3.png)
+Result of changing the background and toggling the lines
 
-Resources
----
+Shapes usage:
+ - Circle(s): Background and animation
+ - Rectangle: I considered drawing a rectangle between the animated circles, (especially earlier in development when I only had 4 circles), but I assume the goal was to use the ```rect``` element, which would require a lot of calculations to determine the correct rotation. Instead, I added a header with the course and assignment number as svg text (Ignore that this is very easy to do without SVGs)
+ - Line(s): Togglable display to show that circles move along a line
+ - Polygon: 16-gon as alternate background
+ - Different colors: Besides the lines, which are all grey, every shape has a different color
 
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
+Technical achievement
+===
+The visualization is animated. The timing of each inner circle's motion is very important, as they have to stay closely synced in order to create the appearance of a larger circle. Otherwise, the motion becomes a mess.
 
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
+Most online resources say to call the animation in a function, and to loop by using the ```transition.on()``` function. However, I found that this would result in desyncing very quickly. In order to fix this, I needed to start an animation a fixed amount of time after the start of the last animation. That way, animations will automatically resync.
 
-Requirements
----
+```transition.on()``` only supports running a function right after the animation starts, or right after it ends. To add the delay without overcomplicating things, I switched to a ```setTimout``` loop, where it calls the animation function and then sets a new timout for 250ms later. The new timeout calls the animation for the next circle, so if one of the circles finishes its animation slightly too fast, it will pause for a very small amount of time and then get resynced to be on a 250ms delay again.
 
-1. Your project should contain at least four kinds of graphics primitives (circles, rectangles, lines, polygons) in different colors. 
-2. Your document should identify the source of the code if you start with code that you found. 
-3. Your code should be forked from the GitHub repo and linked using GitHub pages. See the "GitHub Details" section below for detailed instructions on how to do this.
+Design achievement
+===
+The base assignment was just to draw some shapes, so I think recreating a relatively well known illusion is an achievement.
 
-GitHub Details
----
+I chose to use a rainbow color scheme for the circles to create the effect of a color wheel, emphasizing the circle shape they create. The idea is that a viewer's eye moves along the colors rather then following the path of a single circle, which makes it harder to see that they are moving in a straight line.
 
-- Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
-- Make changes to index.html to fulfill the project requirements. 
-- Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
-
-Submission Details
----
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-- Note: name your pull request using the following scheme: 
-```
-a1-your Gh username-your first name-your lastname
-
-```
-
-Vis Details
----
-
-For this project you should use d3.js. 
-You can learn from examples on the [d3.js](http://d3js.org) site or start from scratch.
-
-See the [Using d3js](https://github.com/mbostock/d3/wiki#using) documentation for how to run your own local server.
-
-Creative solutions are welcome! In the past I've seen recreations of paintings, interactives, and more.
-
-Go beyond the minimum requirements of this project.
-Experiment with other aspects of the [d3 API](https://github.com/mbostock/d3/wiki/API-Reference) and [d3 Tutorials](https://github.com/mbostock/d3/wiki/Tutorials). 
-Try making the elements interactive, for example, or animate them.
-
-Grading
----
-
-Grades are on a 120 point scale. 
-96 points will be graded for functionality: the program does what the assignment requests with an informative README. 
-
-We will use Google Chrome to view submissions. 
-Be sure to test your code there.
-
-Below are some, but not necessarily all, of the key points we will consider during grading:
-
-- Circles and Rectangles  
-- Lines  
-- Polygons  
-- Different colors  
-- README Quality
-    - A description of what you have created. 1-2 screenshots are recommended for the README.  
-    - A working link to the hosted files (usually the gh-pages 'live' url)  
-    - Section for Technical and Design Achievements
-
-Technical Achievement Desription -- 12  
-Design Achievement Description -- 12
-
-Remember, it is up to *you* to define what constitutes a technical and design achievements.
-Be ambitious as these are designed to allow you to shape your learning.
-These are the only way to move from B to A territory.
-
+The togglable lines are an (admitedly fairly obvious) design choice to help people understand what is actually happening.
