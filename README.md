@@ -1,86 +1,27 @@
 Assignment 1 - Hello World: GitHub and d3  
-===
+Aaron Zhang
 
-This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
+Link: https://azzhang3.github.io/a1-ghd3/
 
-The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
+For Assignment 1, I created a adaptive picture of what a city during the day/night. I used circles, rectangles, lines, polygons, and paths to create my picture/art piece. The foundation or container was made with an SVG. Rectangles were added for the buildings and the red AOV light. Cirlces were added for the sun/moon. Lines were added for the building poles. Paths were used to create the curved lines for the bird wings. Polygons, specifically pentagons were added to the top of some buildings to give it different shapes.
 
-The secondary goal is to introduce you to coding on GitHub, including creating a gh-pages branch to host your visualizations.
+Technical Achievement Description:
+- I added a function to change the colors of the sun, the background, and the buildings to represent a typical sunny day in the city. This was done through the use of a built in timer.
+- I added a function to make the red lights on top of some buildings blink to simulate the Aviation Obstruction Light you would typically see on top of tall buildings. I needed it to blink at a faster pace than the change of the city from morning to night, so I had to use a different time interval.
+- I added a function to rotate the wings (lines) that represented a bird. The left wing would go clockwise up, then counterclockwise back down, and the right wing would do the opposite, at the same time intervals. A bounce effect was added to the animation to make the wings flap more naturally. This was meant to simulate the flapping of wings as the birds fly through the city. This also used a sort of timer.
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, you **must identify** the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
+Design Achievement Description:
+- I added a creative title - City Summer Evening - for my project so people could immediately understand what the picture and animation is.
+- Throughout the assignment I would talk and have discussions with my girlfriend who majors in illustration and does graphic design, on how I could improve the picture and my visualization. Some of these suggestions included:
+    - Using saturation and the change of saturation to make the sun change to a moon
+    - Using saturation and the change of saturation to make the background turn darker and then lighter to simulated sunset and sunrise
+    - Using saturation and the change of saturation to make the buildings change based on the time of day - darker at night and greyish during the day.
+    - Using saturation and the change of saturation to make the AOV light look like its blinking.
+    - Making the bird's wings curved instead of a straight v shape to make it more realistic.
+    - Make the sun/moon larger and put it in the center of the city for aesthetic purposes.
+    - Offset the bird (usually traveling in a triangluar formation) for aesthetic purposes and realism.
+- I made sure that everything is where I wanted, like making sure the AOV light is perfectly centered on the pole.
+- I made sure everything in the picture made sense, and had a sense of realism and would complement each other well.
 
-For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
-
-Resources
----
-
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
-
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
-
-Requirements
----
-
-1. Your project should contain at least four kinds of graphics primitives (circles, rectangles, lines, polygons) in different colors. 
-2. Your document should identify the source of the code if you start with code that you found. 
-3. Your code should be forked from the GitHub repo and linked using GitHub pages. See the "GitHub Details" section below for detailed instructions on how to do this.
-
-GitHub Details
----
-
-- Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
-- Make changes to index.html to fulfill the project requirements. 
-- Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
-
-Submission Details
----
-- To submit, make a [Pull Request](https://help.github.com/articles/using-pull-requests/) on the original repository.
-- Note: name your pull request using the following scheme: 
-```
-a1-your Gh username-your first name-your lastname
-
-```
-
-Vis Details
----
-
-For this project you should use d3.js. 
-You can learn from examples on the [d3.js](http://d3js.org) site or start from scratch.
-
-See the [Using d3js](https://github.com/mbostock/d3/wiki#using) documentation for how to run your own local server.
-
-Creative solutions are welcome! In the past I've seen recreations of paintings, interactives, and more.
-
-Go beyond the minimum requirements of this project.
-Experiment with other aspects of the [d3 API](https://github.com/mbostock/d3/wiki/API-Reference) and [d3 Tutorials](https://github.com/mbostock/d3/wiki/Tutorials). 
-Try making the elements interactive, for example, or animate them.
-
-Grading
----
-
-Grades are on a 120 point scale. 
-96 points will be graded for functionality: the program does what the assignment requests with an informative README. 
-
-We will use Google Chrome to view submissions. 
-Be sure to test your code there.
-
-Below are some, but not necessarily all, of the key points we will consider during grading:
-
-- Circles and Rectangles  
-- Lines  
-- Polygons  
-- Different colors  
-- README Quality
-    - A description of what you have created. 1-2 screenshots are recommended for the README.  
-    - A working link to the hosted files (usually the gh-pages 'live' url)  
-    - Section for Technical and Design Achievements
-
-Technical Achievement Desription -- 12  
-Design Achievement Description -- 12
-
-Remember, it is up to *you* to define what constitutes a technical and design achievements.
-Be ambitious as these are designed to allow you to shape your learning.
-These are the only way to move from B to A territory.
-
+<img width="1488" alt="Screenshot 2024-01-19 at 2 22 15 AM" src="https://github.com/azzhang3/a1-ghd3/assets/128123007/5593a196-0c9f-409e-905f-3becd5c6e8e8">
+<img width="1491" alt="Screenshot 2024-01-19 at 2 21 18 AM" src="https://github.com/azzhang3/a1-ghd3/assets/128123007/c86f2b48-4b23-47fb-8abb-0862545c3197">

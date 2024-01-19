@@ -1,10 +1,679 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1000, initial-scale=1.0">
+  <title>D3.js</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
 
-<script>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+
+  #visualization {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>
+
+<body>
+  <div id="visualization"></div>
+  <script>
   console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+  
+  // Select the container
+  const container = d3.select("#visualization");
+  
+  // Set the background color of the container
+  container.style("background-color", "orange");
+
+  // Append an SVG element to the container
+  const svg = container
+    .append("svg")
+    .attr("width", 1300)
+    .attr("height", 1000);
+
+  // Adding text
+  const text = svg
+    .append("text")
+    .attr("x", 890) // Adjust the x-coordinate for positioning from the right
+    .attr("y", 150) // Adjust the y-coordinate for positioning from the top
+    .attr("text-anchor", "end") // Set the text anchor to end for right alignment
+    .attr("fill", "Black") // Set the text color
+    .attr("font-weight", "bold") // Make the text bold
+    .attr("font-size", "30px") // Set the font size
+    .text("Assignment 1 - City Summer Evening"); // Set the text content
+
+  // Adding Sun/Moon (Circle)
+  // Center Circle
+  const centerX = svg.attr("width") / 2;
+  const centerY = svg.attr("height") / 1.5;
+
+  svg
+    .append("circle")
+    .attr("cx", centerX)
+    .attr("cy", centerY)
+    .attr("r", 625)
+    .attr("fill", "url(#sunGradient)");
+
+  // Adding Birds (Lines)
+  const radius = 40;
+
+  const lineData = [
+    { x: 0, y: -radius },                   
+    { x: radius / Math.sqrt(2), y: -radius / Math.sqrt(2) }, 
+    { x: radius, y: -radius } 
+  ];
+
+  const lineGenerator = d3.line()
+    .x(d => d.x)
+    .y(d => d.y)
+    .curve(d3.curveBasis);
+
+  const reflectedLineData = lineData.map(point => ({ x: -point.x, y: point.y }));
+
+  const bird1 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.2}, ${svg.attr("height") / 5})`);
+  const bird2 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.3}, ${svg.attr("height") / 4.3})`);
+  const bird3 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.1}, ${svg.attr("height") / 4.3})`)
+  const bird4 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.4}, ${svg.attr("height") / 3.6})`)
+  const bird5 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.2}, ${svg.attr("height") / 3.6})`)
+  const bird6 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.05}, ${svg.attr("height") / 3.6})`)
+  const bird7 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.5}, ${svg.attr("height") / 3.1})`)
+  const bird8 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.3}, ${svg.attr("height") / 3.1})`)
+  const bird9 = svg.append("g")
+    .attr("transform", `translate(${svg.attr("width") / 1.1}, ${svg.attr("height") / 3.1})`)
+
+
+  // row 1 bird 1
+  const bird1R = bird1
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird1L = bird1
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 2 bird 1
+  const bird2R = bird2
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird2L = bird2
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 2 bird 2
+  const bird3R = bird3
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird3L = bird3
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 3 bird 1
+  const bird4R = bird4
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird4L = bird4
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 3 bird 2
+  const bird5R = bird5
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird5L = bird5
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 3 bird 3
+  const bird6R = bird6
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird6L = bird6
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 4 bird 1
+  const bird7R = bird7
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird7L = bird7
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 4 bird 2
+  const bird8R = bird8
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird8L = bird8
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // row 4 bird 3
+  const bird9R = bird9
+    .append("path")
+    .attr("d", lineGenerator(lineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  const bird9L = bird9
+    .append("path")
+    .attr("d", lineGenerator(reflectedLineData))
+    .attr("stroke", "black")
+    .attr("stroke-width", 2)
+    .attr("fill", "none");
+
+  // Adding building (rectangles)
+  svg
+    .append("rect")
+    .attr("x", 0)
+    .attr("y", 500)
+    .attr("width", 225)
+    .attr("height", 500)
+    .attr("fill", "grey")
+    .attr("class", "building");
+
+  svg
+    .append("rect")
+    .attr("x", 250)
+    .attr("y", 400)
+    .attr("width", 225)
+    .attr("height", 600)
+    .attr("fill", "grey")
+    .attr("class", "building");
+
+  svg
+    .append("rect")
+    .attr("x", 500)
+    .attr("y", 375)
+    .attr("width", 225)
+    .attr("height", 625)
+    .attr("fill", "grey")
+    .attr("class", "building");
+
+  svg
+    .append("rect")
+    .attr("x", 750)
+    .attr("y", 600)
+    .attr("width", 225)
+    .attr("height", 400)
+    .attr("fill", "grey")
+    .attr("class", "building");
+
+  svg
+    .append("rect")
+    .attr("x", 1000)
+    .attr("y", 475)
+    .attr("width", 225)
+    .attr("height", 800)
+    .attr("fill", "grey")
+    .attr("class", "building");
+
+
+  // Adding a long pentagon (top of building)
+  const pentagonPoints = [
+    { x: 250, y: 400 },
+    { x: 475, y: 400 },
+    { x: 475, y: 300 },
+    { x: 362.5, y: 200 },
+    { x: 250, y: 300 }
+  ];
+
+  
+  const pentagonPoints2 = [
+    { x: 750, y: 700 },
+    { x: 975, y: 700 },
+    { x: 975, y: 600 },
+    { x: 862.5, y: 500 },
+    { x: 750, y: 600 }
+  ];
+
+  svg
+    .append("polygon")
+    .attr("points", pentagonPoints.map(point => `${point.x},${point.y}`).join(" "))
+    .attr("fill", "grey")
+  
+  svg
+    .append("polygon")
+    .attr("points", pentagonPoints2.map(point => `${point.x},${point.y}`).join(" "))
+    .attr("fill", "grey")
+
+  // Adding radio poles (lines)
+  svg
+    .append("line")
+    .attr("x1", 112.5)
+    .attr("y1", 400)
+    .attr("x2", 112.5)
+    .attr("y2", 500)
+    .attr("stroke", "black")
+    .attr("stroke-width", 5);
+
+  svg
+    .append("line")
+    .attr("x1", 1112.5)
+    .attr("y1", 350)
+    .attr("x2", 1112.5)
+    .attr("y2", 600)
+    .attr("stroke", "black")
+    .attr("stroke-width", 5);
+
+  //Adding red light
+  svg
+    .append("rect")
+    .attr("x", 97.5)
+    .attr("y", 400)
+    .attr("width", 30)
+    .attr("height", 10)
+    .attr("fill", "red")
+    .attr("class", "light");
+
+  svg
+    .append("rect")
+    .attr("x", 1097.5)
+    .attr("y", 350)
+    .attr("width", 30)
+    .attr("height", 10)
+    .attr("fill", "red")
+    .attr("class", "light");
+  
+  // Add the linear gradient definition
+  svg.append("defs")
+      .append("linearGradient")
+      .attr("id", "sunGradient")
+      .attr("x1", "0%")
+      .attr("y1", "0%")
+      .attr("x2", "100%")
+      .attr("y2", "0%")
+      .selectAll("stop")
+      .data([
+        { offset: "0%", color: "yellow" },
+        { offset: "25%", color: "orange" },
+        { offset: "50%", color: "white" },
+        { offset: "75%", color: "orange" },
+        { offset: "100%", color: "yellow" }
+      ])
+      .enter().append("stop")
+      .attr("offset", d => d.offset)
+      .attr("stop-color", d => d.color);
+
+  // Function to update gradient stops over time
+  function updateGradient() {
+    const gradientStops = svg.select("#sunGradient").selectAll("stop");
+
+  // Update saturation based on time
+    const currentTime = new Date().getTime();
+    const saturation = 50 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time
+
+  // Apply the same color with varying saturation to all stops
+    const color = `hsl(50, ${saturation}%, 50%)`;
+    gradientStops.each(function() {
+      d3.select(this).attr("stop-color", color);
+    });
+
+  // Update background color based on time for the container
+    const containerSaturation = 40 + Math.sin((currentTime / 100) * 2 * Math.PI) * 50; // Vary saturation over time for the background
+    const containerColor = `hsl(30, ${containerSaturation}%, 40%)`;
+    container.style("background-color", containerColor);
+
+  // Update building colors based on time
+    const buildingSaturation = 15 + Math.sin((currentTime / 100) * 2 * Math.PI) * 30; // Vary saturation over time for the buildings
+    const buildingColor = `hsl(0, 0%, ${buildingSaturation}%)`;
+
+  // Select and update each building
+    svg.selectAll(".building")
+    .attr("fill", buildingColor);
+
+  // Select and update top building
+    svg.selectAll("polygon")
+    .attr("fill", buildingColor);
+
+  // Select radio pole and update color
+    svg.selectAll("line")
+    .attr("stroke", buildingColor);
+
+  // Repeat the update at a certain interval
+    setTimeout(updateGradient, 200);
+}
+  // Call the function to start the dynamic color change
+  updateGradient();
+
+  function updatelight() {
+    // Update saturation based on time
+    const currentTime = new Date().getTime();
+
+    // Update light color based on time
+    const lightSaturation = 50 + Math.sin((currentTime / 200) * 2 * Math.PI) * 50; // Vary saturation over time for the light
+    const lightColor = `hsl(0, ${lightSaturation}%, 50%)`;
+
+    // Select and update only the red light element
+    svg.selectAll(".light")
+    .attr("fill", lightColor);
+
+    // Repeat the update at a certain interval
+    setTimeout(updatelight, 10);
+  }
+  // Call the function to start the dynamic color change
+  updatelight();
+
+  // Animation: Rotate the lines in opposite directions
+  function rotateLines() {
+      bird1R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird1R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird1L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird1L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird2R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird2R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird2L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird2L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird3R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird3R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird3L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird3L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird4R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird4R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird4L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird4L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird5R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird5R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird5L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird5L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird6R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird6R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird6L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird6L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird7R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird7R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird7L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird7L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird8R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird8R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird8L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird8L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+
+      bird9R.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", counterclockwiseRotateTween)
+        .on("end", function() {
+          bird9R.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", clockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+      
+      bird9L.transition()
+        .duration(2000)
+        .ease(d3.easeBounceOut)
+        .attrTween("transform", clockwiseRotateTween)
+        .on("end", function() {
+          bird9L.transition()
+            .duration(500)
+            .ease(d3.easeBounce)
+            .attrTween("transform", counterclockwiseRotateTweenBack)
+            .on("end", rotateLines);
+        });
+    }
+
+    function clockwiseRotateTween() {
+      const i = d3.interpolate(0, 5); // Rotate clockwise 360 degrees
+      return t => `rotate(${i(t)}, 0, 0)`;
+    }
+
+    function counterclockwiseRotateTween() {
+      const i = d3.interpolate(0, -5); // Rotate counterclockwise 360 degrees
+      return t => `rotate(${i(t)}, 0, 0)`;
+    }
+
+    function clockwiseRotateTweenBack() {
+      const i = d3.interpolate(0, 1.5); // Rotate clockwise 360 degrees
+      return t => `rotate(${i(t)}, 0, 0)`;
+    }
+
+    function counterclockwiseRotateTweenBack() {
+      const i = d3.interpolate(0, -1.5); // Rotate counterclockwise 360 degrees
+      return t => `rotate(${i(t)}, 0, 0)`;
+    }
+
+  // Start the rotation animation
+  rotateLines();
+
+  text.raise();
+
+  // Add an SVG (container)
+  // Add Rectangles (buildings) and (red light on radio pole)
+  // Add Circles (sun/moon)
+  // Add Lines (birds) and (radio poles)
+  // Add Polygons (top of building)
+  </script>
+</body>
