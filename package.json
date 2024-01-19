@@ -1,0 +1,23 @@
+{
+  "name": "a1-ghd3",
+  "version": "1.0.0",
+  "description": "Assignment 1 - Hello World: GitHub and d3  \r ===",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/r2pen2/a1-ghd3.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/r2pen2/a1-ghd3/issues"
+  },
+  "homepage": "https://github.com/r2pen2/a1-ghd3#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
