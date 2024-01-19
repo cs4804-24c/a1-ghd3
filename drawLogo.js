@@ -10,6 +10,7 @@ const svg = d3.create("svg").attr("width", width).attr("height", height);
 
 drawCenterCross();
 drawLetteringBackground();
+drawLettering();
 
 container.append(svg.node());
 
@@ -110,8 +111,8 @@ function drawLetteringBackground() {
   
   // Draw the top of the J
   const jTopLeft = `${(width - 2 * ps) / 2 - 11 * ps},${height / 2 - (30/2 + 2) * ps}`;
-  const jTopRight = `${(width - 2 * ps) / 2},${height / 2 - (30/2 + 3) * ps}`;
-  const jBottomRight = `${(width - 2 * ps) / 2},${height / 2 + 15 * ps}`;
+  const jTopRight = `${(width - 2 * ps) / 2 -  2 * ps},${height / 2 - (30/2 + 3) * ps}`;
+  const jBottomRight = `${(width - 2 * ps) / 2 - 2 * ps},${height / 2 + 15 * ps}`;
   const jBottomLeft = `${(width - 2 * ps) / 2 - 11 * ps},${height / 2 + 15 * ps}`;
   svg.append("polygon")
     .attr("points", `${jTopLeft} ${jTopRight} ${jBottomRight} ${jBottomLeft}`)
@@ -151,3 +152,92 @@ function drawLetteringBackground() {
     .attr("d", lineGenerator(jCurvePoints))
     .style("fill", "black");
 }
+
+function drawLettering() {
+
+    // Draw a white oval
+    svg.append("ellipse")
+      .attr("cx", width / 2 + ps * 9)
+      .attr("cy", height / 2 - 1 * ps)
+      .attr("rx", ps * 13) 
+      .attr("ry", ps * 12) 
+      .style("fill", "white");
+    
+      // Cut off the back of the D
+      svg.append("rect")
+        .attr("x", width / 2 - ps * 3)
+        .attr("y", height / 2 - 15 * ps)
+        .attr("width", 5 * ps)
+        .attr("height", 30 * ps)
+        .style("fill", "black");
+      svg.append("rect")
+        .attr("x", width / 2 - ps * 4)
+        .attr("y", height / 2 - 6 * ps)
+        .attr("width", 5 * ps)
+        .attr("height", 10 * ps)
+        .style("fill", "black");
+
+
+      // Draw a smaller black oval inside the d for the hole
+      svg.append("ellipse")
+        .attr("cx", width / 2 + ps * 9)
+        .attr("cy", height / 2 - 1 * ps)
+        .attr("rx", ps * 6) 
+        .attr("ry", ps * 6) 
+        .style("fill", "black");
+
+      // Form the straight back of the D
+      svg.append("rect")
+        .attr("x", width / 2 + ps * 2)
+        .attr("y", height / 2 - 13 * ps)
+        .attr("width", 7 * ps)
+        .attr("height", 24 * ps)
+        .style("fill", "white");
+
+      // Draw a block for the D that we'll cover with a black circle
+      svg.append("rect")
+        .attr("x", width / 2 - ps * 6)
+        .attr("y", height / 2 + 2 * ps)
+        .attr("width", 9 * ps)
+        .attr("height", 9 * ps)
+        .style("fill", "white");
+
+      // Draw the black circle
+      svg.append("ellipse")
+        .attr("cx", width / 2 - ps * 8)
+        .attr("cy", height / 2 + 2 * ps)
+        .attr("rx", ps * 10) 
+        .style("fill", "black");
+
+      // Create an array of points for the curved line
+      const curvePoints = [
+        [width / 2 - 7 * ps, height / 2 - 16 * ps],
+        // [width / 2 - 12 * ps, height / 2 + 2 * ps],
+        // [width / 2 - 13 * ps, height / 2 + 3 * ps],
+        // [width / 2 - 14 * ps, height / 2 + 4 * ps],
+        // [width / 2 - 15 * ps, height / 2 + 5 * ps],
+        [width / 2 - 12 * ps, height / 2 + 6 * ps],
+        [width / 2 - 24 * ps, height / 2 + 8 * ps],
+      ];
+    
+      // Create a line generator with a cardinal curve
+      const lineGenerator = d3.line()
+        .curve(d3.curveCardinal)
+        .x(d => d[0])
+        .y(d => d[1]);
+    
+      // Append the curved line to the SVG
+      svg.append("path")
+        .attr("d", lineGenerator(curvePoints))
+        .style("stroke", "white")
+        .style("stroke-width", 8 * ps);
+    
+      // Cut off the top of the J
+      svg.append("rect")
+        .attr("x", width / 2 - 12 * ps)
+        .attr("y", height / 2 - 17 * ps)
+        .attr("width", 9 * ps)
+        .attr("height", 2.2 * ps)
+        .style("fill", "black");
+}
+
