@@ -77,10 +77,15 @@ Below are some, but not necessarily all, of the key points we will consider duri
     - A working link to the hosted files (usually the gh-pages 'live' url)  
     - Section for Technical and Design Achievements
 
-Technical Achievement Desription -- 12  
+Technical Achievement Desription -- 12
+
+As for technical achievements, this project does not require anything else outside of html and d3.js which makes it very quick to load and responsive on any device.
+
 Design Achievement Description -- 12
 
-Remember, it is up to *you* to define what constitutes a technical and design achievements.
-Be ambitious as these are designed to allow you to shape your learning.
-These are the only way to move from B to A territory.
+For my design achievements I have designed a smiley face with the objects in the d3 library. I believe this deserves points in the design category for not only putting each type of object but also coordinating them to be apart of a bigger picture. I think having the smiley face makes the project more fun to look at and the colors contrast each other to the point where its not hard to see. Along with that, the elements are carefully placed in well spaced positions to make it more aesthetic
 
+My Link: https://eramadani3.github.io/eramadani3-a1-ghd3/
+
+
+![Alt text](image.png)
