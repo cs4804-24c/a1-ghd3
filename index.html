@@ -1,10 +1,30 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
-
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+.rectangle {
+  height: 50px;
+  width: 100px;
+  background-color: #555;
+}
+</style>
+</head>
+<body>
 <script>
   console.log(d3); // test if d3 is loaded
   // Add an SVG
+  const svg = d3.select("body")
+  .append("svg")
+  .attr("width", width)
+  .attr("height", height)
   // Add Rectangles
+  <div class="rectangle"></div>
+}
   // Add Circles
   // Add Lines
   // Add Polygons
 </script>
+</body>
+</html>
