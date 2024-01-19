@@ -1,10 +1,216 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<div id="container"></div>
+<script type="module">
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+// Declare the chart dimensions and margins.
+const width = 600;
+const height = 400;
+
+
+console.log(d3); // test if d3 is loaded
+
+// Create the SVG container.
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+// Append a rectangle. 
+var background = svg.append('rect')
+    .attr('x', 0)
+    .attr('y', 0)
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', 'skyblue')
+    .on('click', function() {
+      d3.select(this)
+        .transition()
+        .duration(2000)
+        .attr('fill','darkblue');
+    })
+;
+
+// defining grass gradient
+const gradient = svg.append("defs")
+  .append("linearGradient")
+  .attr("id", "gradient")
+  .attr("x1", "0%")
+  .attr("y1", "0%")
+  .attr("x2", "0%")
+  .attr("y2", "100%");
+
+// Add gradient stops
+gradient.append("stop")
+  .attr("offset", "0%")
+  .attr("style", "stop-color:green");
+
+gradient.append("stop")
+  .attr("offset", "100%")
+  .attr("style", "stop-color:lightgreen");
+
+
+// Append a rectangle. 
+svg.append('rect')
+    .attr('x', 0)
+    .attr('y', 400 - height/3)
+    .attr('width', width)
+    .attr('height', height/3)
+    .attr("fill", "url(#gradient)");
+
+// Add a circle. 
+var sun = svg.append('circle')
+    .attr('cx', 575)
+    .attr('cy', 25)
+    .attr('r', 50)
+    .attr('fill', 'yellow')
+    .on('click', function() {
+      d3.select(this)
+        .transition()
+        .duration(2000)
+        .attr('fill','grey');
+    })
+
+// Add a line
+svg.append('line')
+    .attr('x1', 150)
+    .attr('y1', 400 - height/3)
+    .attr('x2', 150)
+    .attr('y2', 185)
+    .attr('stroke', 'black');
+
+
+// Function from chatgpt to calculate the octogon points for me    
+function calculateOctagonCoordinates(centerX, centerY, sideLength) {
+const angleOff = Math.PI / 8; // Angle offset to create octagon
+const coordinates = [];
+
+  for (let i = 0; i < 8; i++) {
+    const angle = i * (2 * Math.PI / 8) + angleOff;
+    const x = centerX + sideLength * Math.cos(angle);
+    const y = centerY + sideLength * Math.sin(angle);
+    coordinates.push(`${x},${y}`);
+  }
+
+  return coordinates.join(" ");
+}
+
+
+// Define octagon dimensions
+const sideLength = 35;
+const centerX = 150;
+const centerY = 185;
+
+// Calculate coordinates for the octagon
+const coordinates = calculateOctagonCoordinates(centerX, centerY, sideLength);
+
+// Add a polygon
+svg.append('polygon')
+.attr("points", coordinates)
+  .attr("stroke", "white")
+  .attr('fill', 'red');
+  
+// Function to calculate star coordinates.
+function calculateStarCoordinates(centerX, centerY, outerRadius, innerRadius) {
+  const points = [];
+  for (let i = 0; i < 5; i++) {
+    const angleOuter = (i * 2 * Math.PI) / 5 - Math.PI / 2;
+    const xOuter = centerX + outerRadius * Math.cos(angleOuter);
+    const yOuter = centerY + outerRadius * Math.sin(angleOuter);
+    points.push(`${xOuter},${yOuter}`);
+
+    const angleInner = ((i + 0.5) * 2 * Math.PI) / 5 - Math.PI / 2;
+    const xInner = centerX + innerRadius * Math.cos(angleInner);
+    const yInner = centerY + innerRadius * Math.sin(angleInner);
+    points.push(`${xInner},${yInner}`);
+  }
+  return points.join(" ");
+}
+
+// Define star dimensions.
+const starcenterX = 350;
+const starcenterY = 100;
+const outerRadius = 20;
+const innerRadius = 5;
+
+// Calculate star coordinates.
+const starCoordinates = calculateStarCoordinates(starcenterX, starcenterY, outerRadius, innerRadius);
+
+// Append the star to the SVG.
+var star = svg.append("polygon")
+  .attr("points", starCoordinates)
+  .attr("fill", 'skyblue')
+  .attr("stroke", 'skyblue');
+
+// Creating a button
+const nightbutton = svg.append("rect")
+  .attr("x", 10)
+  .attr("y", 10)
+  .attr("width", 85)
+  .attr("height", 40)
+  .attr("fill", "lightblue")
+  .attr("stroke", "black");
+
+// Append text to the button.
+svg.append("text")
+  .attr("x", 15)
+  .attr("y", 30)
+  .text("Night Time")
+  .attr("fill", "black");
+
+nightbutton.on("click", function() {
+  sun
+    .transition()
+    .duration(2000)
+    .attr('fill','grey');
+  background
+    .transition()
+    .duration(2000)
+    .attr('fill','darkblue');
+  star
+    .transition()
+    .duration(2000)
+    .attr('fill', 'gold')
+    .attr("stroke", 'gold');
+  console.log("Button clicked!");
+});
+
+// Creating a button
+const daybutton = svg.append("rect")
+  .attr("x", 10)
+  .attr("y", 60)
+  .attr("width", 85)
+  .attr("height", 40)
+  .attr("fill", "lightblue")
+  .attr("stroke", "black");
+
+// Append text to the button.
+svg.append("text")
+  .attr("x", 15)
+  .attr("y", 80)
+  .text("Day Time")
+  .attr("fill", "black");
+
+daybutton.on("click", function() {
+  sun
+    .transition()
+    .duration(2000)
+    .attr('fill','yellow');
+  background
+    .transition()
+    .duration(2000)
+    .attr('fill','skyblue');
+  star
+    .transition()
+    .duration(2000)
+    .attr('fill', 'skyblue')
+    .attr("stroke", 'skyblue');
+  console.log("Button clicked!");
+});
+
+// Append the SVG element.
+container.append(svg.node());
+
 </script>
