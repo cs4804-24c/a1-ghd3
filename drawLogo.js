@@ -455,4 +455,107 @@ function drawBackgroundPolygons() {
     .attr("width", width / 2)
     .attr("height", 2 * ps)
     .style("fill", "#f55b1b");
+
+    const blueGradient = svg.append("defs")
+    .append("linearGradient")
+    .attr("id", "blueGradient")
+    .attr("gradientTransform", "rotate(-90)");
+
+    blueGradient.append("stop")
+      .attr("offset", "0%")
+      .attr("stop-color", "#00a2ca");
+      
+    blueGradient.append("stop")
+      .attr("offset", "100%")
+      .attr("stop-color", "#02d0e5");
+
+  const bp = [
+    `${width / 2 - 2.5 * ps},${height - 12 * ps}`,
+    `${width / 2 - 2.5 * ps},${height - 32 * ps}`,
+    `${width / 2 - 32 * ps},${height - 32 * ps}`,
+    `${width / 2 - 32 * ps},${height - 29 * ps}`,
+    `${width / 2 - 20 * ps},${height - 29 * ps}`,
+    `${width / 2 - 20 * ps},${height - 8 * ps}`,
+    `${width / 2 - 16 * ps},${height - 8 * ps}`,
+    `${width / 2 - 16 * ps},${height - 10 * ps}`,
+    `${width / 2 - 7 * ps},${height - 10 * ps}`,
+    `${width / 2 - 7 * ps},${height - 18 * ps}`,
+    `${width / 2 - 4 * ps},${height - 18 * ps}`,
+    `${width / 2 - 4 * ps},${height - 12 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(bp))
+    .style("fill", "url(#blueGradient)");
+
+  const dbp = [
+    `${width / 2},${height - 29 * ps}`,
+    `${width / 2 - 36 * ps},${height - 29 * ps}`,
+    `${width / 2 - 36 * ps},${height - 27 * ps}`,
+    `${width / 5},${height - 27 * ps}`,
+    `${width / 5},${height - 24 * ps}`,
+    `${width / 5 - 6 * ps},${height - 24 * ps}`,
+    `${width / 5 - 6 * ps},${height - 20 * ps}`,
+    `${width / 5 - 3 * ps},${height - 20 * ps}`,
+    `${width / 5 - 3 * ps},${height - 14 * ps}`,
+    `${width / 5},${height - 14 * ps}`,
+    `${width / 5},${height - 24 * ps}`,
+    `${width / 5 + 1 * ps},${height - 24 * ps}`,
+    `${width / 5 + 1 * ps},${height - 20 * ps}`,
+    `${width / 5 + 5 * ps},${height - 20 * ps}`,
+    `${width / 5 + 5 * ps},${height - 21 * ps}`,
+    `${width / 5 + 8 * ps},${height - 21 * ps}`,
+    `${width / 5 + 8 * ps},${height - 24 * ps}`,
+    `${width / 2 + 8 * ps},${height - 24 * ps}`,
+    `${width / 2 + 8 * ps},${height - 8 * ps}`,
+    `${width / 2 + 10 * ps},${height - 8 * ps}`,
+    `${width / 2 + 10 * ps},${height - 11 * ps}`,
+    `${width / 2 + 12 * ps},${height - 11 * ps}`,
+    `${width / 2 + 12 * ps},${height - 24 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(dbp))
+    .style("fill", "#2b1c7c");
+
+    const bpp = [
+      `${width / 2 + 25 * ps},${height - 13 * ps}`,
+      `${width / 2 + 25 * ps},${height - 21 * ps}`,
+      `${width / 2 + 28 * ps},${height - 21 * ps}`,
+      `${width / 2 + 28 * ps},${height - 25 * ps}`,
+      `${width / 2 + 31 * ps},${height - 25 * ps}`,
+      `${width / 2 + 31 * ps},${height - 27 * ps}`,
+      `${width / 2 + 22 * ps},${height - 27 * ps}`,
+      `${width / 2 + 22 * ps},${height - 30 * ps}`,
+      `${width / 2 + 20 * ps},${height - 30 * ps}`,
+      `${width / 2 + 20 * ps},${height - 13 * ps}`,
+    ]
+  
+    svg.append("polygon")
+      .attr("points", buildPoints(bpp))
+      .style("fill", "#d500b9");
+
+  const pp = [
+    `${width / 2 - 36 * ps},${height - 27 * ps}`,
+    `${width / 2 - 36 * ps},${height - 29 * ps}`,
+    `${width / 2 - 37 * ps},${height - 29 * ps}`,
+    `${width / 2 - 37 * ps},${height - 27 * ps}`,
+    `${width / 2 - 40 * ps},${height - 27 * ps}`,
+    `${width / 2 - 40 * ps},${height - 25 * ps}`,
+    `${width / 2 + 2.5 * ps},${height - 25 * ps}`,
+    `${width / 2 + 2.5 * ps},${height - 27 * ps}`,
+    `${width / 2 + 2.5 * ps},${height - 18 * ps}`,
+    `${width / 2 + 4 * ps},${height - 18 * ps}`,
+    `${width / 2 + 4 * ps},${height - 12 * ps}`,
+    `${width / 2 + 10 * ps},${height - 12 * ps}`,
+    `${width / 2 + 10 * ps},${height - 13 * ps}`,
+    `${width / 2 + 24 * ps},${height - 13 * ps}`,
+    `${width / 2 + 24 * ps},${height - 20 * ps}`,
+    `${width / 2 + 21 * ps},${height - 20 * ps}`,
+    `${width / 2 + 21 * ps},${height - 27 * ps}`,
+  ]
+
+  svg.append("polygon")
+    .attr("points", buildPoints(pp))
+    .style("fill", "#8b00a7");
 }
