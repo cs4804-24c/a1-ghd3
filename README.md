@@ -5,11 +5,11 @@ This project creates an interactive visual display with draggable and clickable 
 A working link to the hosted files (usually the gh-pages 'live' url)
 resources used 
 I got my inspiration of my circles from D3 circle animation but instead of it being 3d I made a 2d circle that bounces up and down and grows from small to big.
-https://observablehq.com/@jurestabuc/d3-circle-animation 
+[LINK1](https://observablehq.com/@jurestabuc/d3-circle-animation )
 I found the drag and drop option really cool so I implemented that into my rectangle.
-https://observablehq.com/d/3d3e4357b6782edb
+[LINK2](https://observablehq.com/d/3d3e4357b6782edb)
 This really helped me utilize the rotatation function well. I applied it into one of my polygons.
-https://p5js.org/examples/form-regular-polygon.html
+[LINK3](https://p5js.org/examples/form-regular-polygon.html)
 
 
 Technical Achievements
