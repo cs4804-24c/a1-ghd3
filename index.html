@@ -17,6 +17,33 @@
   .attr("height", 175)
   .attr("fill", "pink");
 
+
+  svg.append("rect")
+  .attr("id", "window")
+  .attr("x", 175)
+  .attr("y", 325)
+  .attr("width", 50)
+  .attr("height", 50)
+  .attr("fill", "black");
+
+  function turnOn(){
+    svg.select("#window").attr("fill", "yellow");
+    console.log("light was turned on");
+  }
+
+  function turnOff(){
+    svg.select("#window").attr("fill", "black");
+    console.log("light was turned on");
+  }
+
+  var door = svg.append("rect")
+  .attr("x", 215)
+  .attr("y", 400)
+  .attr("width", 50)
+  .attr("height", 75)
+  .attr("fill", "purple");
+
+
   svg.append("rect")
   .attr("x", 0)
   .attr("y", 475)
@@ -30,24 +57,25 @@
     .attr('cx', x)
     .attr('cy', y)
     .attr('r', 50)
-    .attr('stroke', 'black')
+    .attr('opacity', 0.5)
     .attr('fill', 'white');
     svg.append("circle") 
-    .attr('cx', x+50)
+    .attr('cx', x+75)
     .attr('cy', y)
     .attr('r', 50)
-    .attr('stroke', 'black')
+    .attr('opacity', 0.5)
     .attr('fill', 'white');
     svg.append("circle") 
     .attr('cx', x+25)
     .attr('cy', y-25)
     .attr('r', 50)
-    .attr('stroke', 'black')
+    .attr('opacity', 0.5)
     .attr('fill', 'white');
   }
   
-  svg.append(cloud(100,100));
-  svg.append(cloud(300,75));
+  const cloud1 = svg.append(cloud(100,100));
+  const cloud2 = svg.append(cloud(300,75));
+
   // Add Lines
 
   svg.append("line")
@@ -65,6 +93,7 @@
   .attr("stroke", "brown");
 
 
+ 
   // Add Polygons
   svg.append("polygon")
   .attr("points", "125 300 237 225 350 300")
@@ -72,5 +101,7 @@
 
 
 </script>
+<button onclick = "turnOn();">turn light on</button>
+<button onclick = "turnOff();">turn light off</button>
 </body>
 </html>
