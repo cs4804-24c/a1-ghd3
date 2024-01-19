@@ -43,8 +43,7 @@ a1-your Gh username-your first name-your lastname
 
 DESCRIPTION
 
-pink screen with shapes loaded onto the screen, with transitions that slightly move and change the color of the shapes.
-
+This was a product for my first assignment in CS4804, it features a light pink background with animated rectangles, circles, lines, and polygons. The shapes transition in shape and color, with the intent of creating an aesthetically pleasing graphic display.
 
 ```
 
