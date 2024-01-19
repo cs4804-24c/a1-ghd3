@@ -1,5 +1,7 @@
 Assignment 1 - Hello World: GitHub and d3 
 ===
+https://aoboafo.github.io/a1-ghd3/ 
+[link to project page](https://aoboafo.github.io/a1-ghd3/)
 This project creates an interactive visual display with draggable and clickable elements (rectangle), transitioning circles, dividing lines, colored shapes, and a rotating polygon with he use of D3.js and p5.js libraries. First I started by creating the svg container. Then I added a draggable and clickable rectangle which responds to click events with a transition effect. Two circles, each undergoing distinct transitions—a size increase with motion and a bouncing effect. Additionally, the SVG is divided by horizontal and vertical lines, and a yellow line connects the two circles, emphasizing visual separation. Colored polygons, one in purple and another rotating blue octagon at the top-right. The octagon undergoes a continuous rotation around its center. 
 
 A working link to the hosted files (usually the gh-pages 'live' url)
