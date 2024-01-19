@@ -4,16 +4,19 @@
 <html>
 <body>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+<h1>Nick Whalen</h1>
+
 
 <script src="https://d3js.org/d3.v6.min.js"></script>
 <svg width="800" height="400"></svg>
 
 <script>
   console.log(d3); // test if d3 is loaded
+
+//I used to ChatGPT to help me understand the syntax of D3 and JavaScript. 
+//My chat log can be found here: https://chat.openai.com/share/68be0097-21d6-4719-889d-bf0b408b8896
+
   // Add an SVG
- 
   var svg = d3.select("svg");
 
  // Add Rectangles
@@ -35,12 +38,52 @@ svg.append("rect")
 
  svg.append("circle")
       .attr("cx", 200)
-      .attr("cy", 50)
+      .attr("cy", 60)
       .attr("r", 30)
       .attr("fill", "purple");
 
   // Add Lines
+  var lineData = [
+        { x: 50, y: 30 },
+        { x: 50, y: 110},
+        //{ x: 200, y: 150 },
+        { x: 350, y: 110 },
+        { x: 350, y: 30},
+        { x: 50, y: 30}
+    ];
+
+    // Create a line generator
+    var lineGenerator = d3.line()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; });
+
+    // Append a path element representing the line
+    svg.append("path")
+        .attr("d", lineGenerator(lineData))
+        .attr("stroke", "orange")
+        .attr("stroke-width", 2)
+        .attr("fill", "none");
   // Add Polygons
+  var starVertices = [
+        { x: 200, y: 50 },
+        { x: 240, y: 150 },
+        { x: 160, y: 80 },
+        { x: 240, y: 80 },
+        { x: 160, y: 150 }
+    ];
+
+    // Create a line generator for the star
+    var starGenerator = d3.line()
+        .x(function(d) { return d.x; })
+        .y(function(d) { return d.y; })
+        
+
+    // Append a path element representing the star
+    svg.append("path")
+        .attr("d", starGenerator(starVertices))
+        .attr("stroke", "purple")
+        .attr("stroke-width", 2)
+        .attr("fill", "yellow");
 
  
 
