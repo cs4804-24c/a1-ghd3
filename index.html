@@ -1,10 +1,219 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html>
+<body>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script>
+      console.log(d3); // test if d3 is loaded
+      
+      // Add an SVG
+      var svg = d3.select("body").append("svg")
+                  .attr("width", 800)
+                  .attr("height", 400);
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+      // Add Rectangles
+
+      // Bob's left arm
+      svg.append("rect")
+          .attr("x", 180)
+          .attr("y", 170)
+          .attr("width", 100)
+          .attr("height", 20)
+          .style("fill", "red");
+      
+      // Bob' right arm
+      var right_arm = svg.append("rect")
+        .attr("x", 320)
+        .attr("y", 170)
+        .attr("width", 100)
+        .attr("height", 20)
+        .style("fill", "red");
+       
+      // Function to make Bob continuously wave with his right arm  
+      function wave() {
+            right_arm.transition()
+                .duration(1000)
+                .attr("transform", "rotate(-20, 300, 200)")
+                .transition()
+                .duration(1000)
+                .attr("transform", "rotate(20, 300, 155)")
+                .on("end", wave);
+        }
+
+        wave();
+
+      // Bob's left leg
+      svg.append("rect")
+          .attr("x", 270)
+          .attr("y", 270)
+          .attr("width", 20)
+          .attr("height", 100)
+          .style("fill", "red");
+
+      // Bob's right leg
+      svg.append("rect")
+          .attr("x", 310)
+          .attr("y", 270)
+          .attr("width", 20)
+          .attr("height", 100)
+          .style("fill", "red");
+
+      // Add Polygons
+
+      // Bob's head
+      var hexagonPoints = [
+            [250, 100],
+            [280, 60],
+            [320, 60],
+            [350, 100],
+            [320, 140],
+            [280, 140]
+        ];
+
+        svg.append("polygon")
+           .attr("points", hexagonPoints.join(" "))
+           .style("fill", "pink");
+
+      // Add Circles   
+
+      // The white of Bob's left eye
+      svg.append("circle")
+            .attr("cx", 280)
+            .attr("cy", 90)
+            .attr("r", 10)
+            .style("fill", "white");
+      
+      // The white of Bob's right eye
+      svg.append("circle")
+            .attr("cx", 320)
+            .attr("cy", 90)
+            .attr("r", 10)
+            .style("fill", "white");
+
+      
+      // The pupil of Bob's left eye
+      var left_pupil = svg.append("circle")
+            .attr("cx", 280)
+            .attr("cy", 90)
+            .attr("r", 5)
+            .style("fill", "black");
+            
+      // The pupil of Bob's right eye
+      var right_pupil = svg.append("circle")
+            .attr("cx", 320)
+            .attr("cy", 90)
+            .attr("r", 5)
+            .style("fill", "black");
+
+      // Bob's nose
+      svg.append("circle")
+            .attr("cx", 300)
+            .attr("cy", 105)
+            .attr("r", 15)
+            .style("fill", "red")
+            .on("click", function() {
+                d3.select(this)
+                .transition()
+                .duration(3000)
+                .style("fill", "blue")
+                .transition()
+                .duration(3000)
+                .style('fill', 'yellow');
+            });
+           
+      // Adding Elipses
+
+      // Bob's body
+      var body = svg.append("ellipse")
+           .attr("cx", 300)
+           .attr("cy", 220)
+           .attr("rx", 50)
+           .attr("ry", 80)
+           .style("fill", "pink");
+
+      // Bob's mouth
+      var mouth = svg.append("ellipse")
+           .attr("cx", 300)
+           .attr("cy", 128)
+           .attr("rx", 10)
+           .attr("ry", 5)
+           .style("fill", "black");
+
+    
+      // Creating a scare button that, when pushed, makes Bob's eyes and mouth bigger
+      var scare_button = svg.append("circle")
+            .attr("cx", 560)
+            .attr("cy", 300)
+            .attr("r", 70)
+            .style("fill", "red")
+            .on("click", function() {
+                mouth.transition()
+                    .attr("rx", 20)
+                    .attr("ry", 10)
+                left_pupil.transition()
+                    .attr("r", 7)
+                right_pupil.transition()
+                    .attr("r", 7)
+            });
+
+      // Add Lines
+      
+      // Bob's first hair
+      svg.append("line")
+           .attr("x1", 280)
+           .attr("y1", 40)
+           .attr("x2", 300)
+           .attr("y2", 60)
+           .style("stroke", "black")
+           .style("stroke-width", 2);
+
+      // Bob's second hair
+      svg.append("line")
+           .attr("x1", 300)
+           .attr("y1", 40)
+           .attr("x2", 300)
+           .attr("y2", 60)
+           .style("stroke", "black")
+           .style("stroke-width", 2);
+
+      // Bob's third hair
+      svg.append("line")
+           .attr("x1", 300)
+           .attr("y1", 60)
+           .attr("x2", 320)
+           .attr("y2", 40)
+           .style("stroke", "black")
+           .style("stroke-width", 2);
+           
+      
+      // Add Text
+      svg.append("text")
+          .attr("x", 330)
+          .attr("y", 30)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "20px")
+          .text("Hi, I'm Bob! Click my nose to see it change colors!");
+
+        svg.append("text")
+          .attr("x", 570)
+          .attr("y", 100)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "20px")
+          .text("I am waving hello to you!");
+
+        svg.append("text")
+          .attr("x", 570)
+          .attr("y", 200)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "20px")
+          .text("Push the button to scare me.");
+
+        svg.append("text")
+          .attr("x", 560)
+          .attr("y", 305)
+          .attr("text-anchor", "middle")
+          .attr("font-size", "24px")
+          .text("Scare me");
+      
+    </script>
+</body>
+</html>
