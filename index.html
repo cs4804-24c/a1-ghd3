@@ -7,4 +7,155 @@
   // Add Circles
   // Add Lines
   // Add Polygons
-</script>
+<script>
+  
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nadav Konstantine Israeli FlagPlus</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+    <script>
+        // Add an SVG
+        var svg = d3.select("body").append("svg")
+            .attr("width", 600)
+            .attr("height", 400)
+            .style("margin", "auto")
+            .style("display", "block");
+
+        // Adding Rectangles (This is for background of flag and page)
+        svg.append("rect")
+            .attr("width", "100%")
+            .attr("height", "100%")
+            .attr("fill", "white");
+
+        // Adding Rectangles (This is for blue stripes on top and bottom of flag) 
+        svg.append("rect")
+            .attr("x", "5%")
+            .attr("y", "20%")
+            .attr("width", "90%")
+            .attr("height", "7%")
+            .attr("fill", "blue");
+
+        svg.append("rect")
+            .attr("x", "5%")
+            .attr("y", "73%")
+            .attr("width", "90%")
+            .attr("height", "7%")
+            .attr("fill", "blue");
+
+        // Add Circles
+        // radius pixel size and spacing pixel sizes
+        var circleRadius = 5;
+        var circleSpacing = 10;
+
+        // Calculate the number of circles to fit along the width and height
+        var numCirclesX = Math.floor(svg.attr("width") / circleSpacing);
+        var numCirclesY = Math.floor(svg.attr("height") / circleSpacing);
+
+        // Helper function to create a row of circles
+        function createCircleRow(y) {
+            d3.range(numCirclesX).map(function(i) {
+                svg.append("circle")
+                    .attr("cx", i * circleSpacing + circleRadius) // Add an offset to the x position
+                    .attr("cy", y + circleRadius) // Add an offset to the y position
+                    .attr("r", circleRadius)
+                    .attr("fill", "blue");
+            });
+        }
+
+        // Line of Circles for the top and bottom of the flag
+        createCircleRow(0);
+        createCircleRow(svg.attr("height") - circleSpacing);
+
+        // Line of Circles for the left and right borders
+        d3.range(numCirclesY).map(function(i) {
+            svg.append("circle")
+                .attr("cx", 0 + circleRadius) // Add an offset to the x position
+                .attr("cy", i * circleSpacing + circleRadius) // Add an offset to the y position
+                .attr("r", circleRadius)
+                .attr("fill", "blue");
+
+            svg.append("circle")
+                .attr("cx", svg.attr("width") - circleSpacing + circleRadius) // Add an offset to the x position
+                .attr("cy", i * circleSpacing + circleRadius) // Add an offset to the y position
+                .attr("r", circleRadius)
+                .attr("fill", "blue");
+        });
+
+                // Define the points for the two overlapping triangles to form a Star of David
+        var starPoints1 = [
+          {x: 300, y: 137.5}, // Top point of the first triangle
+          {x: 360, y: 237.5}, // Right point of the first triangle
+          {x: 240, y: 237.5}  // Left point of the first triangle
+        ];
+
+        var starPoints2 = [
+          {x: 300, y: 262.5}, // Bottom point of the second triangle
+          {x: 360, y: 162.5}, // Right point of the second triangle
+          {x: 240, y: 162.5}  // Left point of the second triangle
+        ];
+
+        // Create a line generator
+  var lineGenerator = d3.line()
+          .x(function(d) { return d.x; })
+          .y(function(d) { return d.y; });
+
+        // Draw the first triangle of the Star of David
+        svg.append("path")
+          .attr("d", lineGenerator(starPoints1))
+          .attr("fill", "blue")
+          .attr("stroke", "blue")
+          .attr("stroke-width", 2)
+          .attr("fill-rule", "evenodd"); // This is important for the fill to work correctly
+
+        // Draw the second triangle of the Star of David
+        svg.append("path")
+          .attr("d", lineGenerator(starPoints2))
+          .attr("fill", "blue")
+          .attr("stroke", "blue")
+          .attr("stroke-width", 2)
+          .attr("fill-rule", "evenodd"); // This is important for the fill to work correctly
+
+// Add Polygon (Hexagon)
+var size = 37;
+var hexagonPoints = [
+  {x: 300, y: 200 - size}, // Top point
+  {x: 300 + size * Math.sqrt(3) / 2, y: 200 - size / 2}, // Upper right point
+  {x: 300 + size * Math.sqrt(3) / 2, y: 200 + size / 2}, // Lower right point
+  {x: 300, y: 200 + size}, // Bottom point
+  {x: 300 - size * Math.sqrt(3) / 2, y: 200 + size / 2}, // Lower left point
+  {x: 300 - size * Math.sqrt(3) / 2, y: 200 - size / 2} // Upper left point
+].map(function(d) { return [d.x, d.y]; }).join(" ");
+
+var hexagon = svg.append("polygon")
+    .attr("points", hexagonPoints)
+    .attr("fill", "white");
+      
+// Define the rotation animation
+var animate = function() {
+    hexagon.transition()
+        .duration(1750)
+        .attrTween("transform", function() {
+           return d3.interpolateString("rotate(90,300,200)", "rotate(450,300,200)");
+        })
+        .on("end", animate);
+};
+animate();
+    </script>
+</body>
+</html>
