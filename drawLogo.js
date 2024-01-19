@@ -12,6 +12,7 @@ drawCenterCross();
 drawBackgroundPolygons();
 drawLetteringBackground();
 drawLettering();
+drawDots();
 
 container.append(svg.node());
 
@@ -558,4 +559,135 @@ function drawBackgroundPolygons() {
   svg.append("polygon")
     .attr("points", buildPoints(pp))
     .style("fill", "#8b00a7");
+}
+
+function drawDots() {
+  
+  // The one yellow dot
+  svg.append("circle")
+    .attr("r", 1 * ps)
+    .attr("fill", "#ffd200")
+    .attr("cx", width / 10 * 3)
+    .attr("cy", height / 10 + 3 * ps);
+
+  // Orange dots
+  svg.append("circle")
+    .attr("r", 0.5 * ps)
+    .attr("fill", "#fc9610")
+    .attr("cx", width / 3 + 3 * ps)
+    .attr("cy", height / 15);
+  svg.append("circle")
+    .attr("r", 0.75 * ps)
+    .attr("fill", "#fb4c23")
+    .attr("cx", 50 * ps)
+    .attr("cy", height / 14);
+  svg.append("circle")
+    .attr("r", 0.25 * ps)
+    .attr("fill", "#fb4c23")
+    .attr("cx", 8 * ps)
+    .attr("cy", height / 4.2);
+  svg.append("circle")
+    .attr("r", 0.25 * ps)
+    .attr("fill", "#fb4c23")
+    .attr("cx", 53 * ps)
+    .attr("cy", height / 8);
+  svg.append("circle")
+    .attr("r", 0.5 * ps)
+    .attr("fill", "#fb4c23")
+    .attr("cx", 70 * ps)
+    .attr("cy", height / 4);
+  svg.append("circle")
+    .attr("r", 1 * ps)
+    .attr("fill", "#f9173e")
+    .attr("cx", 67 * ps)
+    .attr("cy", height / 3.7);
+  svg.append("circle")
+    .attr("r", 0.4 * ps)
+    .attr("fill", "#f9173e")
+    .attr("cx", 80 * ps)
+    .attr("cy", height / 3);
+
+  // Purple dots
+  svg.append("circle")
+    .attr("r", 0.65 * ps)
+    .attr("fill", "#dc08ae")
+    .attr("cx", 13 * ps)
+    .attr("cy", 12 * ps);
+  svg.append("circle")
+    .attr("r", 0.4 * ps)
+    .attr("fill", "#dc08ae")
+    .attr("cx", 3 * ps)
+    .attr("cy", 42.5 * ps);
+  svg.append("circle")
+    .attr("r", 0.15 * ps)
+    .attr("fill", "#dc08ae")
+    .attr("cx", 7 * ps)
+    .attr("cy", 42 * ps);
+  svg.append("circle")
+    .attr("r", 0.6 * ps)
+    .attr("fill", "#dc08ae")
+    .attr("cx", 55 * ps)
+    .attr("cy", 57 * ps);
+    svg.append("circle")
+    .attr("r", 0.4 * ps)
+    .attr("fill", "#dc08ae")
+    .attr("cx", 57 * ps)
+    .attr("cy", 65 * ps);
+    svg.append("circle")
+      .attr("r", 0.6 * ps)
+      .attr("fill", "#dc08ae")
+      .attr("cx", 68 * ps)
+      .attr("cy", 57.5 * ps);
+    svg.append("circle")
+      .attr("r", 0.2 * ps)
+      .attr("fill", "#dc08ae")
+      .attr("cx", 73 * ps)
+      .attr("cy", 54 * ps);
+    svg.append("circle")
+      .attr("r", 0.3 * ps)
+      .attr("fill", "#dc08ae")
+      .attr("cx", width - 3 * ps)
+      .attr("cy", 42 * ps);
+
+  // Blue dots
+  svg.append("circle")
+  .attr("r", 0.3 * ps)
+  .attr("fill", "#2a148c")
+  .attr("cx", 50 * ps)
+  .attr("cy", 70 * ps);
+  svg.append("circle")
+  .attr("r", 0.4 * ps)
+  .attr("fill", "#2a148c")
+  .attr("cx", 15 * ps)
+  .attr("cy", 65 * ps);
+  svg.append("circle")
+  .attr("r", 0.35 * ps)
+  .attr("fill", "#2a148c")
+  .attr("cx", 11.5 * ps)
+  .attr("cy", 59 * ps);
+  
+  // Light blue smudge thing
+  svg.append("circle")
+  .attr("r", 1.5 * ps)
+  .attr("fill", "#02aed3")
+  .attr("cx", 7.5 * ps)
+  .attr("cy", 53 * ps);
+  svg.append("rect")
+    .attr("width", 1.75 * ps)
+    .attr("height", 3 * ps)
+    .attr("fill", "#02aed3")
+    .attr("x", 6 * ps)
+    .attr("y",  51.5 * ps)
+    .attr("rx", 0.5 * ps);
+
+  // Pink smudge thing
+  
+svg.append("rect")
+  .attr("width", 3 * ps)
+  .attr("height", 3 * ps)
+  .attr("rx", 0.5 * ps)
+  .attr("ry", 0.5 * ps)
+  .attr("fill", "#f81f3b")
+  .attr("x", 54 * ps)
+  .attr("y",  11 * ps)
 }
