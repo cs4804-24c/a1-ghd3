@@ -8,6 +8,8 @@ The technical achievements I have made during this project are:
         random generation is done by taking a starting pentagon/rectangle and adding a 
         random amount of x and y displacement to it to generate another one.
 
+        ![Alt text](image.png)
+
     Enabling the user to move the ice cream cone with the arrow keys
 
     Enabling the user to click and drag the svg (container box) and the individual sprinkles
@@ -25,10 +27,15 @@ The design achievements I made during this project are:
     The design of using the required elements (lines, polygons, rectangles and circles) to create 
     make an ice cream cone
 
+    ![Alt text](image-1.png)
+
     Making an easy to use interface for the user
 
     I also think allowing the user to move the different elements of the page is a good design
     choice because it gives the user more choice, especially when placing the sprinkles
+
+    After adjusting the sprinkles manually:
+    ![Alt text](image-2.png)
 
     Using random placement of the rectangles and pentagons to make it look like spinkles
 
