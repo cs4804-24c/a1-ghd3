@@ -14,9 +14,11 @@ Link to page: https://jamesstaryi.github.io/a1-ghd3/
 **Different Colors:** I used different colors to make the character more easily identifiable.
 
 Character default state
+
 ![Alt text](arm1.png)
 
 Character punching state
+
 ![Alt text](arm2.png)
 
 Achievements
