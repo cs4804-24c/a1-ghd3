@@ -41,6 +41,11 @@ Submission Details
 ```
 a1-your Gh username-your first name-your lastname
 
+DESCRIPTION
+
+pink screen with shapes loaded onto the screen, with transitions that slightly move and change the color of the shapes.
+
+
 ```
 
 Vis Details
