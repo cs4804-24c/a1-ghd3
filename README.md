@@ -8,3 +8,4 @@ Two polygons with a predefined class for style, from the head of the code.
 
 The link to the website is:
 
+https://joshj339.github.io/a1-ghd3/index.html
