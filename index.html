@@ -22,7 +22,7 @@ svg.append("rect")
   .attr("y", 0)
   .attr("width", 420)
   .attr("height", 300)
-  .attr("fill", "azure")
+  .attr("fill", "lightcyan")
   .on('click', function(){
       d3.select(this)
           .transition()
@@ -42,8 +42,8 @@ svg.append("rect")
       .transition()
       .duration(1000) 
       .attrTween("transform", function() {
-        var cx = 90; 
-        var cy = 90; 
+        var cx = 130 + 50 /2; 
+        var cy = 130 + 50 /2; 
         return d3.interpolateString("rotate(0," + cx + "," + cy + ")", "rotate(360," + cx + "," + cy + ")");
       });
   });
@@ -66,18 +66,55 @@ svg.append("rect")
 
 
 // Add Circles
-//sun or moon
+
+// cloud points
+var cloudData = [
+  { cx: 50, cy: 50, r: 20 },
+  { cx: 70, cy: 50, r: 30 },
+  { cx: 90, cy: 50, r: 25 },
+  { cx: 105, cy: 50, r: 20 },
+  { cx: 80, cy: 40, r: 20 },
+  { cx: 95, cy: 40, r: 15 }
+];
+
+// Append clouds
+svg.selectAll("circle")
+  .data(cloudData)
+  .enter().append("circle")
+  .attr("cx", function(d) { return d.cx; })
+  .attr("cy", function(d) { return d.cy; })
+  .attr("r", function(d) { return d.r; })
+  .attr("fill", "ghostwhite");
+
+
+// Append a linear gradient for sun 
+var gradient = svg.append("defs")
+  .append("linearGradient")
+  .attr("id", "sunset")
+  .attr("gradientTransform", "rotate(90)"); 
+
+// gradient colors
+gradient.append("stop")
+  .attr("offset", "0%")
+  .attr("stop-color", "orange");
+
+gradient.append("stop")
+  .attr("offset", "100%")
+  .attr("stop-color", "yellow");
+
+// sun or moon
 svg.append("circle")
-  .attr("cx", 50)
-  .attr("cy", 50)
+  .attr("cx", 350)
+  .attr("cy", 60)
   .attr("r", 50)
-  .attr("fill", "orange")
+  .attr("fill", "url(#sunset)")
   .on('click', function(){
       d3.select(this)
           .transition()
           .duration(1000)
-          .attr("fill", "gray");
+          .attr("fill", "khaki");
   });
+
 
 //back wheel
 svg.append("circle")
