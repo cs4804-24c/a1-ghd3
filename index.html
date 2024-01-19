@@ -1,10 +1,79 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<html>
+  <head>
+    <title>CS4804 Project A1</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+      .line {
+        stroke: steelblue;
+        stroke-width: 2;
+      }
+      .polygon {
+        fill: lightgreen;
+        stroke: green;
+        stroke-width: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      console.log(d3); //Test if d3 is loaded
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+      //Add an SVG
+      var svg = d3.select("body").append("svg")
+        .attr("width", 800)
+        .attr("height", 600);
+
+      //Add Rectangles
+      svg.append("rect")
+        .attr("x", 20)
+        .attr("y", 20)
+        .attr("width", 100)
+        .attr("height", 50)
+        .attr("fill", "red");
+
+      svg.append("rect")
+        .attr("x", 150)
+        .attr("y", 20)
+        .attr("width", 100)
+        .attr("height", 50)
+        .attr("fill", "blue");
+
+      //Add Circles
+      svg.append("circle")
+        .attr("cx", 70)
+        .attr("cy", 150)
+        .attr("r", 40)
+        .attr("fill", "yellow");
+
+      svg.append("circle")
+        .attr("cx", 200)
+        .attr("cy", 150)
+        .attr("r", 40)
+        .attr("fill", "purple");
+
+      //Add Lines
+      svg.append("line")
+        .attr("x1", 300)
+        .attr("y1", 20)
+        .attr("x2", 350)
+        .attr("y2", 70)
+        .attr("class", "line");
+
+      svg.append("line")
+        .attr("x1", 350)
+        .attr("y1", 20)
+        .attr("x2", 300)
+        .attr("y2", 70)
+        .attr("class", "line");
+
+      //Add Polygons
+      svg.append("polygon")
+        .attr("points", "400,20 450,70 350.70")
+        .attr("class", "polygon");
+
+      svg.append("polygon")
+        .attr("points", "500,20 550,70 450,70")
+        .attr("class", "polygon");
+    </script>
+  </body>
+</html>
