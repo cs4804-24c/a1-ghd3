@@ -16,20 +16,99 @@ const svg = d3.create("svg")
 
 console.log(d3); // test if d3 is loaded
 
+var gradient = svg.append("defs")
+  .append("radialGradient")
+  .attr("id", "radial-gradient")
+  .attr("cx", "50%")
+  .attr("cy", "50%")
+  .attr("r", "50%")
+  .attr("fx", "50%")
+  .attr("fy", "50%");
+
+  gradient.append("stop")
+  .attr("offset", "10%")
+  .style("stop-color", "gold");
+
+gradient.append("stop")
+  .attr("offset", "95%")
+  .style("stop-color", "red");
+
 //Add Retangle
 svg.append("rect")
-    .attr("x", 100)
-    .attr("y", 100)
-    .attr("width", 50)
+    .attr("x", 50)
+    .attr("y", 200)
+    .attr("width", 100)
     .attr("height", 50)
-    .attr("fill", red);
+    .attr("rx", 15)
+    .style("fill", "url(#radial-gradient)");
+
+svg.append("rect")
+    .attr("x", 170)
+    .attr("y", 300)
+    .attr("width", 100)
+    .attr("height", 50)
+    .attr("rx", 15)
+    .style("fill", "url(#radial-gradient)");
+
+svg.append("rect")
+    .attr("x", 280)
+    .attr("y", 200)
+    .attr("width", 100)
+    .attr("height", 50)
+    .attr("rx", 15)
+    .style("fill", "url(#radial-gradient)");
+
+svg.append("rect")
+    .attr("x", 390)
+    .attr("y", 300)
+    .attr("width", 100)
+    .attr("height", 50)
+    .attr("rx", 15)
+    .style("fill", "url(#radial-gradient)");
 // Add Circles
 svg.append("circle")
-    .attr("cx", 50)
-    .attr("cy", 50)
-    .attr("r", 50);
+    .attr("cx", 220)
+    .attr("cy", 220)
+    .attr("r", 50)
+    .attr("fill", "gold")
+    .attr("stroke", "maroon")
+    .attr("stroke-width", "10px");
+
+svg.append("circle")
+    .attr("cx", 110)
+    .attr("cy", 320)
+    .attr("r", 50)
+    .attr("fill", "gold")
+    .attr("stroke", "maroon")
+    .attr("stroke-width", "10px");
+
+svg.append("circle")
+    .attr("cx", 330)
+    .attr("cy", 320)
+    .attr("r", 50)
+    .attr("fill", "gold")
+    .attr("stroke", "maroon")
+    .attr("stroke-width", "10px");
+
+svg.append("circle")
+    .attr("cx", 440)
+    .attr("cy", 220)
+    .attr("r", 50)
+    .attr("fill", "gold")
+    .attr("stroke", "maroon")
+    .attr("stroke-width", "10px");
   // Add Lines
-  // Add Polygons
+
+var pathData = "M100,100 L150,150 L200,100 L250,150 L300,100"; 
+
+svg.append("path")
+  .attr("d", pathData)
+  .attr("fill", "none")
+  .attr("stroke", "maroon");
+// Add Polygons
+svg.append("polygon")
+    .attr("points", "100,100 150,25 150,75,200, 0")
+    .style("fill", "url(#radial-gradient)");
 
 // Append the SVG element.
 container.append(svg.node());
