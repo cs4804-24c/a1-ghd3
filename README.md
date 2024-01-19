@@ -1,30 +1,17 @@
 Assignment 1 - Hello World: GitHub and d3  
 ===
+Additions: 
 
-This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
+Link: http://huangrandy.github.io/a1-ghd3/index.html
 
-The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
+I used a basic dataset of 4 numbers, starting at 10 and incrementing by 20 
+I created circles, rectangles of different sizes based on the data index, lines with colors based on the data index, and triangle polygons filled with colors.
+<img src="sc2.png">
 
-The secondary goal is to introduce you to coding on GitHub, including creating a gh-pages branch to host your visualizations.
+Design and Technical Achievements
+<img src="sc.png">
+I created a pannable/zoomable display for a spiral display of 50 circle points. I generated the spiral shape using function that generates it using a little bit of math. When hovering over the circles, the circle will become 1/2 transparent to indicate hover status, and you can also drag the circles around. The toughest part of the design was creating the spiral for the visual display, since I had to figure out how to generate the points for the spiral. I also had to figure out how to make the circles draggable, which was a bit tricky since I had to figure out how to make the circles draggable without making the entire svg move -- it was a bit easier after I looked at some examples online. The spiral was also a bit of a technical challenge, since I had to consult some math to figure out how to generate the points for the spiral.
 
-You may write everything from scratch, or start with demo programs from books or the web. 
-If you do start with code that you found, you **must identify** the source of the code in your README and, most importantly, make non-trivial changes to the code to make it your own so you really learn what you're doing. 
-
-For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
-
-Resources
----
-
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
-
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
-
-Requirements
----
-
-1. Your project should contain at least four kinds of graphics primitives (circles, rectangles, lines, polygons) in different colors. 
-2. Your document should identify the source of the code if you start with code that you found. 
-3. Your code should be forked from the GitHub repo and linked using GitHub pages. See the "GitHub Details" section below for detailed instructions on how to do this.
 
 GitHub Details
 ---
@@ -42,23 +29,6 @@ Submission Details
 a1-your Gh username-your first name-your lastname
 
 ```
-
-Vis Details
----
-
-For this project you should use d3.js. 
-You can learn from examples on the [d3.js](http://d3js.org) site or start from scratch.
-
-See the [Using d3js](https://github.com/mbostock/d3/wiki#using) documentation for how to run your own local server.
-
-Creative solutions are welcome! In the past I've seen recreations of paintings, interactives, and more.
-
-Go beyond the minimum requirements of this project.
-Experiment with other aspects of the [d3 API](https://github.com/mbostock/d3/wiki/API-Reference) and [d3 Tutorials](https://github.com/mbostock/d3/wiki/Tutorials). 
-Try making the elements interactive, for example, or animate them.
-
-Grading
----
 
 Grades are on a 120 point scale. 
 96 points will be graded for functionality: the program does what the assignment requests with an informative README. 

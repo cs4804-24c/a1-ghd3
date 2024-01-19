@@ -26,6 +26,7 @@
     <div id="chart-container"></div>
 
     <script>
+        // drag: https://observablehq.com/d/b0ac5adf65cf4bcf
         function createChart() {
             const width = 1000;
             const height = 500;
@@ -65,7 +66,17 @@
                 .call(d3.drag()
                     .on("start", dragStart)
                     .on("drag", dragMove)
-                    .on("end", dragEnd));
+                    .on("end", dragEnd))
+                .on('mouseover', function (event) {
+                    d3.select(this)
+                        .transition().duration(100)
+                        .attr('fill-opacity', 0.5);
+                })
+                .on('mouseout', function (event) {
+                    d3.select(this)
+                        .transition().duration(100)
+                        .attr('fill-opacity', 1);
+                })
 
             svg.call(d3.zoom()
                 .extent([[0, 0], [width, height]])
@@ -167,7 +178,7 @@
             .attr('y1', 0)
             .attr('x2', (d, i) => i * 100 + 30)
             .attr('y2', 400)
-            .attr('stroke', 2)
+            .attr('stroke', (d, i) => Math.random() > 0.5*i ? 'red' : 'blue')
 
         svg1.selectAll("circle")
             .data(data)
@@ -184,9 +195,9 @@
             .append("rect")
             .attr("x", (d, i) => i * 100 + 30)
             .attr("y", 200)
-            .attr("width", d => d)
+            .attr("width", d => Math.random() * 100 * d/2)
             .attr("height", d => d)
-            .style("fill", "red");
+            .style("fill", "green");
 
         // Add Polygons
         svg1.selectAll('polygon')
@@ -197,7 +208,7 @@
                 return `${i * 100 + d},400 ${i * 100 + d + 50},400 ${i * 100 + d + 25},450`
             })
             .attr('stroke', 'black')
-            .attr('fill', 'transparent')
+            .attr('fill', 'purple')
     </script>
 
 </body>
