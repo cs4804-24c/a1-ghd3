@@ -90,6 +90,7 @@
       .attr("height", 20)
       .attr("fill", "#fdf5c9")
       .attr("stroke", "#f0e7be")
+      .attr("stroke-width", 1)
       .attr("transform", "scale(1)")
       .call(d3.drag()
           .on("drag", dragged));
@@ -112,31 +113,47 @@
         originalColors = !originalColors;
         if(!originalColors) {
           //turn the polygon and all of its clones blue
-          polygon.attr("fill", "blue");
+          polygon
+          .attr("fill", "#fdf5c9")
+          .attr("stroke", "#f0e7be");
           
           for(i = 0; i < otherPolygons.length; i++) {
-            otherPolygons[i].attr("fill", "blue");
+            otherPolygons[i]
+            .attr("fill", "#fdf5c9")
+            .attr("stroke", "#f0e7be");
           }
 
           //turn the rectangle and all of its clones blue
-          rectangle.attr("fill", "red");
+          rectangle
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
           
           for(i = 0; i < otherPolygons.length; i++) {
-            otherRectangles[i].attr("fill", "red");
+            otherRectangles[i]
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
           }
         } else {
           //turn the polygon and all of its clones red
-          polygon.attr("fill", "red");
+          polygon
+          .attr("fill", "#ffc5d9")
+          .attr("stroke", "#cc9dad");
           
           for(i = 0; i < otherPolygons.length; i++) {
-            otherPolygons[i].attr("fill", "red");
+            otherPolygons[i]
+            .attr("fill", "#ffc5d9")
+            .attr("stroke", "#cc9dad");
           }
 
           //turn the rectangle and all of its clones blue
-          rectangle.attr("fill", "blue");
+          rectangle
+          .attr("fill", "#fdf5c9")
+          .attr("stroke", "#f0e7be");
 
           for(i = 0; i < otherPolygons.length; i++) {
-            otherRectangles[i].attr("fill", "blue");
+            otherRectangles[i]
+            .attr("fill", "#fdf5c9")
+            .attr("stroke", "#f0e7be");
           }
         }
 
