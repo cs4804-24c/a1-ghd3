@@ -25,12 +25,6 @@ var background = svg.append('rect')
     .attr('width', width)
     .attr('height', height)
     .attr('fill', 'skyblue')
-    .on('click', function() {
-      d3.select(this)
-        .transition()
-        .duration(2000)
-        .attr('fill','darkblue');
-    })
 ;
 
 // defining grass gradient
@@ -65,13 +59,7 @@ var sun = svg.append('circle')
     .attr('cx', 575)
     .attr('cy', 25)
     .attr('r', 50)
-    .attr('fill', 'yellow')
-    .on('click', function() {
-      d3.select(this)
-        .transition()
-        .duration(2000)
-        .attr('fill','grey');
-    })
+    .attr('fill', 'yellow');
 
 // Add a line
 svg.append('line')
