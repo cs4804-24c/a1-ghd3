@@ -17,11 +17,12 @@ const svg = d3.create("svg")
 console.log(d3); // test if d3 is loaded
 
 //Add Retangle
-svg.append("rectangle")
+svg.append("rect")
     .attr("x", 100)
     .attr("y", 100)
     .attr("width", 50)
-    .attr("height", 50);
+    .attr("height", 50)
+    .attr("fill", red);
 // Add Circles
 svg.append("circle")
     .attr("cx", 50)
