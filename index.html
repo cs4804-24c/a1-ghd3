@@ -31,7 +31,6 @@
       .style("flex-direction", "column");
       
     
-    // Make the main SVG container
     let svg = d3.select("body")
     .append("svg")
     .attr("class", "draggable")
@@ -39,37 +38,12 @@
     .attr("height", svgHeight)
     .attr("transform", "scale(1)")
     .style("border", "5px solid black")
-    .style("border-radius", "10px");
-
-
+    .style("border-radius", "10px")
+    .style("box-shadow", "1px 1px 1px 1px #888888");
 
     let group = svg
     .append("g")
     .attr("transform", "translate(" + groupTransformX + "," + groupTransformY + ")");
-
-
-    // Add a circle
-    let circle = group
-      .append("circle")
-      .attr("class", "draggable")
-      .attr("cx", 100)
-      .attr("cy", 120)
-      .attr("r", 50)
-      .attr("transform", "scale(1)")
-      .attr("fill", "green")
-      .attr("stroke", "black")
-      .attr("stroke-width", 2);
-
-    // Add a polygon
-    let polygon = group
-      .append("polygon")
-      .attr("points", "100,10 190,60 160,180 40,180 10,60")
-      .attr("transform", "translate(64, 92) scale(0.1)")
-      .attr("fill", "red")
-      .attr("stroke", "black")
-      .attr("stroke-width", 5)
-      .call(d3.drag()
-          .on("drag", dragged));
 
     let line = group
       .append("line")
@@ -78,7 +52,7 @@
       .attr("y1", 0)
       .attr("x2", 100)
       .attr("y2", 200)
-      .attr("stroke", "black")
+      .attr("stroke", "#6b3e26")
       .attr("stroke-width", 5)
       .attr("transform", "translate(55, 140) scale(0.5)");
 
@@ -91,22 +65,44 @@
       .attr("y1", 205)
       .attr("x2", 100)
       .attr("y2", 100)
-      .attr("stroke", "black")
+      .attr("stroke", "#6b3e26")
       .attr("stroke-width", 2)
       .attr("transform", "translate(48,36) scale(1)");
 
+      
+      // Add a circle
+     let circle = group
+      .append("circle")
+      .attr("class", "draggable")
+      .attr("cx", 101)
+      .attr("cy", 120)
+      .attr("r", 50)
+      .attr("transform", "scale(1)")
+      .attr("fill", "#c2f2d0")
+      .attr("stroke", "#c2f2d0")
+      .attr("stroke-width", 2);
+      
     let rectangle = group
       .append("rect")
       .attr("x", 100)
       .attr("y", 120)
       .attr("width", 10)
       .attr("height", 20)
-      .attr("fill", "blue")
-      .attr("stroke", "black")
+      .attr("fill", "#fdf5c9")
+      .attr("stroke", "#f0e7be")
       .attr("transform", "scale(1)")
       .call(d3.drag()
           .on("drag", dragged));
 
+    let polygon = group
+      .append("polygon")
+      .attr("points", "100,10 190,60 160,180 40,180 10,60")
+      .attr("transform", "translate(64, 92) scale(0.1)")
+      .attr("fill", "#ffc5d9")
+      .attr("stroke", "#cc9dad")
+      .attr("stroke-width", 5)
+      .call(d3.drag()
+          .on("drag", dragged));
     // when space bar is pressed, change color of polygon
     d3.select("body").on("keydown", function(e) {
       if (e.keyCode == 32) {
@@ -174,17 +170,15 @@
 
     // d3.selectAll(svg.childNodes).on("drag", dragged);
     function dragged(e) {
-      // move the element
-      //this.setAttribute("transform", "translate(" + e.x + "," + e.y + ") scale(0.1)");
-      // console.log(this.transform, e);
+      // With some help from GitHub Copilot and this page of 
+      // documentation: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/transform
+      // I was able to figure out how to move elements without reseting their transform/scaling values
 
-
-      // set e and f values 
       this.transform.baseVal[0].matrix.e += e.dx;
       this.transform.baseVal[0].matrix.f += e.dy;
     }
-    
-    // d3.selectAll(".draggable").call(d3.drag().on("drag", dragged));
+
+
     svg.call(d3.drag().on("drag", dragged));
 
     let button1 = d3.select("body")
@@ -194,6 +188,7 @@
       .style("padding", "10px")
       .style("border-radius", "10px")
       .style("border", "2px solid black")
+      .style("box-shadow", "1px 1px 1px 1px #888888")
       .style("background-color", "white")
       .style("font-size", "20px")
       .style("cursor", "pointer")
@@ -208,6 +203,7 @@
       .style("padding", "10px")
       .style("border-radius", "10px")
       .style("border", "2px solid black")
+      .style("box-shadow", "1px 1px 1px 1px #888888")
       .style("background-color", "white")
       .style("font-size", "20px")
       .style("cursor", "pointer")
@@ -216,15 +212,20 @@
         makeRandomRectangles(rectangle);
       });
 
+
+    d3.selectAll("button, h3")
+      .style("font-family", "Arial, sans-serif");
+
+    
     function makeRandomRectangles(originRectangle){
 
-      //remove all of the old rectangles
+      // Remove all of the old rectangles
       for(i = 0; i < otherRectangles.length; i++) {
         otherRectangles[i].remove();
       }
       otherRectangles = [];
       for(i = 0; i < 6; i++) {
-        //spread rectangles randomly out from the center of the circle
+        // Spread rectangles randomly out from the center of the circle
         let randomAngle = Math.random() * 2 * Math.PI;
         let randomDistance = Math.random() * 50;
 
@@ -245,7 +246,7 @@
 
     function makeRandomPolygons(originPolygon){
       
-      //remove all of the old polygons
+      // Remove all of the old polygons
       for(i = 0; i < otherPolygons.length; i++) {
         otherPolygons[i].remove();
       }
