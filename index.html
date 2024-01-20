@@ -1,10 +1,155 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework 1
+    </title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="hw1.js"></script>
+</head>
+
+<body style="background-color: #151515;">
+<body>
+
+
+
 
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+    // Set up the SVG container
+
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", 1200)
+        .attr("height", 650);
+    
+
+
+    // Define circle attributes
+    var circleAttributes = {
+        cy: 450,  
+        r: 36,   
+    };
+
+
+
+    // Draw the circle
+    svg.append("circle")
+        .attr("cx", 650)
+        .attr("cy", circleAttributes.cy)
+        .attr("r", circleAttributes.r)
+        .attr("fill", '#f49595');
+    
+        svg.append("circle")
+                .attr("cx", 700)
+                .attr("cy", circleAttributes.cy)
+                .attr("r", circleAttributes.r)
+                .attr("fill", '#ffbd90');
+   
+    svg.append("circle")
+        .attr("cx", 750)
+        .attr("cy", circleAttributes.cy)
+        .attr("r", circleAttributes.r)
+        .attr("fill", '#f9eb97');
+    
+        svg.append("circle")
+                .attr("cx", 800)
+                .attr("cy", circleAttributes.cy)
+                .attr("r", circleAttributes.r)
+                .attr("fill", '#c6f9ac');
+        
+          svg.append("circle")
+                .attr("cx", 850)
+                .attr("cy", circleAttributes.cy)
+                .attr("r", circleAttributes.r)
+                .attr("fill", '	#a8d9f6'); 
+         svg.append("circle")
+                .attr("cx", 900)
+                .attr("cy", circleAttributes.cy)
+                .attr("r", circleAttributes.r)
+                .attr("fill", '	#e2bbfd'); 
+
+        //////////////////////rectangle/////////////////////////////////
+        var rectAttributes1 = {
+                x: 550,   
+                y: 440,    
+                width: 50, 
+                height: 10, 
+                fill: "#e9e0d4" 
+            };
+
+          var rectAttributes = {
+                x: 100,   
+                y: 440,    
+                width: 340, 
+                height: 10,
+                fill: "#e9e0d4" 
+            }
+
+            // Draw the rectangle
+            svg.append("rect")
+                .attr("x", rectAttributes1.x)
+                .attr("y", rectAttributes1.y)
+                .attr("width", rectAttributes1.width)
+                .attr("height", rectAttributes1.height)
+                .attr("fill", rectAttributes1.fill);
+
+         svg.append("rect")
+                .attr("x", rectAttributes.x)
+                .attr("y", rectAttributes.y)
+                .attr("width", rectAttributes.width)
+                .attr("height", rectAttributes.height)
+                .attr("fill", rectAttributes.fill);
+
+
+    ////////////////////////////polygon/////////////////////////////////////
+    var svg = d3.select("svg");
+
+
+    svg.append("polygon")
+        .attr("points", "200,400 270,150 310,150 240,400")
+        .style("fill", "#e9e0d4")
+    
+     svg.append("polygon")
+            .attr("points", "460,500 530,150 580,150 510,500")
+            .style("fill", "#e9e0d4")
+    
+
+          
+
+////////////////////////////////line///////////////////////////////////////////
+    svg.append('line')
+        .style("stroke", "#e9e0d4")
+        .style("stroke-width", 40)
+                .attr("x1", 295)
+                .attr("y1", 160)
+                .attr("x2", 400)
+                .attr("y2", 310); 
+    
+    svg.append('line')
+            .style("stroke", "#e9e0d4")
+            .style("stroke-width", 40)
+            .attr("x1", 380)
+            .attr("y1", 300)
+            .attr("x2", 550)
+            .attr("y2", 165); 
+
+    /////////////////////////word//////////////////////////
+ 
+
+          svg.append("text")
+            .attr("x", 550)   
+            .attr("y", 390)  
+            .text("ARLIN")
+            .attr("font-size", "150px")
+              .attr("font-weight", 700)
+            .attr("fill", "#e9e0d4")
+                  .style("font-family", "'Impact', sans-serif")
+                  .style("font-style", "italic")
+              .style("letter-spacing", "12px");
+
 </script>
+
+</body>
+</html>
