@@ -1,10 +1,158 @@
+<!DOCTYPE html>
+<html>
 <script src="https://d3js.org/d3.v6.min.js"></script>
+<head>
+    <title> CS4804-C24-C01 </title>
+</head>
+<body>
+  <script>
+    console.log(d3); // test if d3 is loaded
+    // Add an SVG
+    var svg;
+  </script>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+  <div id="rect">
+    <script>
+      // Add rectangles
+      svg = d3.select('#rect').
+    append('svg').
+    attr('width', 200).
+    attr('height', 200);
+      
+      svg.append('rect').
+    attr('x',70).
+    attr('y',30).
+    attr('width', 10).
+    attr('height', 40).
+    attr('stroke','magenta').
+    attr('fill','lime');
+    </script>
+  </div>
+  
+  <div id="rect2">
+    <script>
+      // Add Rectangles
+      svg = d3.select('#rect2').
+	      append('svg').
+	      attr('width', 200).
+	      attr('height', 200);
+
+      svg.append('rect').
+	      attr('x',100).
+	      attr('y',100).
+	      attr('width',70).
+	      attr('height',80).
+	      attr('stroke','red').
+	      attr('fill','orange');
+    </script>
+  </div>
+  
+  <div id="circle">
+    <script>
+      // Add Circles
+      svg = d3.select('#circle').
+	      append('svg').
+	      attr('width', 200).
+    attr('height', 200);
+      
+
+      svg.append('circle').
+	      attr('cx',100).
+	      attr('cy',100).
+	      attr('r',30).
+	      attr('stroke','green').
+	      attr('fill','purple');
+    </script>
+
+    <div id="circle2">
+      <script>
+	// Add Circles
+      svg = d3.select('#circle2').
+	      append('svg').
+	      attr('width', 200).
+    attr('height', 200);
+      
+
+      svg.append('circle').
+	      attr('cx',100).
+	      attr('cy',100).
+	      attr('r',50).
+	      attr('stroke','black').
+	      attr('fill','blue');
+      </script>
+    </div>
+
+    <div id="line">
+      <script>
+	// Add Lines
+	svg = d3.select('#line').
+    append('svg').
+    attr('width', 200).
+    attr('height', 200);
+	
+	svg.append('line').
+    attr('x1',20).
+    attr('y1',30).
+    attr('x2',40).
+    attr('y2',50).
+    attr('stroke','yellow');
+      </script>
+    </div>
+
+    <div id="line2">
+      <script>
+	// Add Lines
+	svg = d3.select('#line2').
+    append('svg').
+    attr('width', 200).
+    attr('height', 200);
+	
+	svg.append('line').
+    attr('x1',180).
+    attr('y1',42).
+    attr('x2',90).
+    attr('y2',76).
+    attr('stroke','turquoise');
+      </script>
+    </div>
+
+    <div id="polygon">
+      <script>
+	// Add Polygons
+	svg = d3.select('#polygon').
+    append('svg').
+    attr('width', 200).
+    attr('height', 200);
+	
+	svg.append('polygon').
+    attr('points','10,80 70,2 3,45 66,66 8,100 1,0 190,30').
+    attr('stroke','beige').
+    attr('fill','indigo');
+      </script>
+    </div>
+
+    <div id="polygon2">
+      <script>
+	//Add Polygons
+	svg = d3.select('#polygon2').
+    append('svg').
+    attr('width',200).
+    attr('height',200);
+
+	svg.append('polygon').
+    attr('points','5,49 69,1 8,120, 73,55 2,200').
+    attr('stroke','lavender').
+    attr('fill','brown');
+      </script>
+    </div>
+  </div>
+   <div id="content">
+   
+   <header>Assignment 1 - d3.js</header>
+
+   <h1>Arjun Vyavaharkar</h1>
+  
+   <footer>CS4804-C24-C01 &copy; 2024</footer>
+    </div>
+</body>
+</html>
