@@ -1,3 +1,11 @@
+I did not use any starting code
+
+Link:
+http://github.com/vboothroyd/a1-ghd3/blob/main/index.html
+
+Technical Achievement:
+All of the shapes are based on a single variable called size that can be changed to adjust how big all the shapes are instead of changing them individually.
+
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
