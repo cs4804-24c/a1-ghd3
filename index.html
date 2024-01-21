@@ -1,10 +1,48 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My D3.js Example</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+<h1>My D3.js Visualization</h1>
 
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+    // Your D3.js code goes here
+    console.log(d3); // test if d3 is loaded
+
+    const svg = d3.select('body').append('svg')
+        .attr('width', 400)
+        .attr('height', 200);
+
+    svg.append('rect')
+        .attr('x', 50)
+        .attr('y', 50)
+        .attr('width', 50)
+        .attr('height', 30)
+        .attr('fill', 'blue');
+
+    svg.append('circle')
+        .attr('cx', 150)
+        .attr('cy', 100)
+        .attr('r', 20)
+        .attr('fill', 'green');
+
+    svg.append('line')
+        .attr('x1', 200)
+        .attr('y1', 50)
+        .attr('x2', 300)
+        .attr('y2', 100)
+        .attr('stroke', 'red');
+
+    const polygonPoints = '250,30 300,80 275,120 225,120 200,80';
+    svg.append('polygon')
+        .attr('points', polygonPoints)
+        .attr('fill', 'orange');
 </script>
+
+</body>
+</html>
