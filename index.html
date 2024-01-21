@@ -1,10 +1,104 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D3.js Visualization</title>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
 
-<script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
-</script>
+  <div id="chart"></div>
+
+  <script type="text/javascript">
+    // Declare and initialize the dataset
+    var dataset = d3.range(5).map(function() {
+      return Math.round(Math.random() * 100);
+    });
+
+    // Add an SVG
+    var svg = d3.select("#chart")
+      .append("svg")
+      .attr("width", 1200)
+      .attr("height",550);
+
+    // Add Rectangle
+    svg.selectAll("rect")
+    .data(dataset)
+    .enter().append("rect")
+    .attr("x", () => 200+(Math.random()*1000)) // Random x coordinate
+    .attr("y", () => Math.random() * 500) // Random y coordinate
+    .attr("width", () => Math.random() * 100 + 50) // Random width
+    .attr("height", () => Math.random() * 100 + 50) // Random height
+    .attr("transform", (d, i) => "rotate(" + Math.random() * 135 + ")") // Random rotation
+    .style("fill", () => getRandomColor()); // Random color
+
+    
+ svg.selectAll("circle")
+    .data(dataset)
+    .enter().append("circle")
+    .attr("cx", () => Math.random() * 1200) // Random x coordinate
+    .attr("cy", () => Math.random() * 550) // Random y coordinate
+    .attr("r", () => Math.random() * 50 + 20) // Random radius
+    .style("fill", () => getRandomColor()); // Random color
+
+
+    // Add Lines
+    svg.selectAll("line")
+  .data(dataset)
+  .enter().append("line")
+  .attr("x1", (d, i) => Math.random() * 1200) // Random x1 coordinate
+  .attr("y1", (d, i) => Math.random() * 550) // Random y1 coordinate
+  .attr("x2", (d, i) => Math.random() * 1200) // Random x2 coordinate
+  .attr("y2", (d, i) => Math.random() * 550) // Random y2 coordinate
+  .attr("stroke-width", 3)
+  .style("stroke", () => getRandomColor()); // Random color
+
+// Function to generate a random color
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
+    // Add Polygons
+    var polygonPoints = [
+      [50, 400],
+      [130, 400],
+      [90, 470]
+    ];
+
+    svg.append("polygon")
+      .attr("points", polygonPoints.map(point => point.join(',')).join(' '))
+      .style("fill", "green");
+
+  var poly2 = [
+	[880, 450],
+	[910,475],
+	[955,490],
+        [985,450]       
+  ];
+  
+
+    svg.append("polygon")
+      .attr("points", poly2.map(point => point.join(',')).join(' '))
+      .style("fill", "cornflowerblue");
+
+  var poly3 = [
+	[404, 295],
+       	[390,305],
+	[445,380],
+        [500,286],
+	[440,360]
+	
+  ];
+
+svg.append("polygon")
+      .attr("points", poly3.map(point => point.join(',')).join(' '))
+      .style("fill", "cadetblue");
+
+  </script>
+</body>
+</html>
