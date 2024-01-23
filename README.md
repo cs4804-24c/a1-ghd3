@@ -1,6 +1,6 @@
 Alessandra Giovenco (anavi16): CS4804 Assignment 1
 
-_gh-pages site:_ file:///C:/Users/agiov/a1-ghd3/index.html 
+_gh-pages site:_ https://anavi16.github.io/a1-ghd3/
 
 Description and Screenshots:
 I created a 600x600 SVG canvas that has a line grid creating 4 equal parts of the canvas. In the four sections, 
