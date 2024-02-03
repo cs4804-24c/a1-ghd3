@@ -1,10 +1,116 @@
-<script src="https://d3js.org/d3.v6.min.js"></script>
+<!DOCTYPE html>
+<div id="container"></div>
+<script type="module">
 
-<script>
-  console.log(d3); // test if d3 is loaded
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+const width = 1000
+const height = 1000
+
+
+console.log(d3); // test if d3 is loaded
+
+  
   // Add an SVG
+const svg = d3.create("svg")
+  .attr("width", width)
+  .attr("height", height);
   // Add Rectangles
+svg.append("rect")
+  .attr("x",100)
+  .attr("y",0)
+  .attr("width",100)
+  .attr("height",200)
+  .attr("fill","red");
   // Add Circles
+svg.append("circle")
+  .attr("cx",700)
+  .attr("cy",700)
+  .attr("r",10)
+  .attr("fill","red");
+
+
   // Add Lines
+svg.append("line")
+  .attr("x1",120)
+  .attr("y1",120)
+  .attr("x2",120)
+  .attr("y2",120)
+  .attr("stroke","steelblue");
+
+
+svg.append("line")
+   .attr("x1",500)
+   .attr("y1",500)
+   .attr("x2",550)
+   .attr("y2",550)
+   .attr("stroke","black");
+
+svg.append("line")
+   .attr("x1",750)
+   .attr("y1",750)
+   .attr("x2",500)
+   .attr("y2",500)
+   .attr("stroke","black");
   // Add Polygons
+var point = [[100,0],[100,200],[0,200]];
+
+svg.append("polygon")
+  .attr("points", point.map(d => d.join(",")))
+  .attr("fill","yellow");
+
+
+
+svg.append("ellipse")
+  .attr("cx",100)
+  .attr("cy",200)
+  .attr("rx",100)
+  .attr("ry",40)
+  .attr("fill","blue");
+
+var point1 = [[100,160],[200,150],[200,200]];
+svg.append("polygon")
+  .attr("points", point1.map(d => d.join(",")))
+  .attr("fill","red");
+
+var point2 = [[100,115],[100,95],[95,100]];
+svg.append("polygon")
+  .attr("points", point2.map(d => d.join(",")))
+  .attr("fill","red");
+
+
+
+var point3 = [[95,100],[70,120],[70,130],[100,110]];
+
+svg.append("polygon")
+  .attr("points", point3.map(d => d.join(",")))
+  .attr("fill","red");
+
+svg.append("circle")
+  .attr("cx",70)
+  .attr("cy",125)
+  .attr("r",10)
+  .attr("stroke","red");
+
+svg.append("circle")
+  .attr("cx",70)
+  .attr("cy",125)
+  .attr("r",10)
+  .attr("fill","white");
+
+svg.append("rect")
+  .attr("x",200)
+  .attr("y",250)
+  .attr("width",200)
+  .attr("height",200)
+  .attr("fill","yellow");
+
+svg.append("circle")
+  .attr("cx",300)
+  .attr("cy",350)
+  .attr("r",100)
+  .attr("fill","red");
+
+container.append(svg.node());
+
 </script>
