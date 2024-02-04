@@ -1,6 +1,41 @@
 Assignment 1 - Hello World: GitHub and d3  
 ===
 
+Code and Description: 
+
+For this assignment, I created a visualization consisting of different shapes. First, I created an SVG container and then I tried to add a line. As my base reference for creating these visualizations, I used the professor's video regarding how to make shapes in D3. I continued by adding a rectangle, circle, line, square and a polygon with different colorsat the end. I used the D3 website for creating the polygon with the following link: 
+https://d3js.org/d3-polygon
+At the end, I appended the SVG to the container. 
+
+Design Achievement Description:
+
+For the design achievements, I tried connecting the line from the purple circle to the square and I tried adding a rectangle on the square with a different color. My goal was to be able to locate a rectangle on a square that is connected to a circle by a line. Also, I added a black-outlined polygon on the upper left of the square.
+
+Technical Achievement Description:
+
+Integrating the D3.js library into the HTML document as it was the first time I was using D3 for visualizations. Using D3.js to create an SVG with specified dimensions. Being able to implement the idea of adding different shapes. Appending the created SVG to the HTML container. Trying to see the output of the code by opening a new terminal in the Visual Code Studio, adding the path of my assignment and writing the command ‘python3 -m http.server’. Being able to see the output by using the ‘http://localhost:8000/’.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 This is a starting project to make sure you can write and host a webpage that generates graphics using d3. 
 
 The primary goal is to be able to generate graphics primitives (circles, rectangles, lines, polygons) at different locations on the screen with different colors. 
