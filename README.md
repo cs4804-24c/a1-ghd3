@@ -33,7 +33,7 @@ GitHub Details
 - Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
 - Make changes to index.html to fulfill the project requirements. 
 - Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "(https://github.com/AshKitturGitHub/a1-ghd3/blob/main/index.html)".
+- Edit the README.md with a link to your gh-pages site "[(https://github.com/AshKitturGitHub/a1-ghd3/blob/main/index.html)](https://github.com/AshKitturGitHub/a1-ghd3/blob/main/index.html)".
 
 Submission Details
 ---
