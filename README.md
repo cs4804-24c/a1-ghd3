@@ -12,13 +12,14 @@ If you do start with code that you found, you **must identify** the source of th
 
 For example, you could download one of the d3.js examples, read it through so you understand what it's doing, and then change the appearance of the graphical output to use different color schemes, different primitive shapes, different layouts of the primitives, and so on.
 
-Resources
+Technical and Design Achievements
 ---
-
-If you need a JavaScript/HTML/CSS refresher, see [JavaScript Codeacademy](https://www.codecademy.com/en/tracks/javascript) or find one of your choosing on the web.
-
-If you need a Git/GitHub refreseher, some possible resources include [Getting Started with GitHub](https://help.github.com/categories/bootcamp/), the [GitHub Guides](https://guides.github.com/) (especially the ones on Hello World, and Understanding the GitHub Flow, and Forking Projects), and [CodeSchool's Try Git Course](https://www.codeschool.com/courses/try-git).
-
+![img.png](img.png)
+**Technical Achievements:** The page is created in html, and calls upon d3 to create the shapes. The page
+can then be loaded within any web browser.
+**Design Achievements:** Has four different primitive shapes of different colors coexisting on one page,
+including a blue rectangle, a red line, a yellow right triangle and a green circle. The shapes overlap upon
+one another for artistic effect.
 Requirements
 ---
 
@@ -32,7 +33,7 @@ GitHub Details
 - Fork the GitHub Repository for Assignment 1. You now have a copy associated with your username.
 - Make changes to index.html to fulfill the project requirements. 
 - Make sure your "main" branch matches your "gh-pages" branch. See the GitHub Guides referenced above if you need help.
-- Edit the README.md with a link to your gh-pages site "http://YourUsernameGoesHere.github.io/01-ghd3/index.html".
+- Edit the README.md with a link to your gh-pages site "(https://ashkitturgithub.github.io/a1-ghd3/)".
 
 Submission Details
 ---
