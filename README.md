@@ -29,7 +29,7 @@ Here are screenshots of the results:
 ![Second time loading the html file](images/Screenshot%202.png)
 
 Here is a working link to the files: 
-https://github.com/pnarasimhan2021/a1-ghd3.git
+https://github.com/pnarasimhan2021/a1-ghd3
 
 ### Technical Achievement Desription:
 - was able to use d3 and Javascript to meet the requirements of having an svg, with a rectangle, a circle, a line, and a polygon. 
