@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<div id="container"></div>
+<script type="module">
+
+import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm";
+
+
+// Declare the chart dimensions and margins.
+const width = 640;
+const height = 400;
+
+
+console.log(d3); // test if d3 is loaded
+
+
+
+  // Add an SVG
+const svg = d3.create("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+
+  // Add Lines
+svg.append("line")
+    .attr("x1", 110)
+    .attr("y1", 110)
+    .attr("x2", 300)
+    .attr("y2", 300)
+    .attr("stroke", "black");
+
+
+
+  // Add Rectangles (square)
+svg.append("rect")
+    .attr("x", 20)
+    .attr("y", 20)
+    .attr("width", 200)
+    .attr("height", 200)
+    .attr("fill", "green");
+  
+  // Add Rectangles (in center of the last cube we had)
+svg.append("rect")
+  .attr("x", 80)
+  .attr("y", 70)
+  .attr("width", 70)
+  .attr("height", 100)
+  .attr("fill", "yellow");
+  
+  
+  // Add Circles
+svg.append("circle")
+    .attr("cx", 300)
+    .attr("cy", 300)
+    .attr("r", 50)
+    .attr("fill", "purple");
+
+
+
+
+  // Add Polygons
+svg.append("polygon")
+    .attr("points", "0,100 50,25 50,75 100,0")
+    .attr("stroke", "black");
+
+  // Append the SVG element.
+container.append(svg.node());
+
+</script>
+  // link to my gh-pages site
+
+  https://PEmdad.github.oi/01-gh3/index.html
