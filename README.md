@@ -16,7 +16,7 @@ Technical Achievement Description:
 Integrating the D3.js library into the HTML document as it was the first time I was using D3 for visualizations. Using D3.js to create an SVG with specified dimensions. Being able to implement the idea of adding different shapes. Appending the created SVG to the HTML container. Trying to see the output of the code by opening a new terminal in the Visual Code Studio, adding the path of my assignment and writing the command ‘python3 -m http.server’. Being able to see the output by using the ‘http://localhost:8000/’.
 
 
-
+https://pemdad.github.io/a1-ghd3/
 
 
 
