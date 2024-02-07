@@ -94,6 +94,75 @@
       }
       return color;
     }
+    // Add Polygons
+    var polygonPoints = [
+      [150, 280],
+      [230, 280],
+      [180, 350]
+    ];
+
+    var poly1 = svg.append("polygon")
+      .attr("points", polygonPoints.map(point => point.join(',')).join(' '))
+      .style("fill", "green");
+
+    var polygon2 = [
+      [689, 280],
+      [600, 285],
+      [745, 360],
+      [700, 366],
+    ];
+
+
+    var poly2 = svg.append("polygon")
+      .attr("points", polygon2.map(point => point.join(',')).join(' '))
+      .style("fill", "cornflowerblue");
+
+    var polygon3 = [
+      [434, 295],
+      [420, 305],
+      [475, 380],
+      [530, 286],
+      [470, 360]
+
+    ];
+
+    var poly3 = svg.append("polygon")
+      .attr("points", polygon3.map(point => point.join(',')).join(' '))
+      .style("fill", "cadetblue");
+
+    // Add more unique polygons
+    var polygon4 = [
+      [100, 50],
+      [90, 180],
+      [180, 80],
+      [60, 150],
+    ];
+
+    var poly4 = svg.append("polygon")
+      .attr("points", polygon4.map(point => point.join(',')).join(' '))
+      .style("fill", "lightcoral");
+
+    var polygon5 = [
+      [550, 50],
+      [600, 80],
+      [630, 150],
+      [570, 180],
+    ];
+
+    var poly5 = svg.append("polygon")
+      .attr("points", polygon5.map(point => point.join(',')).join(' '))
+      .style("fill", "lightsteelblue");
+
+    var polygon6 = [
+      [350, 150],
+      [400, 100],
+      [460, 150],
+      [400, 200],
+    ];
+
+    var poly6 = svg.append("polygon")
+      .attr("points", polygon6.map(point => point.join(',')).join(' '))
+      .style("fill", "lightgreen");
 
     // Function to update shapes with transitions
     function updateShapes() {
@@ -118,6 +187,25 @@
         .attr("x2", () => Math.random() * 800)
         .attr("y2", () => Math.random() * 400)
         .style("stroke", () => getRandomColor())
+        .delay(1000)
+        .duration(3000);
+
+      poly1.transition().style("fill", () => getRandomColor())
+        .delay(1000)
+        .duration(500);
+      poly2.transition().style("fill", () => getRandomColor())
+        .delay(1000)
+        .duration(1000);
+      poly3.transition().style("fill", () => getRandomColor())
+        .delay(1000)
+        .duration(1500);
+      poly4.transition().style("fill", () => getRandomColor())
+        .delay(1000)
+        .duration(2000);
+      poly5.transition().style("fill", () => getRandomColor())
+        .delay(1000)
+        .duration(2500);
+      poly6.transition().style("fill", () => getRandomColor())
         .delay(1000)
         .duration(3000);
     }
