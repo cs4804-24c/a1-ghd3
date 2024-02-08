@@ -1,10 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Initialize d3 -->
 <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+
+<!-- Add a svg area, empty -->
+<svg id="dataviz_area" height=300 width=900>
+</svg>
+
+<!-- Aided with code from "https://d3-graph-gallery.com/intro_d3js.html" -->
+<!-- Aided with help from ChatGPT 3.5 from "https://chat.openai.com/" -->
 
 <script>
-  console.log(d3); // test if d3 is loaded
-  // Add an SVG
-  // Add Rectangles
-  // Add Circles
-  // Add Lines
-  // Add Polygons
+var svg = d3.select("#dataviz_area")
+svg.append("circle")
+  .attr("cx", 2).attr("cy", 2).attr("r", 40).style("fill", "blue");
+svg.append("circle")
+  .attr("cx", 140).attr("cy", 70).attr("r", 40).style("fill", "red");
+svg.append("circle")
+  .attr("cx", 300).attr("cy", 100).attr("r", 40).style("fill", "green");
+svg.append("rect")
+      .attr("x", 50)
+      .attr("y", 50)
+      .attr("width", 20)
+      .attr("height", 10)
+      .attr("fill", "#001b42");
+svg.append("line")
+      .attr("x1", 100)
+      .attr("y1", 100)
+      .attr("x2", 800)
+      .attr("y2", 200)
+      .attr("stroke", "orange")
+      .attr("stroke-width", 5)
+
+const hexagonalTrack = svg.append("polygon")
+	  .attr("points", "709,200 450,250 190,200 190,100 449,50 709,99 709,200")
+	  .style("stroke", "transparent")
+	  .style("fill", "transparent")
+
+const movingCircle = svg.append("circle")
+	  .attr("cx", 0).attr("cy", 0).attr("r", 10).attr("stroke", "black").attr("stroke-width", 1)
+
+        
+
+svg.append("polygon")
+      .attr("points", "729,200 720,177 698,177 689,200 698,222 720,222")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "green")
+svg.append("polygon")
+      .attr("points", "470,250 461,227 438,227 430,250 438,272 461,272")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "blue")
+svg.append("polygon")
+      .attr("points", "210,200 201,177 179,177 170,200 179,222 201,222")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "orange")
+svg.append("polygon")
+      .attr("points", "210,100 201,77 179,77 170,100 179,122 201,122")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "pink")
+svg.append("polygon")
+      .attr("points", "469,50 461,27 438,27 429,50 438,72 461,72")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "white")
+svg.append("polygon")
+      .attr("points", "729,99 720,77 698,77 689,99 698,122 720,122")
+      .style("stroke", "black")
+      .style("strokeWidth", "20px")
+      .style("fill", "purple")
+	  
+const duration = 4000; // Animation duration in milliseconds
+const colors = ["green", "blue", "orange", "pink", "white", "purple"]; // Define colors
+
+function moveCircle() {
+    movingCircle.transition()
+        .duration(duration)
+        .ease(d3.easeLinear)
+        .attrTween("transform", translateAlong(hexagonalTrack.node()))
+		.attr("fill", () => colors[Math.floor(Math.random() * colors.length)])
+        .on("end", moveCircle);
+}
+
+function translateAlong(path) {
+    const l = path.getTotalLength();
+    return function (d, i, a) {
+        return function (t) {
+            const p = path.getPointAtLength(t * l);
+            return "translate(" + p.x + "," + p.y + ")";
+        };
+    };
+}
+
+
+moveCircle();
+
 </script>
+
+</body>
+</html>
