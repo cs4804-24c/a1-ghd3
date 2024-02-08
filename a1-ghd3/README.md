@@ -28,8 +28,9 @@ Here are screenshots of the results:
 
 ![Second time loading the html file](images/Screenshot%202.png)
 
-Here is a working link to the files: 
-https://github.com/pnarasimhan2021/a1-ghd3/blob/daf2f78bf0ae48f653ab0eac0388b3af99db3437/index.html
+Here is a working link to the page: 
+https://pnarasimhan2021.github.io/a1-ghd3/index.html
+
 ### Technical Achievement Desription:
 - was able to use d3 and Javascript to meet the requirements of having an svg, with a rectangle, a circle, a line, and a polygon. 
 
